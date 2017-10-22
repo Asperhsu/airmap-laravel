@@ -1,0 +1,108 @@
+.gauge-no-data {
+	color: #333;
+	font-size: 1.3em;
+}
+
+.d3-gauge .label{
+	fill:  #666;
+}
+
+.d3-gauge .major-tick-label {
+	fill :  #666 !important;
+}
+
+.d3-gauge.simple .green-zone {
+	fill :  #58CE58;
+}
+
+.d3-gauge.size-xl .label{
+	font-size: 26px;
+}
+.d3-gauge.size-l .current-value{
+	font-size: 26px;
+}
+
+.d3-gauge.size-l .label{
+	font-size: 22px;
+}
+.d3-gauge.size-l .current-value{
+	font-size: 22px;
+}
+
+.d3-gauge.size-m .label{
+	font-size: 18px;
+}
+
+.d3-gauge.size-s .label{
+	font-size: 12px;
+}
+
+.d3-gauge.size-s .major-tick-label {
+	font-size: 8px;
+}
+
+/* AQI */
+.d3-gauge.AQI .green-zone {
+	fill : #00FF00
+}
+
+.d3-gauge.AQI .yellow-zone {
+	fill : #FFFF00
+}
+
+.d3-gauge.AQI .orange-zone {
+	fill : #FF7E00
+}
+
+.d3-gauge.AQI .red-zone {
+	fill : #FF0000
+}
+
+.d3-gauge.AQI .purple-zone {
+	fill : #800080
+}
+
+.d3-gauge.AQI .brown-zone {
+	fill : #7E0023
+}
+
+/* PM 2.5 */
+.d3-gauge.pm25 .light-green-zone {
+	fill : #9CFF9C
+}
+
+.d3-gauge.pm25 .green-zone {
+	fill : #31FF00
+}
+
+.d3-gauge.pm25 .dark-green-zone {
+	fill : #31CF00
+}
+
+.d3-gauge.pm25 .yellow-zone {
+	fill : #FFFF00
+}
+
+.d3-gauge.pm25 .golden-zone {
+	fill : #FFCF00
+}
+
+.d3-gauge.pm25 .orange-zone {
+	fill : #FF9A00
+}
+
+.d3-gauge.pm25 .indian-red-zone {
+	fill : #FF6464
+}
+
+.d3-gauge.pm25 .red-zone {
+	fill : #FF0000
+}
+
+.d3-gauge.pm25 .brown-zone {
+	fill : #990000
+}
+
+.d3-gauge.pm25 .purple-zone {
+	fill : #CE30FF
+}

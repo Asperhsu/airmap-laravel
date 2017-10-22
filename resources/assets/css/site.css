@@ -1,0 +1,187 @@
+html, body{ height: 100%; }
+body {
+	position: relative;
+}
+
+#sidebar > ul { 
+	display: flex;
+	flex-direction: column; 
+	height: 100vh; 
+	width: 35px; 
+	float: left; 
+	padding: 0; 
+	margin-right: 10px;
+	position: fixed;
+}
+#sidebar > ul > li { 
+	font-size: 1.2em;
+	display: flex; 
+	align-items: center;
+	justify-content: center; 
+	border-right: 8px solid; 
+	border-radius: 0 5px 5px 0;
+	flex: 1; 
+	list-style: none; 
+	padding: 10px;
+	margin: 3px 0;
+	box-shadow: 0px 0px 3px 2px #888888;
+}
+#sidebar > ul > li > a { transform: rotate(-90deg); color: #000; }
+#sidebar > ul > li.active { width: 50px; }
+
+#container { 
+	padding-left: 2.5em; 
+}
+
+#navbar {
+	display: flex;
+	justify-content:space-between;
+	align-items: center;
+	padding: 15px;
+	background-color: #E91E63;
+	margin-bottom: 1.5em;
+}
+	#navbar .site-info { 
+		font-size: 1.5em; 
+		color: #fff;
+	}
+	#navbar .site-name { 
+		vertical-align: middle; 
+	}
+
+	#navbar .g0v-logo {
+		text-align: right;
+	}
+	#navbar .g0v-logo img { 
+		height: 3em; 
+		filter: drop-shadow(0px 0px 3px #fff) drop-shadow(0px 0px 5px #fff);
+		-webkit-filter: drop-shadow(0px 0px 3px #fff) drop-shadow(0px 0px 5px #fff);		
+	}
+
+#content > div{ 
+	box-shadow: 0px 3px 5px #888888;
+	margin: 0 1.5em 1.5em 2.5em;
+	border-radius: 5px;
+}
+
+#content .header {
+	padding: 10px;
+	font-size: 1.3em;
+	cursor: default;
+}
+#content .body {
+	padding: 20px;
+	color: white;
+}
+
+	#guide {
+		padding: 10px;
+	}
+
+	#gauge .body a {
+		color: #eee;
+	}
+	
+	#gauge .body .chart-container{
+
+	}
+		#gauge .body .chart-container > div {
+			text-align: center;
+		}
+
+		#gauge .body .bg-info{
+			padding: 5px 10px;
+			border-radius: 5px;
+			color: #333;
+		}
+
+		#gauge .body .chart { 
+			display: inline-block; 
+			width: 25vw; 
+			height: 25vw; 
+			margin: 5px 0; 
+		}
+		
+		#gauge .body .chart.no-data{
+			text-align: center;
+			line-height: 1em;
+			padding: .7em 0;
+			font-size: 5em;
+			opacity: .2;
+		}
+		#gauge .body .chart.no-data::after { 
+			content: 'No Data';
+		}
+
+	#gauge .suggestion {
+		font-size: 1.3em;
+	}
+		#gauge .suggestion .label-suggestion {
+			width: 12em;
+			display: inline-block;
+		}	
+		#gauge .suggestion .datasource {
+			font-size: .8em;
+			margin-top: 1em;
+			border-top: 2px dotted #79B9F2;
+			padding-top: 5px;
+		}
+
+	#gauge .header{
+		font-size: 1em;
+	}
+		#gauge .header .title {
+			font-size: 1.3em;
+		}
+
+		#gauge .header .create-at {
+			line-height: 2em;
+		}
+
+	#locatiion .body {
+		padding: 0;
+		height: 300px;
+	}
+
+	#history .body{
+		position: relative;
+	}
+
+
+	#history .loading-error{ 
+		display: none; 
+		color: red; 
+		font-size:1.3em; 
+		text-align: center;
+	}
+
+	#history .chart-control{
+		margin-top: 10px; 
+		text-align: center;
+	}
+	#history .chart-control .btn.active{ 
+		background-color: #F0AD4E; 
+		color: #fff; 
+	}
+
+	#detail .body{
+		color: black;
+	}
+
+#no-content{ display: none; }
+#error-msg{ display: none; }
+
+
+@media (max-width: 768px) {
+	#gauge .body .chart { 
+		width: 50vw; 
+		height: 50vw; 
+	}
+
+	#gauge .suggestion .targetPeople {
+		text-align: center;
+	}
+	#gauge .suggestion .text {
+		text-align: center;
+	}
+}

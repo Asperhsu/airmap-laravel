@@ -1,0 +1,125 @@
+#navigator{ 
+	position: absolute; 
+	top: 0; left:-1000px; 
+	width: 87%; max-width: 400px;
+	height: 100.0%;
+	z-index:90; 
+	background: #fff;
+	border-radius: 0 10px 10px 0;
+	opacity: .85;
+	cursor: default;
+}
+	.header{ padding: 8px 15px; }
+		.logo-side { 
+			padding-left:170px; 
+			text-align:right; 
+		}
+			.logo-side > div {
+				display: inline-block;
+				margin: 0 3px;
+			}
+			.site-list {
+				font-size: 1.1em;
+				vertical-align: bottom;
+			}
+
+		.map-search { padding-top: 1em; }
+
+	.navbar-toggle{ 
+		display: block; 
+		position:absolute; 
+		top: 40px; right: -45px; 
+		padding: 9px 8px; 
+		background-color: #fff;
+		border-radius: 0;
+		box-shadow: 3px 0 3px 0px #aaa;
+	}
+	.navbar-toggle .icon-bar { background-color: #aaa; }
+
+	.list-group{ height: calc(100% - 100px); overflow-y: auto; overflow-x: hidden; }
+		
+		.list-group-item { padding-top: 0; padding-bottom: 0; border-left: 0; border-right: 0;}
+		.list-group-item .bootstrap-switch{ float:right; }
+		
+		.list-group-item-heading{ margin-bottom:0; padding: 10px; cursor: pointer; }
+
+		.list-group-item-text { margin-top: 10px; }		
+			.blockquote{ border-left: 5px solid #eee; padding: 0px 10px 0px 10px; margin-bottom:10px;}
+			/*.blockquote .title{ display:inline-block; padding: 10px 20px 10px 0;  }*/
+			.blockquote > .title{ display:inline-block; padding: 10px 20px 10px 0; font-size: 1.1em; }
+
+			.blockquote-content { margin-left: 1em; margin-bottom: 1em; }
+			.blockquote-content > .blockquote{ border-left: 0px; margin-top:0;}
+			.blockquote-content > .blockquote > .title{ font-size: 1em; }
+
+		.list-group-item .btn-site{
+			width:45%; min-width:10em; margin: 3px 1%;
+		}
+
+			.list-group-item .btn-site .count{
+				float: left;
+				width: 30%;
+				border-radius: 10px;
+			}
+				.list-group-item .btn-default .count{
+					background-color: #eee;
+				}
+				.list-group-item .btn-success .count{
+					color: #5cb85c;
+					background-color: #fff;
+				}
+
+			.list-group-item .btn-site .name{
+				float: left;
+				width: 70%;
+				text-align: left;
+				padding-left: 5px;
+				overflow: hidden;
+			}
+		
+		.site-icon-text {
+			font-size: 0.9em;
+		}
+		.site-icon-text .text {
+			display: inline-block;
+			line-height: 30px;
+			vertical-align: top;
+		}
+		.site-icon-text .about {
+			font-size: 0.9em;
+			padding-left: 20px;
+			padding-top: 5px;
+			margin-top: 5px;
+		}
+
+
+
+		.list-group-item .slider{
+			width: 55%; float:right; margin-top: 10px;
+		}
+		.list-group-item .site-category-allswitch{
+			float: right;
+			padding: 10px 0;
+		}
+
+		.list-group-item[data-name="windLayer"] .help-block{
+			text-indent: -0.8em;
+			font-size: 1em;
+			padding: 10px 0 10px 20px;
+		}
+			.list-group-item[data-name="windLayer"] .glyphicon{ padding-right:5px; }
+		
+			
+			.site-history-error{
+				color: red; font-size:1.3em; text-align: center;
+			}
+
+		li#footer{
+			padding:10px;
+			font-size:0.9em;
+			color:#8E9090;
+			margin-top:2em;
+		}
+
+fieldset{ padding: 0.35em 0.625em 0.75em; margin-bottom: 10px; border: 1px solid silver; }
+legend { font-size:1em; border: 0; margin-bottom: 0; width: auto; }

@@ -1,0 +1,50 @@
+html, body{ padding: 10px; }
+
+#navbar {
+	margin-bottom: 10px;
+}	
+	#navbar .g0v-logo img {
+		height: 2.5em;
+	}
+	#navbar .link {
+		text-align: right;
+	}
+
+#filter > .well { 
+	display: flex; 
+	align-items: center; 
+	margin-bottom: 5px;
+}
+	#filter .title { 
+		font-size: 1.1em; 
+		font-weight: bold;
+		border-right: 1px solid #000;
+		padding: 0 10px;
+		margin-right: 10px; 
+		flex-shrink: 0;
+	}
+
+.bg-info{
+	padding: 5px 15px;
+}
+
+.bsTable th, .bsTable td { text-align: center; }
+.bsTable > thead > tr > th.detail,
+.bsTable > tbody > tr:not(.detail-view) > td:first-of-type { display: none; }
+.bsTable > thead > tr > th:nth-child(2),
+.bsTable > tbody > tr:not(.detail-view) > td:nth-child(2) { border-left: none !important; }
+
+.bsTable > tbody .SiteName { text-align: left; }
+.bsTable > tbody .ranking { color: #FFC436; }
+.bsTable > tbody .supposeStatus { padding: 4px 0 0 0 !important; }
+.bsTable > tbody .Create_at { text-align: left; }
+
+.detail-view .table thead th { padding: 8px !important; }
+.detail-view .table tbody th { text-align: right; }
+.detail-view .table tbody td { text-align: left; }
+
+#footer {
+	margin-top: 20px;
+	text-align: center;
+	border-top: 2px dotted #eee;
+}

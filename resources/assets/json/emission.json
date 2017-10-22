@@ -1,0 +1,1361 @@
+[
+ {
+   "id": 1,
+   "latitude": 24.0873851,
+   "longitude": 120.5594818,
+   "name": "彰化台化",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 2,
+   "latitude": 24.0874,
+   "longitude": 120.561617,
+   "name": "台化彰化廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 3,
+   "latitude": 24.095142,
+   "longitude": 120.714149,
+   "name": "經濟部工業局大里工業區服務中心",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 4,
+   "latitude": 24.095152,
+   "longitude": 120.7119615,
+   "name": "大里工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 5,
+   "latitude": 24.095932,
+   "longitude": 120.618875,
+   "name": "烏日BOT垃圾資源回收場(焚化爐)",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 6,
+   "latitude": 24.108612,
+   "longitude": 120.644444,
+   "name": "烏日工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 7,
+   "latitude": 24.1139728,
+   "longitude": 120.5903079,
+   "name": "永豐餘烏日廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 8,
+   "latitude": 24.125751,
+   "longitude": 120.729103,
+   "name": "台中市太平區太平工業區 ",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 9,
+   "latitude": 24.152616,
+   "longitude": 120.599105,
+   "name": "台中文山焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 10,
+   "latitude": 24.168612,
+   "longitude": 120.605985,
+   "name": "台中工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 11,
+   "latitude": 24.1843907,
+   "longitude": 120.6047114,
+   "name": "榮總焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 12,
+   "latitude": 24.208879,
+   "longitude": 120.618848,
+   "name": "中部科學工業園區台中園區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 13,
+   "latitude": 24.213337,
+   "longitude": 120.48682,
+   "name": "台中龍井區火力發電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 14,
+   "latitude": 24.218234,
+   "longitude": 120.701049,
+   "name": "台中市潭子區潭子加工出口區 ",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 15,
+   "latitude": 24.229311,
+   "longitude": 120.50138,
+   "name": "中龍鋼鐵股份有限公司",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 16,
+   "latitude": 24.237254,
+   "longitude": 120.523169,
+   "name": "關連工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 17,
+   "latitude": 24.2411306,
+   "longitude": 120.5346506,
+   "name": "中港加工出口區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 18,
+   "latitude": 24.252014,
+   "longitude": 120.738751,
+   "name": "東億紙業股份有限公司",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 19,
+   "latitude": 24.2520189,
+   "longitude": 120.73657,
+   "name": "豐原東億紙業",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 20,
+   "latitude": 24.261357,
+   "longitude": 120.49664,
+   "name": "中美和石油化學 股份有限公司",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 21,
+   "latitude": 24.2770588,
+   "longitude": 120.6959992,
+   "name": "神岡豐洲科技工業園區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 22,
+   "latitude": 24.284271,
+   "longitude": 120.722834,
+   "name": "正隆紙廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 23,
+   "latitude": 24.287663,
+   "longitude": 120.698232,
+   "name": "后里焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 24,
+   "latitude": 24.295482,
+   "longitude": 120.726734,
+   "name": "友達光電后里L8B廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 25,
+   "latitude": 24.3014489,
+   "longitude": 120.7157985,
+   "name": "中科后里園區-七星基地",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 26,
+   "latitude": 24.31131,
+   "longitude": 120.711155,
+   "name": "豐興鋼鐵",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 27,
+   "latitude": 24.3183299,
+   "longitude": 120.7219027,
+   "name": "后里中科-美光",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 28,
+   "latitude": 24.412404,
+   "longitude": 120.643012,
+   "name": "廣源造紙(大甲幼獅工業區)",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 29,
+   "latitude": 25.1195219,
+   "longitude": 121.298964,
+   "name": "林口發電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 30,
+   "latitude": 25.0277287,
+   "longitude": 120.9768552,
+   "name": "長生發電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 31,
+   "latitude": 25.0292898,
+   "longitude": 121.0486342,
+   "name": "大潭發電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 32,
+   "latitude": 25.0327002,
+   "longitude": 121.3196353,
+   "name": "國光發電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 33,
+   "latitude": 24.8156458,
+   "longitude": 121.1953029,
+   "name": "新桃電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 34,
+   "latitude": 24.4900179,
+   "longitude": 120.671311,
+   "name": "通霄發電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 35,
+   "latitude": 24.2133418,
+   "longitude": 120.4846259,
+   "name": "台中發電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 36,
+   "latitude": 24.1281533,
+   "longitude": 120.4187531,
+   "name": "星元電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 37,
+   "latitude": 24.1266891,
+   "longitude": 120.4284708,
+   "name": "星能電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 38,
+   "latitude": 23.8011937,
+   "longitude": 120.2108166,
+   "name": "麥寮汽電",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 39,
+   "latitude": 25.1574748,
+   "longitude": 121.7375229,
+   "name": "協和發電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 40,
+   "latitude": 24.3093338,
+   "longitude": 121.7597243,
+   "name": "和平電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 41,
+   "latitude": 22.6015895,
+   "longitude": 120.2996905,
+   "name": "南部發電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 42,
+   "latitude": 22.5360059,
+   "longitude": 120.333415,
+   "name": "大林發電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 43,
+   "latitude": 22.8589405,
+   "longitude": 120.1983564,
+   "name": "興達發電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 44,
+   "latitude": 23.5636038,
+   "longitude": 119.6564689,
+   "name": "尖山發電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 45,
+   "latitude": 24.4143213,
+   "longitude": 118.2799798,
+   "name": "塔山發電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 46,
+   "latitude": 23.5317119,
+   "longitude": 120.470737,
+   "name": "嘉惠電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 47,
+   "latitude": 23.0840733,
+   "longitude": 120.3536505,
+   "name": "森霸電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 48,
+   "latitude": 22.0260684,
+   "longitude": 121.5375965,
+   "name": "蘭嶼發電廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 49,
+   "latitude": 24.8352182,
+   "longitude": 120.916969,
+   "name": "新竹市南寮垃圾焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 50,
+   "latitude": 24.6731798,
+   "longitude": 120.8335429,
+   "name": "苗栗縣竹南焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 51,
+   "latitude": 24.3059215,
+   "longitude": 120.7074675,
+   "name": "台中縣后里焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 52,
+   "latitude": 24.3067053,
+   "longitude": 120.5838127,
+   "name": "台中市垃圾焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 53,
+   "latitude": 23.8257949,
+   "longitude": 120.458926,
+   "name": "彰化縣溪州焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 54,
+   "latitude": 23.4764535,
+   "longitude": 120.4140324,
+   "name": "嘉義市焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 55,
+   "latitude": 23.0400452,
+   "longitude": 120.2802999,
+   "name": "台南縣永康焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 56,
+   "latitude": 23.046176,
+   "longitude": 120.072791,
+   "name": "台南市城西焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 57,
+   "latitude": 22.611007,
+   "longitude": 120.2981516,
+   "name": "高雄縣仁武焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 58,
+   "latitude": 22.6658549,
+   "longitude": 120.3290659,
+   "name": "高雄市中區焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 59,
+   "latitude": 22.5527951,
+   "longitude": 120.3742443,
+   "name": "高雄市南區焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 60,
+   "latitude": 22.810227,
+   "longitude": 120.2673068,
+   "name": "高雄縣岡山焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 61,
+   "latitude": 24.9924648,
+   "longitude": 121.250393,
+   "name": "桃園縣焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 62,
+   "latitude": 22.4998042,
+   "longitude": 120.495648,
+   "name": "屏東縣崁頂焚化廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 63,
+   "latitude": 25.1199794,
+   "longitude": 121.4923425,
+   "name": "台北市北投垃圾焚化廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 64,
+   "latitude": 25.0629791,
+   "longitude": 121.6033233,
+   "name": "台北市內湖焚化廠",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 65,
+   "latitude": 25.1248018,
+   "longitude": 121.3645025,
+   "name": "台北縣八里焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 66,
+   "latitude": 25.0468678,
+   "longitude": 121.3622051,
+   "name": "台北縣樹林焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 67,
+   "latitude": 25.047146,
+   "longitude": 121.3618615,
+   "name": "台北縣新店焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 68,
+   "latitude": 24.0984296,
+   "longitude": 120.6180359,
+   "name": "台中縣烏日焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 69,
+   "latitude": 24.6599538,
+   "longitude": 121.833171,
+   "name": "宜蘭縣利澤焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 70,
+   "latitude": 24.9984383,
+   "longitude": 121.5602644,
+   "name": "台北市木柵焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 71,
+   "latitude": 25.1226886,
+   "longitude": 121.7744794,
+   "name": "基隆市焚化爐",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 72,
+   "latitude": 25.1486568,
+   "longitude": 121.6968193,
+   "name": "大武崙工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 73,
+   "latitude": 25.0976469,
+   "longitude": 121.7799156,
+   "name": "瑞芳工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 74,
+   "latitude": 25.0781921,
+   "longitude": 121.4299321,
+   "name": "新北產業園區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 75,
+   "latitude": 25.0805868,
+   "longitude": 121.3908632,
+   "name": "新北市林口工二工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 76,
+   "latitude": 25.021013,
+   "longitude": 121.3084531,
+   "name": "工三工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 77,
+   "latitude": 24.9998935,
+   "longitude": 121.412933,
+   "name": "樹林區工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 78,
+   "latitude": 24.9577707,
+   "longitude": 121.4049042,
+   "name": "頂埔科技園區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 79,
+   "latitude": 24.9615477,
+   "longitude": 121.4170913,
+   "name": "土城工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 80,
+   "latitude": 24.9837078,
+   "longitude": 121.3200563,
+   "name": "龜山工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 81,
+   "latitude": 24.9787794,
+   "longitude": 121.2372425,
+   "name": "中壢工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 82,
+   "latitude": 24.9239874,
+   "longitude": 121.1701146,
+   "name": "桃園幼獅工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 83,
+   "latitude": 24.8994368,
+   "longitude": 121.2021395,
+   "name": "平鎮工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 84,
+   "latitude": 24.8842878,
+   "longitude": 121.1761012,
+   "name": "龍潭科學園區服務處 ",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 85,
+   "latitude": 25.0472336,
+   "longitude": 121.0840025,
+   "name": "桃園科技園區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 86,
+   "latitude": 25.0316173,
+   "longitude": 121.0622263,
+   "name": "大潭工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 87,
+   "latitude": 25.0355301,
+   "longitude": 121.0627571,
+   "name": "桃園環保科技園區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 88,
+   "latitude": 25.071746,
+   "longitude": 121.196094,
+   "name": "大園工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 89,
+   "latitude": 24.781651,
+   "longitude": 121.0037267,
+   "name": "新竹科學園區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 90,
+   "latitude": 24.871472,
+   "longitude": 121.0069788,
+   "name": "新竹工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 91,
+   "latitude": 24.8031879,
+   "longitude": 121.0151748,
+   "name": "新竹生物醫學園區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 92,
+   "latitude": 24.7093933,
+   "longitude": 120.9134173,
+   "name": "新竹科學園區-竹南園區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 93,
+   "latitude": 24.7092408,
+   "longitude": 120.8705762,
+   "name": "竹南工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 94,
+   "latitude": 24.6813768,
+   "longitude": 120.8802272,
+   "name": "頭份工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 95,
+   "latitude": 24.4826499,
+   "longitude": 120.7844013,
+   "name": "銅鑼工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 96,
+   "latitude": 24.4678582,
+   "longitude": 120.7595538,
+   "name": "新竹科學園區-銅鑼園區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 97,
+   "latitude": 24.4050619,
+   "longitude": 120.6499023,
+   "name": "大甲幼獅工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 98,
+   "latitude": 24.3014489,
+   "longitude": 120.7157985,
+   "name": "后里園區-七星基地",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 99,
+   "latitude": 24.3043113,
+   "longitude": 120.7176013,
+   "name": "后里園區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 100,
+   "latitude": 24.2184333,
+   "longitude": 120.7025602,
+   "name": "潭子加工出口區台中分處",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 101,
+   "latitude": 24.2411306,
+   "longitude": 120.5346506,
+   "name": "中港加工出口區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 102,
+   "latitude": 24.168612,
+   "longitude": 120.605985,
+   "name": "台中工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 103,
+   "latitude": 24.095152,
+   "longitude": 120.7119615,
+   "name": "大里工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 104,
+   "latitude": 24.1649079,
+   "longitude": 120.5006698,
+   "name": "全興工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 105,
+   "latitude": 24.0787929,
+   "longitude": 120.411743,
+   "name": "彰濱工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 106,
+   "latitude": 24.0119278,
+   "longitude": 120.48479,
+   "name": "福興工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 107,
+   "latitude": 23.9140141,
+   "longitude": 120.3449065,
+   "name": "芳苑工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 108,
+   "latitude": 23.879676,
+   "longitude": 120.45686,
+   "name": "埤頭工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 109,
+   "latitude": 23.8468682,
+   "longitude": 120.5644799,
+   "name": "田中工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 110,
+   "latitude": 23.926942,
+   "longitude": 120.666912,
+   "name": "南崗工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 111,
+   "latitude": 23.7654698,
+   "longitude": 120.6964443,
+   "name": "竹山工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 112,
+   "latitude": 23.9371249,
+   "longitude": 120.693019,
+   "name": "高等研究園區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 113,
+   "latitude": 23.7724025,
+   "longitude": 120.2588413,
+   "name": "離島工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 114,
+   "latitude": 23.7352629,
+   "longitude": 120.3984635,
+   "name": "虎尾園區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 115,
+   "latitude": 23.613024,
+   "longitude": 120.3254748,
+   "name": "元長工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 116,
+   "latitude": 23.6421923,
+   "longitude": 120.4655808,
+   "name": "豐田工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 117,
+   "latitude": 23.7135453,
+   "longitude": 120.5873258,
+   "name": "斗六工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 118,
+   "latitude": 23.7263917,
+   "longitude": 120.4992807,
+   "name": "雲林科技工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 119,
+   "latitude": 23.5228723,
+   "longitude": 120.4455911,
+   "name": "民雄工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 120,
+   "latitude": 23.5085819,
+   "longitude": 120.3605833,
+   "name": "嘉太工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 121,
+   "latitude": 23.4382859,
+   "longitude": 120.2450043,
+   "name": "朴子工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 122,
+   "latitude": 23.3594317,
+   "longitude": 120.2196476,
+   "name": "義竹工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 123,
+   "latitude": 23.3032871,
+   "longitude": 120.2791651,
+   "name": "新營工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 124,
+   "latitude": 23.303367,
+   "longitude": 120.2463344,
+   "name": "柳營科技工業園區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 125,
+   "latitude": 23.2110694,
+   "longitude": 120.3208098,
+   "name": "官田 工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 126,
+   "latitude": 23.1000439,
+   "longitude": 120.2804169,
+   "name": "南部科學工業園區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 127,
+   "latitude": 23.0491149,
+   "longitude": 120.2722633,
+   "name": "永康工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 128,
+   "latitude": 23.0459471,
+   "longitude": 120.1394668,
+   "name": "台南科技工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 129,
+   "latitude": 22.973664,
+   "longitude": 120.181148,
+   "name": "安平工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 130,
+   "latitude": 22.8124689,
+   "longitude": 120.2702095,
+   "name": "本州工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 131,
+   "latitude": 22.8126167,
+   "longitude": 120.2021809,
+   "name": "楠梓工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 132,
+   "latitude": 22.72605,
+   "longitude": 120.3374065,
+   "name": "大社工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 133,
+   "latitude": 22.7310444,
+   "longitude": 120.3031992,
+   "name": "仁武工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 134,
+   "latitude": 22.6146402,
+   "longitude": 120.3250808,
+   "name": "鳳山工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 135,
+   "latitude": 22.5978601,
+   "longitude": 120.2886468,
+   "name": "高雄加工出口區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 136,
+   "latitude": 22.5740276,
+   "longitude": 120.3182928,
+   "name": "臨廣加工區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 137,
+   "latitude": 22.5340982,
+   "longitude": 120.3588168,
+   "name": "臨海工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 138,
+   "latitude": 22.4993345,
+   "longitude": 120.4045313,
+   "name": "林園工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 139,
+   "latitude": 22.5821718,
+   "longitude": 120.4275102,
+   "name": "大發 工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 140,
+   "latitude": 22.6628219,
+   "longitude": 120.498212,
+   "name": "屏東 工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 141,
+   "latitude": 22.6416276,
+   "longitude": 120.4360695,
+   "name": "屏東加工出口區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 142,
+   "latitude": 22.6379839,
+   "longitude": 120.539005,
+   "name": "內埔 工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 143,
+   "latitude": 22.4119328,
+   "longitude": 120.575014,
+   "name": "屏南工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 144,
+   "latitude": 22.7561596,
+   "longitude": 121.1305299,
+   "name": "豐樂工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 145,
+   "latitude": 23.930736,
+   "longitude": 121.5834218,
+   "name": "光華 工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 146,
+   "latitude": 24.018016,
+   "longitude": 121.6255498,
+   "name": "美崙 工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 147,
+   "latitude": 24.0184066,
+   "longitude": 121.3534071,
+   "name": "和平 工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 148,
+   "latitude": 24.6288429,
+   "longitude": 121.8104608,
+   "name": "龍德工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 149,
+   "latitude": 24.6487089,
+   "longitude": 121.830981,
+   "name": "利澤工業區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 150,
+   "latitude": 24.6962069,
+   "longitude": 121.7692085,
+   "name": "竹科中興園區",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ },
+ {
+   "id": 151,
+   "latitude": 23.797613,
+   "longitude": 120.219343,
+   "name": "雲林六輕",
+   "type": "固定汙染源",
+   "color": "ff0000",
+   "url": ""
+ }
+]

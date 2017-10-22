@@ -1,0 +1,26 @@
+.voronoi-layer {
+	position: absolute;
+	width: 900px;
+	height: 600px;
+	display: none;
+}
+
+.voronoi-layer svg {
+	position: absolute;
+	top: -4000px;
+	left: -4000px;
+	width: 8000px;
+	height: 8000px; 
+	opacity: 0.5;
+    /*background-color: #000;*/
+}
+
+.voronoi-layer svg path{
+	stroke: white;
+	stroke-width: 3;
+}
+
+#satelliteLayer{
+	opacity: .5;
+	transform: rotate(-3deg);
+}
