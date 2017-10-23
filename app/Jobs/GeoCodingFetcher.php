@@ -32,15 +32,27 @@ class GeoCodingFetcher implements ShouldQueue
     public function handle()
     {
         $geoService = new GeoCoding();
+        $cnt = 0;
+        $max = 500;
+        $chunk = 100;
 
-        Record::doesntHave('geometries')
-            ->get()
-            ->map(function ($record) use ($geoService) {
-                $bound = $geoService->findLatLng($record->lat, $record->lng);
+        Record::where('lat', '<>', 0)
+            ->where('lng', '<>', 0)
+            ->whereNotIn('id', function ($query) {
+                $query->select('record_id')->from('geometry_record');
+            })->chunk($chunk, function ($records) use ($geoService, &$cnt, $max, $chunk) {
+                $cnt += $chunk;
 
-                if ($bound) {
-                    $record->geometries()->attach($bound->id);
-                }
+                $results = $records->map(function ($record) use ($geoService) {
+                    $bound = $geoService->findLatLng($record->lat, $record->lng);
+                    
+                    if ($bound) {
+                        $record->geometries()->attach($bound->id);
+                        return $record->id;
+                    }
+                });
+
+                if ($cnt >= $max) { return false; }
             });
     }
 }

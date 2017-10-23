@@ -37,7 +37,7 @@ class Kernel extends ConsoleKernel
                  ->everyFiveMinutes();
 
         $schedule->command('fetch:geocoding')
-                 ->daily();
+                ->hourly();
 
         $schedule->command('record:clear-expired')
                  ->daily();
