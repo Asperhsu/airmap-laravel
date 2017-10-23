@@ -34,6 +34,7 @@ class GeoCoding
 
         if (!$bound) {
             $bound = $this->fetchGeocoding($lat, $lng);
+            usleep(100000); // delay 0.1 sec for request rate
         }
         
         return $bound;

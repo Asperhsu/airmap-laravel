@@ -2,24 +2,24 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\LassAnalysisFetcher;
+use App\Jobs\GeoCodingFetcher;
 use Illuminate\Console\Command;
 
-class FetchLassAnalysis extends Command
+class FetchGeoCoding extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'fetch:lass-analysis';
+    protected $signature = 'fetch:geocoding';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'fetch lass analysis';
+    protected $description = 'fetch geocoding for records';
 
     /**
      * Create a new command instance.
@@ -38,7 +38,7 @@ class FetchLassAnalysis extends Command
      */
     public function handle()
     {
-        $job = new LassAnalysisFetcher();
+        $job = new GeoCodingFetcher();
         dispatch($job);
     }
 }

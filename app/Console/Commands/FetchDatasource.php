@@ -12,7 +12,7 @@ class FetchDatasource extends Command
      *
      * @var string
      */
-    protected $signature = 'record:fetch';
+    protected $signature = 'fetch:record';
 
     /**
      * The console command description.

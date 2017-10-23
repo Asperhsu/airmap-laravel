@@ -30,11 +30,14 @@ class Kernel extends ConsoleKernel
         //     logger('one min');
         // })->everyMinute();
 
-        $schedule->command('record:fetch')
+        $schedule->command('fetch:record')
                  ->everyFiveMinutes();
 
-        $schedule->command('record:fetch-lass-analysis')
+        $schedule->command('fetch:lass-analysis')
                  ->everyFiveMinutes();
+
+        $schedule->command('fetch:geocoding')
+                 ->daily();
 
         $schedule->command('record:clear-expired')
                  ->daily();

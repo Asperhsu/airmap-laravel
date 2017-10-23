@@ -10,19 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('test', function () {
-    $geo = new App\Service\GeoCoding();
-
-    App\Models\Record::doesntHave('geometries')->get()->map(function ($record) use ($geo) {
-        $bound = $geo->findLatLng($record->lat, $record->lng);
-
-        if ($bound) {
-            $record->geometries()->attach($bound->id);
-        }
-        dd($bound);
-    });
-});
-
 Route::get('/{latlng?}', 'HomeController@map')->where('latlng', '@[0-9.]+,[0-9.]+')->name('map');
 Route::get('/list', 'HomeController@list')->name('list');
 Route::get('/site', 'HomeController@site')->name('site');
