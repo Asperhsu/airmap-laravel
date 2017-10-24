@@ -15,6 +15,20 @@ class GeoCodingFetcher implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
+     * Job retry times
+     *
+     * @var integer
+     */
+    public $tries = 1;
+    
+    /**
+     * Job exec timeout
+     *
+     * @var integer
+     */
+    public $timeout = 120;
+
+    /**
      * Create a new job instance.
      *
      * @return void
