@@ -25,6 +25,8 @@ class CreateGeometriesTable extends Migration
             $table->decimal('northlat', 10, 7);
             $table->decimal('southlat', 10, 7);
             $table->timestamps();
+
+            $table->unique(['westlng', 'eastlng', 'northlat', 'southlat']);
         });
     }
 

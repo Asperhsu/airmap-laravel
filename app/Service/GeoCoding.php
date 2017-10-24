@@ -31,42 +31,64 @@ class GeoCoding
             return $lat <= $bound->northlat && $lat >= $bound->southlat
                 && $lng >= $bound->westlng && $lng <= $bound->eastlng;
         })->first();
-
-        if (!$bound) {
-            $bound = $this->fetchGeocoding($lat, $lng);
-            usleep(100000); // delay 0.1 sec for request rate
-        }
-
-        if (!$bound) {
-            $bound = Geometry::where('country', 'default')->first();
-        }
         
-        return $bound;
+        if ($bound) {
+            return $bound;
+        }
+
+        logger(sprintf('GeoCoding fetch unknow lat: %s, lng: %s', $lat, $lng));   
+        $bound = $this->fetchGeocoding($lat, $lng);
+        $this->load(true);
+        usleep(100000); // delay 0.1 sec for request rate
+
+        if ($bound) {
+            return $bound;
+        }
+
+        return $this->bounds->where('country', 'default')->first();
     }
 
-    public function fetchGeocoding(float $lat, float $lng)
+    protected function fetchGeocoding(float $lat, float $lng)
     {
         $url = 'https://maps.googleapis.com/maps/api/geocode/json';
         $query = [
             'key' => config('services.gmap.key'),
-            // 'result_type' => 'country|administrative_area_level_1|administrative_area_level_2|administrative_area_level_3|administrative_area_level_4',
             'language' => 'zh-TW',
             'latlng' => $lat.','.$lng,
         ];
 
         $resource = $url . '?' . http_build_query($query);
         $resource = str_replace('%2C', ',', $resource);
+
         $data = HttpClient::getJson($resource)['data'];
         if ($data['status'] != "OK" || !count($data['results'])) {
             return false;
         }
         
-        $result = array_shift($data['results']);
-        $geometry = $this->createGeometry($result);
+        $result = $this->findAddrResult($data['results'], $lat, $lng);
+        if ($result) {
+            return $this->createGeometry($result);
+        }
 
-        $this->load(true);
+        return false;
+    }
 
-        return $geometry;
+    protected function findAddrResult(array $results, float $lat, float $lng)
+    {
+        foreach ($results as $result) {
+            $viewport = $result['geometry']['viewport'];
+            $westlng  = $viewport['southwest']['lng'];
+            $eastlng  = $viewport['northeast']['lng'];
+            $northlat = $viewport['northeast']['lat'];
+            $southlat = $viewport['southwest']['lat'];
+            
+            if ($lat <= $northlat && $lat >= $southlat
+                && $lng >= $westlng && $lng <= $eastlng) {
+                return $result;
+            }
+        }
+
+        return false;
     }
 
     protected function createGeometry(array $result)
