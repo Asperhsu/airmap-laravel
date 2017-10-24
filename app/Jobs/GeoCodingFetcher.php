@@ -33,7 +33,7 @@ class GeoCodingFetcher implements ShouldQueue
     {
         $geoService = new GeoCoding();
         $cnt = 0;
-        $max = 500;
+        $max = 200;
         $chunk = 100;
 
         Record::where('lat', '<>', 0)
@@ -50,7 +50,11 @@ class GeoCodingFetcher implements ShouldQueue
                         $record->geometries()->attach($bound->id);
                         return $record->id;
                     }
+
+                    return false;
                 });
+
+                logger('GeoCoding processed: '.$results->filter()->count());
 
                 if ($cnt >= $max) { return false; }
             });

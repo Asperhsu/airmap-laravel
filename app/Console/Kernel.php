@@ -36,8 +36,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('fetch:lass-analysis')
                  ->everyFiveMinutes();
 
-        $schedule->command('fetch:geocoding')
-                ->hourly();
+        // $schedule->command('fetch:geocoding')
+        //         ->hourly();
 
         $schedule->command('record:clear-expired')
                  ->daily();

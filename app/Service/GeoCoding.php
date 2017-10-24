@@ -36,6 +36,10 @@ class GeoCoding
             $bound = $this->fetchGeocoding($lat, $lng);
             usleep(100000); // delay 0.1 sec for request rate
         }
+
+        if (!$bound) {
+            $bound = Geometry::where('country', 'default')->first();
+        }
         
         return $bound;
     }
@@ -45,7 +49,7 @@ class GeoCoding
         $url = 'https://maps.googleapis.com/maps/api/geocode/json';
         $query = [
             'key' => config('services.gmap.key'),
-            'result_type' => 'country|administrative_area_level_1|administrative_area_level_2|administrative_area_level_3|administrative_area_level_4',
+            // 'result_type' => 'country|administrative_area_level_1|administrative_area_level_2|administrative_area_level_3|administrative_area_level_4',
             'language' => 'zh-TW',
             'latlng' => $lat.','.$lng,
         ];
@@ -53,7 +57,7 @@ class GeoCoding
         $resource = $url . '?' . http_build_query($query);
         $resource = str_replace('%2C', ',', $resource);
         $data = HttpClient::getJson($resource)['data'];
-        if ($data['status'] != "OK") {
+        if ($data['status'] != "OK" || !count($data['results'])) {
             return false;
         }
         
