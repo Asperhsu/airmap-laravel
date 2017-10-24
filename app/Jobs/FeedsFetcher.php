@@ -118,9 +118,19 @@ abstract class FeedsFetcher implements ShouldQueue
 
             foreach ($floatFields as $field) {
                 $record[$field] = isset($record[$field]) ? floatval($record[$field]) : null;
+
+                if ($record[$field] > 9999) {
+                    logger(sprintf('device %s-%s outofrange %s:$s', $this->group->id, $record['uuid'], $field, $record[$field]));
+                    return false;
+                }
             }
             foreach ($intFields as $field) {
                 $record[$field] = isset($record[$field]) ? intval($record[$field]) : null;
+
+                if ($record[$field] > 9999) {
+                    logger(sprintf('device %s-%s outofrange %s:$s', $this->group->id, $record['uuid'], $field, $record[$field]));
+                    return false;
+                }
             }
 
             $record['group_id']   = $this->group->id;
