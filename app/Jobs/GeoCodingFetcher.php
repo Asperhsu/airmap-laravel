@@ -47,14 +47,16 @@ class GeoCodingFetcher implements ShouldQueue
     {
         $geoService = new GeoCoding();
         $cnt = 0;
-        $max = 200;
+        $max = 500;
         $chunk = 100;
 
         Record::where('lat', '<>', 0)
             ->where('lng', '<>', 0)
             ->whereNotIn('id', function ($query) {
                 $query->select('record_id')->from('geometry_record');
-            })->chunk($chunk, function ($records) use ($geoService, &$cnt, $max, $chunk) {
+            })
+            ->orderBy('id', 'desc')
+            ->chunk($chunk, function ($records) use ($geoService, &$cnt, $max, $chunk) {
                 $cnt += $chunk;
 
                 $results = $records->map(function ($record) use ($geoService) {
@@ -67,8 +69,6 @@ class GeoCodingFetcher implements ShouldQueue
 
                     return false;
                 });
-
-                logger('GeoCoding processed: '.$results->filter()->count());
 
                 if ($cnt >= $max) { return false; }
             });

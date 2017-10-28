@@ -113,6 +113,11 @@ class GeoCoding
             }
         }
 
+        if (!$geometry->level1 && !$geometry->level2 
+            && !$geometry->level3 && !$geometry->level4) {
+            return false;
+        }
+
         $viewport = $result['geometry']['viewport'];
         $geometry->westlng = $viewport['southwest']['lng'];
         $geometry->eastlng = $viewport['northeast']['lng'];
