@@ -69,7 +69,7 @@ class LassAnalyse {
             $data = $this->toRecord($uuid, true);
 
             // dd($data);
-            return DB::table('lass_analyses')->where('uuid', $uuid)->update($data);
+            return DB::table('lass_analyses')->where('uuid', (string) $uuid)->update($data);
         });
     }
 
@@ -124,7 +124,7 @@ class LassAnalyse {
             ]);
         } else {
             $data = array_merge($data, [
-                'uuid'       => $uuid,
+                'uuid'       => (string) $uuid,
                 'created_at' => Carbon::now()->toDateTimeString(),
                 'updated_at' => Carbon::now()->toDateTimeString(),
             ]);
