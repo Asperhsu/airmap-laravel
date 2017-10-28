@@ -13,6 +13,19 @@ class Geometry extends Model
         'southlat' => 'float',
     ];
 
+    public function getFullTextAttribute($value)
+    {
+        $text = [];
+
+        foreach (['country', 'level1', 'level2', 'level3', 'level4'] as $field) {
+            if ($this->{$field}) {
+                $text[] = $this->{$field};
+            }
+        }
+        
+        return implode('', $text);
+    }
+
     public function records()
     {
         $this->belongsToMany(Record::class);

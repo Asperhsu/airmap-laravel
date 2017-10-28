@@ -39,7 +39,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        //
+        $this->mapFbBotRoutes();
     }
 
     /**
@@ -69,5 +69,13 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
+    }
+
+    protected function mapFbBotRoutes()
+    {
+        Route::prefix('fbbot')
+             ->middleware('fbbot')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/fbbot.php'));
     }
 }
