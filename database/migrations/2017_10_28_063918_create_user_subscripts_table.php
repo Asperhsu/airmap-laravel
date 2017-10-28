@@ -21,7 +21,7 @@ class CreateUserSubscriptsTable extends Migration
             $table->integer('geometry_id')->nullable();
             $table->timestamps();
 
-            $table->unique(['fb_m_id', 'groud_id', 'site_name']);
+            $table->unique(['fb_m_id', 'group_id', 'name']);
             $table->unique(['fb_m_id', 'geometry_id']);
         });
     }

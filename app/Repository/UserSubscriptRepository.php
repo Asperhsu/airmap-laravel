@@ -8,6 +8,7 @@ use App\Models\Record;
 use App\Models\Geometry;
 use App\Models\UserSubscript;
 use App\Service\FbBotResponse;
+use App\Formatter\RecordsToBotElements;
 
 class UserSubscriptRepository
 {
@@ -28,13 +29,23 @@ class UserSubscriptRepository
             return FbBotResponse::text($name . ' 這個站點不存在');
         }
 
-        $subscript = new UserSubscript;
-        $subscript->fb_m_id = $this->fb_m_id;
-        $subscript->group_id = $this->groupId;
-        $subscript->name = $this->name;
-        $result = $subscript->save();
+        $exist = UserSubscript::where('fb_m_id', $this->fb_m_id)
+            ->where('group_id', $groupId)
+            ->where('name', $name)
+            ->count();
 
-        $msg = $result ? '訂閱成功' : '訂閱失敗';
+        if ($exist) {
+            $msg = '已在我的最愛內';
+        } else {
+            $subscript = new UserSubscript;
+            $subscript->fb_m_id = $this->fb_m_id;
+            $subscript->group_id = $groupId;
+            $subscript->name = $name;
+            $result = $subscript->save();
+            
+            $msg = $result ? '訂閱成功' : '訂閱失敗';
+        }
+
         return FbBotResponse::text($name . ' ' . $msg);
     }
 
@@ -55,11 +66,18 @@ class UserSubscriptRepository
         return FbBotResponse::text($geometry->full_text . ' ' . $msg);
     }
 
+    public function removeFavorite(int $id)
+    {
+        $result = UserSubscript::find($id)->delete();
+
+        $msg = $result ? '取消訂閱成功' : '取消訂閱失敗';
+        return FbBotResponse::text($msg);
+    }
+
     public function favoriteRecord()
     {
-        Carbon::setLocale('zh-TW');
-        $recordAttrs = [];
         $geometryIds = [];
+        $recordAttrs = [];
         
         // load user subscriptions
         UserSubscript::where('fb_m_id', $this->fb_m_id)
@@ -68,65 +86,53 @@ class UserSubscriptRepository
             ->orderBy('geometry_id')
             ->get()
             ->map(function ($subscript) use (&$recordAttrs, &$geometryIds) {
-                if ($subscript->group_id && $subscript->name) {
-                    $recordAttrs[] = compact('group_id', 'name');
-                    return;
-                }
                 if ($subscript->geometry_id) {
-                    $geometryIds[] = $subscript->geometry_id;
+                    $geometryIds[$subscript->id] = $subscript->geometry_id;
+                }
+
+                if ($subscript->group_id && $subscript->name) {
+                    $recordAttrs[$subscript->id] = [
+                        'group_id' => $subscript->group_id,
+                        'name' => $subscript->name,
+                    ];
+                    return;
                 }
             });
         
         // fetch records
-        $records = collect($recordAttrs)->map(function ($where) {
-            $record = Record::where($where)->orderBy('published_at', 'desc')->first();
-            return $this->transformRecordToElement($record);
-        });
-        dd($records);
-        
-        $regions = $this->fetchRegions($geometryIds);
+        $regions = collect();
+        if (count($geometryIds)) {
+            $regions = $this->fetchRegions($geometryIds);
+        }
+
+        $records = collect();
+        if (count($recordAttrs)) {
+            $records = collect($recordAttrs)->map(function ($where, $subId) {
+                $record = Record::where($where)->orderBy('published_at', 'desc')->first();
+                return RecordsToBotElements::toRemoveSite($record, $this->fb_m_id, $subId);
+            });
+        }
 
         // accordin recording count response type
-        $count = $records->count() + $regions->count();
-        if ($count === 0) {
-            return FbBotResponse::text('你還沒有訂閱喔');
-        }
-        if ($count === 1) {
-            return FbBotResponse::galleries($elements);
-        }        
-        return FbBotResponse::list($elements);
-    }
+        $elements = $records->concat($regions)->values();
 
-    public function transformRecordToElement(Record $record)
-    {
-        $time = $record->published_at->diffForHumans();
-        
-        return [
-            'title' => sprintf('<%s>%s', $record->group, $record->name),
-            'subtitle' => sprintf('%d ug/m3 (%s)', $record->pm25, $time),
-            'buttons' => [
-                [
-                    'type' => 'json_plugin_url',
-                    'title' => '取消訂閱',
-                    'url' => route('bot.user.remove', [
-                        'group' => $record->group_id, 
-                        'name' => $record->name,
-                    ]),
-                ]
-            ]
-        ];
+        $noResult = '您沒有訂閱站點';
+        $tooMuch = FbBotResponse::tooMuchRecordsElement();
+        return FbBotResponse::items($elements, $noResult, $tooMuch);
     }
 
     public function fetchRegions(array $ids)
     {
+        if (!count($ids)) { return collect(); }
+        
         $regions = [];
 
         $records = Record::join('geometry_record', function ($join) use ($geometryIds) {
-            $join->on('geometry_record.record_id', '=', 'records.id');
-            $join->whereIn('geometry_id', $ids);
-            $join->select(DB::raw('max(record_id) as record_id'));
-            $join->groupBy('record_id');
-        })->get()
+                $join->on('geometry_record.record_id', '=', 'records.id');
+                $join->whereIn('geometry_id', array_values($ids));
+                $join->select(DB::raw('max(record_id) as record_id'));
+                $join->groupBy('record_id');
+            })->get()
             ->map(function ($record) use ($regions) {
                 $regions[$record->geometry_id][] = $record->pm25;
             });
@@ -143,7 +149,10 @@ class UserSubscriptRepository
                         [
                             'type' => 'json_plugin_url',
                             'title' => '取消訂閱',
-                            'url' => route('bot.user.remove', ['region' => $id]),
+                            'url' => route('bot.user.remove', [
+                                'fbmid' => $this->fb_m_id,
+                                'id' => $id,
+                            ]),
                         ]
                     ]
                 ];

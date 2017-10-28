@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Service\FbBotResponse;
+use App\Repository\SearchRepository;
+use App\Repository\UserSubscriptRepository;
 use Illuminate\Http\Request;
 
 class FbBotController extends Controller
@@ -10,9 +12,9 @@ class FbBotController extends Controller
     public function searchSiteName(Request $request)
     {
         $userId = $request->input('messenger_user_id');
-        $siteName = $request->input('siteName');
-        
-        $response = [];
+        $name = $request->input('name');
+
+        $response = SearchRepository::searchSiteName($name, $userId);
         return response()->json($response);
     }
 
@@ -27,33 +29,19 @@ class FbBotController extends Controller
 
     public function listUserFavorite(Request $request)
     {
-        $userId = $request->input('messenger_user_id');
+        $fbmid = $request->input('messenger_user_id');
 
-        $response = FbBotResponse::list([
-            [
-                'title' => 'Title',
-                'subtitle' => 'subtitle',
-                'buttons' => [
-                    [
-                        'type' => 'json_plugin_url',
-                        'title' => 'ADD',
-                        'url' => route('bot.user.addsite', ['group' => 'group', 'name' => 'name']),
-                    ]
-                ]
-            ],
-            [
-                'title' => 'Title2',
-                'subtitle' => 'subtitle',
-            ]
-        ]);
+        $repo = new UserSubscriptRepository($fbmid);
+        $response = $repo->favoriteRecord();
+
         return response()->json($response);
     }
 
-    public function addUserFavoriteSite(Request $request, $group, $name)
+    public function addUserFavoriteSite(Request $request, string $fbmid, string $group, string $name)
     {
-        logger([$request->method(), $request->all()]);
-
-        $response = FbBotResponse::text('success');
+        $repo = new UserSubscriptRepository($fbmid);
+        $response = $repo->addFavoriteSite($group, $name);
+        
         return response()->json($response);
     }
 
@@ -65,11 +53,11 @@ class FbBotController extends Controller
         return response()->json($response);
     }
 
-    public function removeUserFavorite(Request $request, int $id)
+    public function removeUserFavorite(Request $request, string $fbmid, int $id)
     {
-        logger($id);
+        $repo = new UserSubscriptRepository($fbmid);
+        $response = $repo->removeFavorite($id);
         
-        $response = [];
         return response()->json($response);
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserSubscript extends Model
 {
-    public function groups()
+    public function group()
     {
         return $this->belongsTo(Group::class);
     }
