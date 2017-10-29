@@ -9,6 +9,7 @@ class JsonCache {
     public static $groupExpireMins = 5;
     public static $latestExpireMins = 1;
     public static $historyExpireMins = 1;
+    public static $geometryExpireMins = 5;
 
     public static function cacheKey($key)
     {
@@ -91,6 +92,23 @@ class JsonCache {
             Cache::forget($key);
         });
         static::keyCollection('history', null, true);
+    }
+
+    public static function geometry(int $id, Collection $record = null)
+    {
+        $key = 'geometry-'.$id;
+        
+        if (!$record) {
+            return Cache::get(static::cacheKey($key));
+        }
+        
+        return Cache::put(static::cacheKey($key), $record, static::$geometryExpireMins);
+    }
+
+    public static function forgetGeometry(int $id)
+    {
+        $key = 'geometry-'.$id;
+        return Cache::forget($key);
     }
 
 }

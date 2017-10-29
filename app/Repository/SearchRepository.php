@@ -4,26 +4,42 @@ namespace App\Repository;
 
 use DB;
 use App\Models\Record;
-use App\Service\FbBotResponse;
-use App\Formatter\RecordsToBotElements;
+use App\Models\Geometry;
 
 class SearchRepository
 {
-    public static function searchSiteName(string $keyword, string $userId){
+    public static function searchSiteName(string $keyword){
         if (mb_strlen($keyword) < 4) {
-            return FbBotResponse::text('關鍵字至少四個字');
+            return false;
         }
 
         $subQuery = "(SELECT max(id) as id FROM `records` WHERE `name` like '%{$keyword}%' group by `name`) as keyword";
         
-        $elements = Record::join(DB::raw($subQuery), 'records.id', '=', 'keyword.id')
-            ->get()
-            ->map(function ($record) use ($userId) {
-                return RecordsToBotElements::toAddSite($record, $userId);
-            });
+        return Record::join(DB::raw($subQuery), 'records.id', '=', 'keyword.id')
+            ->get();
+    }
+
+    public static function searchRegion(array $keywords)
+    {
+        $uniqueIds = null;
         
-        $noResult = '沒有找到類似 '.$keyword.' 的站台';
-        $tooMuch = FbBotResponse::tooMuchRecordsElement();
-        return FbBotResponse::items($elements, $noResult, $tooMuch);
+        // find all keyword intersects ids
+        foreach ($keywords as $keyword) {
+            if (mb_strlen($keyword) < 2) {
+                continue;
+            }
+
+            $ids = Geometry::where('level1' ,'like', '%'.$keyword.'%')
+                ->orWhere('level2' ,'like', '%'.$keyword.'%')
+                ->orWhere('level3' ,'like', '%'.$keyword.'%')
+                ->orWhere('level4' ,'like', '%'.$keyword.'%')
+                ->select('id')
+                ->get()
+                ->pluck('id');
+                
+            $uniqueIds = $uniqueIds ? $uniqueIds->intersect($ids) : $ids;
+        };
+
+        return Geometry::whereIn('id', $uniqueIds)->get();
     }
 }

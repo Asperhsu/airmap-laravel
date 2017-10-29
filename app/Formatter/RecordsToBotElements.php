@@ -38,13 +38,18 @@ class RecordsToBotElements
     {
         return config(sprintf('datasource.%s.logo', strtolower($record->group->name)), '');
     }
+
+    public static function icon(float $value)
+    {
+        return route('pm25icon', round($value));
+    }
     
-    public static function toAddSite(Record $record, string $fbmid)
+    public static function toSubSite(Record $record, string $fbmid)
     {
         return [
             'title' => static::title($record),
             'subtitle' => static::subTitle($record),
-            'image_url' => static::logo($record),
+            'image_url' => static::icon($record->pm25),
             'default_action' => [
                 'type' => 'web_url',
                 'url' => route('site').sprintf('#%s$%s', $record->group->name, $record->name),
@@ -63,12 +68,12 @@ class RecordsToBotElements
         ];
     }
 
-    public static function toRemoveSite(Record $record, string $fbmid, int $subscriptId)
+    public static function toUnsubSite(Record $record, string $fbmid, int $subscriptId)
     {
         return [
             'title' => static::title($record),
             'subtitle' => static::subTitle($record),
-            'image_url' => static::logo($record),
+            'image_url' => static::icon($record->pm25),
             'default_action' => [
                 'type' => 'web_url',
                 'url' => route('site').sprintf('#%s$%s', $record->group->name, $record->name),
@@ -81,6 +86,60 @@ class RecordsToBotElements
                         'fbmid' => $fbmid,
                         'id' => $subscriptId, 
                     ]),
+                ]
+            ]
+        ];
+    }
+
+    public static function toSubRegion(Collection $region, string $fbmid)
+    {
+        $subTitle = implode(chr(10), [
+            sprintf('Avg PM 2.5__: %s mg/u3', $region->get('pm25')),
+            sprintf('Avg Temp____: %s 度', $region->get('temperature')),
+            sprintf('Avg Humidity: %s %%', $region->get('humidity')),
+        ]);
+        
+        return [
+            [
+                'title' => $region->get('regions')->implode(', '),
+                'subtitle' => $subTitle,
+                'image_url' => static::icon($region->get('pm25')),
+                'buttons' => [
+                    [
+                        'type' => 'json_plugin_url',
+                        'title' => '加入我的最愛',
+                        'url' => route('bot.user.addregion', [
+                            'fbmid' => $fbmid,
+                            'region' => $region->get('ids')->implode('-'),
+                        ]),
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    public static function toUnsubRegion(Collection $region, string $fbmid, int $subscriptId)
+    {
+        $subTitle = implode(chr(10), [
+            sprintf('Avg PM 2.5__: %s mg/u3', $region->get('pm25')),
+            sprintf('Avg Temp____: %s 度', $region->get('temperature')),
+            sprintf('Avg Humidity: %s %%', $region->get('humidity')),
+        ]);
+        
+        return [
+            [
+                'title' => $region->get('regions')->implode(', '),
+                'subtitle' => $subTitle,
+                'image_url' => static::icon($region->get('pm25')),
+                'buttons' => [
+                    [
+                        'type' => 'json_plugin_url',
+                        'title' => '從我的最愛移除',
+                        'url' => route('bot.user.remove', [
+                            'fbmid' => $fbmid,
+                            'id' => $subscriptId, 
+                        ]),
+                    ]
                 ]
             ]
         ];

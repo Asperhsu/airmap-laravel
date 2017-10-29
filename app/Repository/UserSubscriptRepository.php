@@ -9,6 +9,7 @@ use App\Models\Geometry;
 use App\Models\UserSubscript;
 use App\Service\FbBotResponse;
 use App\Formatter\RecordsToBotElements;
+use App\Repository\JSONRepository;
 
 class UserSubscriptRepository
 {
@@ -49,21 +50,23 @@ class UserSubscriptRepository
         return FbBotResponse::text($name . ' ' . $msg);
     }
 
-    public function addFavoriteRegion(int $geometryId)
+    public function addFavoriteRegion(array $geometryIds)
     {
-        $geometry = Geometry::find($geometryId);
+        $exist = UserSubscript::where('geometry_ids', $geometryIds)
+            ->count();
 
-        if (!$geometry) {
-            return FbBotResponse::text($name . ' 這個區域不存在');
+        if ($exist) {
+            $msg = '已在我的最愛內';
+            return FbBotResponse::text($msg);
         }
 
         $subscript = new UserSubscript;
         $subscript->fb_m_id = $this->fb_m_id;
-        $subscript->geometry_id = $this->geometryId;
+        $subscript->geometry_ids = $geometryIds;
         $result = $subscript->save();
 
         $msg = $result ? '訂閱成功' : '訂閱失敗';
-        return FbBotResponse::text($geometry->full_text . ' ' . $msg);
+        return FbBotResponse::text($msg);
     }
 
     public function removeFavorite(int $id)
@@ -83,11 +86,11 @@ class UserSubscriptRepository
         UserSubscript::where('fb_m_id', $this->fb_m_id)
             ->with('group')
             ->orderBy('group_id')
-            ->orderBy('geometry_id')
+            ->orderBy('geometry_ids')
             ->get()
             ->map(function ($subscript) use (&$recordAttrs, &$geometryIds) {
-                if ($subscript->geometry_id) {
-                    $geometryIds[$subscript->id] = $subscript->geometry_id;
+                if ($subscript->geometry_ids) {
+                    $geometryIds[$subscript->id] = $subscript->geometry_ids;
                 }
 
                 if ($subscript->group_id && $subscript->name) {
@@ -109,7 +112,7 @@ class UserSubscriptRepository
         if (count($recordAttrs)) {
             $records = collect($recordAttrs)->map(function ($where, $subId) {
                 $record = Record::where($where)->orderBy('published_at', 'desc')->first();
-                return RecordsToBotElements::toRemoveSite($record, $this->fb_m_id, $subId);
+                return RecordsToBotElements::toUnsubSite($record, $this->fb_m_id, $subId);
             });
         }
 
@@ -121,46 +124,30 @@ class UserSubscriptRepository
         return FbBotResponse::items($elements, $noResult, $tooMuch);
     }
 
-    public function fetchRegions(array $ids)
+    public function fetchRegions(array $geometryIds)
     {
-        if (!count($ids)) { return collect(); }
+        if (!count($geometryIds)) { return collect(); }
+
+        $elements = collect();
+
+        foreach ($geometryIds as $subId => $ids) {
+            $records = Geometry::whereIn('id', $ids)
+                ->get()
+                ->map(function ($geometry) {
+                    return JSONRepository::region($geometry);
+                });
+
+            $element = RecordsToBotElements::toUnsubRegion(collect([
+                'regions' => $records->pluck('regions')->flatten()->unique(),
+                'pm25' => round($records->pluck('pm25')->avg(), 2),
+                'humidity' => round($records->pluck('humidity')->avg(), 2),
+                'temperature' => round($records->pluck('temperature')->avg(), 2),
+                'ids' => collect($ids),
+            ]), $this->fb_m_id, $subId);
+
+            $elements = $elements->concat($element);
+        }
         
-        $regions = [];
-
-        $records = Record::join('geometry_record', function ($join) use ($geometryIds) {
-                $join->on('geometry_record.record_id', '=', 'records.id');
-                $join->whereIn('geometry_id', array_values($ids));
-                $join->select(DB::raw('max(record_id) as record_id'));
-                $join->groupBy('record_id');
-            })->get()
-            ->map(function ($record) use ($regions) {
-                $regions[$record->geometry_id][] = $record->pm25;
-            });
-
-        $elements = Geometry::whereIn('id', $ids)->get()
-            ->map(function ($geometry, $id) {
-                $title = $geometry->full_text;
-                $avg = collect($regions[$id])->avg();
-
-                return [
-                    'title' => sprintf('<%s>%s', $title),
-                    'subtitle' => sprintf('%d ug/m3', $avg),
-                    'buttons' => [
-                        [
-                            'type' => 'json_plugin_url',
-                            'title' => '取消訂閱',
-                            'url' => route('bot.user.remove', [
-                                'fbmid' => $this->fb_m_id,
-                                'id' => $id,
-                            ]),
-                        ]
-                    ]
-                ];
-            });
-        
-        dd($elements);
         return $elements;
-
-        // id => full_text, avg pm2.5
     }
 }

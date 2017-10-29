@@ -23,6 +23,8 @@ Route::group(['prefix' => 'json'], function () {
 
     Route::get('query-lastest', 'JsonController@lastest');
     Route::get('query-history', 'JsonController@history');
+
+    Route::get('query-region', 'JsonController@region');
 });
 
 Route::get('fetchlog/{group}', 'FetchLogController@show')->name('fetchlog');

@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserSubscript extends Model
 {
+    protected $casts = [
+        'geometry_ids' => 'json',
+    ];
+    
     public function group()
     {
         return $this->belongsTo(Group::class);
