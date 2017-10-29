@@ -120,7 +120,7 @@ abstract class FeedsFetcher implements ShouldQueue
                 $record[$field] = isset($record[$field]) ? floatval($record[$field]) : null;
 
                 if ($record[$field] > 9999) {
-                    logger(sprintf('device %s-%s outofrange %s:$s', $this->group->id, $record['uuid'], $field, $record[$field]));
+                    // logger(sprintf('device %s-%s outofrange %s:$s', $this->group->id, $record['uuid'], $field, $record[$field]));
                     return false;
                 }
             }
@@ -128,7 +128,7 @@ abstract class FeedsFetcher implements ShouldQueue
                 $record[$field] = isset($record[$field]) ? intval($record[$field]) : null;
 
                 if ($record[$field] > 9999) {
-                    logger(sprintf('device %s-%s outofrange %s:$s', $this->group->id, $record['uuid'], $field, $record[$field]));
+                    // logger(sprintf('device %s-%s outofrange %s:$s', $this->group->id, $record['uuid'], $field, $record[$field]));
                     return false;
                 }
             }

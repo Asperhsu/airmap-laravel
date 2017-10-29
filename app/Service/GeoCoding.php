@@ -36,7 +36,6 @@ class GeoCoding
             return $bound;
         }
 
-        logger(sprintf('GeoCoding fetch unknow lat: %s, lng: %s', $lat, $lng));   
         $bound = $this->fetchGeocoding($lat, $lng);
         $this->load(true);
         usleep(100000); // delay 0.1 sec for request rate
