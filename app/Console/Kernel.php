@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\ClearExpiredRecord',
         'App\Console\Commands\FetchDatasource',
         'App\Console\Commands\FetchLassAnalysis',
+        'App\Console\Commands\UpdateJSON',
     ];
 
     /**
@@ -34,6 +35,9 @@ class Kernel extends ConsoleKernel
                  ->everyFiveMinutes();
 
         $schedule->command('fetch:lass-analysis')
+                 ->everyFiveMinutes();
+
+        $schedule->command('record:update-json')
                  ->everyFiveMinutes();
 
         $schedule->command('fetch:geocoding')
