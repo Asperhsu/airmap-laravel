@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Repository;
 
 use DB;
@@ -28,7 +27,7 @@ class JSONRepository
     {
         return Carbon::now()->subMinutes(static::$validMins);
     }
-    
+
     /**
      * gind enabled group from group name
      *
@@ -38,8 +37,8 @@ class JSONRepository
     public static function findGroup(string $group)
     {
         return Group::where('enable', true)
-                ->where('name', $group)
-                ->first();
+            ->where('name', $group)
+            ->first();
     }
 
     /**
@@ -50,7 +49,7 @@ class JSONRepository
      */
     public static function group($group)
     {
-        if (!is_a($group, Group::class) && !($group = static::findGroup($group)) ) {
+        if (!is_a($group, Group::class) && ! ($group = static::findGroup($group))) {
             return false;
         }
 
@@ -60,16 +59,17 @@ class JSONRepository
         }
 
         // get latest record id for each uuid
-        $subQuery = '(SELECT MAX(id) as id FROM records WHERE group_id='.$group->id.' GROUP BY uuid) IDS';
-        
+        $subQuery = '(SELECT MAX(id) as id FROM records WHERE group_id=' . $group->id . ' GROUP BY uuid) IDS';
+
         $records = Record::join(DB::raw($subQuery), function ($join) {
-                $join->on('records.id', '=' , 'IDS.id');
-            })->leftJoin('lass_analyses', 'records.uuid', 'lass_analyses.uuid')
+            $join->on('records.id', '=', 'IDS.id');
+        })
+            ->leftJoin('lass_analyses', 'records.uuid', 'lass_analyses.uuid')
             ->where('published_at', '>=', static::validTime())
-            ->get()
+            ->get(['records.*', 'lass_analyses.*', 'records.uuid as uuid'])
             ->map(function ($record) use ($group) {
-                return GroupJSONFormatter::format($group, $record);
-            });
+            return GroupJSONFormatter::format($group, $record);
+        });
 
         JsonCache::group($group->id, $records);
         return $records;
@@ -83,7 +83,7 @@ class JSONRepository
     public static function groups()
     {
         $records = collect();
-        
+
         Group::where('enable', true)->each(function ($group) use (&$records) {
             if ($groupRecords = static::group($group)) {
                 $records = $records->merge($groupRecords);
@@ -92,7 +92,7 @@ class JSONRepository
 
         return $records;
     }
-    
+
     /**
      * get latest record for specify device
      *
@@ -103,7 +103,7 @@ class JSONRepository
     public static function latest(string $group, string $uuid)
     {
         $group = static::findGroup($group);
-        if (! $group) {
+        if (!$group) {
             return false;
         }
 
@@ -113,10 +113,11 @@ class JSONRepository
         }
 
         $record = Record::where('group_id', $group->id)
-                ->leftJoin('lass_analyses', 'records.uuid', 'lass_analyses.uuid')
-                ->where('records.uuid', $uuid)
-                ->orderBy('published_at', 'desc')
-                ->first();
+            ->leftJoin('lass_analyses', 'records.uuid', 'lass_analyses.uuid')
+            ->where('records.uuid', $uuid)
+            ->orderBy('published_at', 'desc')
+            ->select(['records.*', 'lass_analyses.*', 'records.uuid as uuid'])
+            ->first();
         $record = GroupJSONFormatter::format($group, $record);
 
         JsonCache::latest($group->id, $uuid, $record);
@@ -135,7 +136,7 @@ class JSONRepository
     public static function history(string $group, string $uuid, int $start, int $end)
     {
         $group = static::findGroup($group);
-        if (! $group) {
+        if (!$group) {
             return false;
         }
 
@@ -143,17 +144,17 @@ class JSONRepository
         if ($value = JsonCache::history($group->id, $uuid)) {
             return $value;
         }
-        
+
         $start = Carbon::createFromTimeStampUTC($start);
-        $end   = Carbon::createFromTimeStampUTC($end);
-        
+        $end = Carbon::createFromTimeStampUTC($end);
+
         $records = Record::where('group_id', $group->id)
-                ->leftJoin('lass_analyses', 'records.uuid', 'lass_analyses.uuid')
-                ->where('records.uuid', $uuid)
-                ->whereBetween('published_at', [$start, $end])
-                ->orderBy('published_at', 'desc')
-                ->get();
-                
+            ->leftJoin('lass_analyses', 'records.uuid', 'lass_analyses.uuid')
+            ->where('records.uuid', $uuid)
+            ->whereBetween('published_at', [$start, $end])
+            ->orderBy('published_at', 'desc')
+            ->get();
+
         $records = RecordsToChartFormatter::format($records);
 
         JsonCache::history($group->id, $uuid, $records);

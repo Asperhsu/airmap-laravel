@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Jobs;
 
 use App\Datasource\Thingspeak as DS;
@@ -11,6 +10,7 @@ class ThingspeakFeedsFetcher extends FeedsFetcher
     public function feedResource()
     {
         // won't use this method
+
     }
 
     public function parseFeed(array $raw)
@@ -21,9 +21,9 @@ class ThingspeakFeedsFetcher extends FeedsFetcher
     public function feeds(array $data)
     {
         $info = [
-            'id'        => $data['channel']['id'],
-            'name'      => $data['channel']['name'],
-            'latitude'  => $data['channel']['latitude'],
+            'id' => $data['channel']['id'],
+            'name' => $data['channel']['name'],
+            'latitude' => $data['channel']['latitude'],
             'longitude' => $data['channel']['longitude'],
         ];
 
@@ -41,9 +41,9 @@ class ThingspeakFeedsFetcher extends FeedsFetcher
 
         Model::where('group_id', $this->group->id)->active()->each(function ($ts) use ($template) {
             $url = str_replace('{{channel}}', $ts->channel, $template);
-            
+
             $feeds = $this->fetch($url);
-            
+
             foreach ($feeds as $feed) {
                 $feed['party'] = $ts->party;
                 $feed['fieldsMap'] = $ts->fields_map;
@@ -58,6 +58,5 @@ class ThingspeakFeedsFetcher extends FeedsFetcher
         });
 
         $this->saveRecords();
-        JsonCache::forgetGroup($this->group->id);
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
@@ -31,7 +30,7 @@ abstract class FeedsFetcher implements ShouldQueue
      * @var integer
      */
     public $timeout = 120;
-    
+
     /**
      * Group instance
      *
@@ -133,11 +132,11 @@ abstract class FeedsFetcher implements ShouldQueue
                 }
             }
 
-            $record['group_id']   = $this->group->id;
-            $record['fetch_id']   = $fetch->id;
+            $record['group_id'] = $this->group->id;
+            $record['fetch_id'] = $fetch->id;
             $record['created_at'] = date('Y-m-d H:i:s');
             $record['updated_at'] = date('Y-m-d H:i:s');
-            
+
             $this->records[] = $record;
         }
     }
@@ -162,9 +161,9 @@ abstract class FeedsFetcher implements ShouldQueue
         $feeds = $this->feeds($response['data']);
 
         $this->fetch = Fetch::create([
-            'group_id'    => $this->group->id,
+            'group_id' => $this->group->id,
             'transfer_ms' => $response['status']['transferTime'],
-            'feeds'       => count($feeds),
+            'feeds' => count($feeds),
         ]);
 
         return is_array($feeds) ? $feeds : [];
@@ -184,7 +183,7 @@ abstract class FeedsFetcher implements ShouldQueue
                 if (!$this->filter($feed)) {
                     continue;
                 }
-                
+
                 try {
                     $record = $this->parseFeed($feed);
                     $this->make($record, $this->fetch);
@@ -195,6 +194,5 @@ abstract class FeedsFetcher implements ShouldQueue
         });
 
         $this->saveRecords();
-        JsonCache::forgetGroup($this->group->id);
     }
 }
