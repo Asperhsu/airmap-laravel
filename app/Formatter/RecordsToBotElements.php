@@ -8,9 +8,14 @@ use Illuminate\Support\Collection;
 
 class RecordsToBotElements
 {
+    public static function group(Record $record)
+    {
+        return $record->group_name ?: $record->group->name;
+    }
+
     public static function title(Record $record)
     {
-        return sprintf('<%s> %s', $record->group->name, $record->name);
+        return sprintf('<%s> %s', static::group($record), $record->name);
     }
 
     public static function subTitle(Record $record)
@@ -36,7 +41,7 @@ class RecordsToBotElements
 
     public static function logo(Record $record)
     {
-        return config(sprintf('datasource.%s.logo', strtolower($record->group->name)), '');
+        return config(sprintf('datasource.%s.logo', strtolower(static::group($record))), '');
     }
 
     public static function icon(float $value)
@@ -52,16 +57,15 @@ class RecordsToBotElements
             'image_url' => static::icon($record->pm25),
             'default_action' => [
                 'type' => 'web_url',
-                'url' => route('site').sprintf('#%s$%s', $record->group->name, $record->name),
+                'url' => route('site').sprintf('#%s$%s', static::group($record), $record->name),
             ],
             'buttons' => [
                 [
                     'type' => 'json_plugin_url',
                     'title' => '加入我的最愛',
                     'url' => route('bot.user.addsite', [
-                        'fbmid' => $fbmid,
                         'group' => $record->group_id, 
-                        'name' => $record->name,
+                        'uuid' => $record->uuid,
                     ]),
                 ]
             ]
@@ -76,14 +80,13 @@ class RecordsToBotElements
             'image_url' => static::icon($record->pm25),
             'default_action' => [
                 'type' => 'web_url',
-                'url' => route('site').sprintf('#%s$%s', $record->group->name, $record->name),
+                'url' => route('site').sprintf('#%s$%s', static::group($record), $record->name),
             ],
             'buttons' => [
                 [
                     'type' => 'json_plugin_url',
                     'title' => '從我的最愛移除',
                     'url' => route('bot.user.remove', [
-                        'fbmid' => $fbmid,
                         'id' => $subscriptId, 
                     ]),
                 ]
@@ -94,6 +97,7 @@ class RecordsToBotElements
     public static function toSubRegion(Collection $region, string $fbmid)
     {
         $subTitle = implode(chr(10), [
+            sprintf('Sites Count: %s', $region->get('site_count')),
             sprintf('Avg PM 2.5__: %s mg/u3', $region->get('pm25')),
             sprintf('Avg Temp____: %s 度', $region->get('temperature')),
             sprintf('Avg Humidity: %s %%', $region->get('humidity')),
@@ -109,7 +113,6 @@ class RecordsToBotElements
                         'type' => 'json_plugin_url',
                         'title' => '加入我的最愛',
                         'url' => route('bot.user.addregion', [
-                            'fbmid' => $fbmid,
                             'region' => $region->get('ids')->implode('-'),
                         ]),
                     ]
@@ -121,6 +124,7 @@ class RecordsToBotElements
     public static function toUnsubRegion(Collection $region, string $fbmid, int $subscriptId)
     {
         $subTitle = implode(chr(10), [
+            sprintf('Sites Count: %s', $region->get('site_count')),
             sprintf('Avg PM 2.5__: %s mg/u3', $region->get('pm25')),
             sprintf('Avg Temp____: %s 度', $region->get('temperature')),
             sprintf('Avg Humidity: %s %%', $region->get('humidity')),
@@ -136,7 +140,6 @@ class RecordsToBotElements
                         'type' => 'json_plugin_url',
                         'title' => '從我的最愛移除',
                         'url' => route('bot.user.remove', [
-                            'fbmid' => $fbmid,
                             'id' => $subscriptId, 
                         ]),
                     ]

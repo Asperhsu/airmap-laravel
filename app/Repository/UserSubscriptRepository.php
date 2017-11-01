@@ -20,19 +20,11 @@ class UserSubscriptRepository
         $this->fb_m_id = $fb_m_id;
     }
 
-    public function addFavoriteSite(int $groupId, string $name)
+    public function addFavoriteSite(int $groupId, string $uuid)
     {
-        $exist = Record::where('group_id', $groupId)
-            ->where('name', $name)
-            ->count();
-
-        if (!$exist) {
-            return FbBotResponse::text($name . ' 這個站點不存在');
-        }
-
         $exist = UserSubscript::where('fb_m_id', $this->fb_m_id)
             ->where('group_id', $groupId)
-            ->where('name', $name)
+            ->where('uuid', $uuid)
             ->count();
 
         if ($exist) {
@@ -41,13 +33,13 @@ class UserSubscriptRepository
             $subscript = new UserSubscript;
             $subscript->fb_m_id = $this->fb_m_id;
             $subscript->group_id = $groupId;
-            $subscript->name = $name;
+            $subscript->uuid = $uuid;
             $result = $subscript->save();
             
             $msg = $result ? '訂閱成功' : '訂閱失敗';
         }
 
-        return FbBotResponse::text($name . ' ' . $msg);
+        return FbBotResponse::text($msg);
     }
 
     public function addFavoriteRegion(array $geometryIds)
@@ -93,10 +85,10 @@ class UserSubscriptRepository
                     $geometryIds[$subscript->id] = $subscript->geometry_ids;
                 }
 
-                if ($subscript->group_id && $subscript->name) {
+                if ($subscript->group_id && $subscript->uuid) {
                     $recordAttrs[$subscript->id] = [
                         'group_id' => $subscript->group_id,
-                        'name' => $subscript->name,
+                        'uuid' => $subscript->uuid,
                     ];
                     return;
                 }
@@ -139,6 +131,7 @@ class UserSubscriptRepository
 
             $element = RecordsToBotElements::toUnsubRegion(collect([
                 'regions' => $records->pluck('regions')->flatten()->unique(),
+                'site_count' => $records->pluck('site_count')->sum(),
                 'pm25' => round($records->pluck('pm25')->avg(), 2),
                 'humidity' => round($records->pluck('humidity')->avg(), 2),
                 'temperature' => round($records->pluck('temperature')->avg(), 2),

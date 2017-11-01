@@ -109,36 +109,38 @@ abstract class FeedsFetcher implements ShouldQueue
             'uuid' => $record['uuid'],
             'group_id' => $this->group->id,
             'published_at' => $record['published_at'],
-        ])->count();
+        ])->exists();
 
-        if (!$existRecord) {
-            $floatFields = ['lat', 'lng', 'humidity', 'temperature'];
-            $intFields = ['pm25'];
-
-            foreach ($floatFields as $field) {
-                $record[$field] = isset($record[$field]) ? floatval($record[$field]) : null;
-
-                if ($record[$field] > 9999) {
-                    // logger(sprintf('device %s-%s outofrange %s:$s', $this->group->id, $record['uuid'], $field, $record[$field]));
-                    return false;
-                }
-            }
-            foreach ($intFields as $field) {
-                $record[$field] = isset($record[$field]) ? intval($record[$field]) : null;
-
-                if ($record[$field] > 9999) {
-                    // logger(sprintf('device %s-%s outofrange %s:$s', $this->group->id, $record['uuid'], $field, $record[$field]));
-                    return false;
-                }
-            }
-
-            $record['group_id'] = $this->group->id;
-            $record['fetch_id'] = $fetch->id;
-            $record['created_at'] = date('Y-m-d H:i:s');
-            $record['updated_at'] = date('Y-m-d H:i:s');
-
-            $this->records[] = $record;
+        if ($existRecord) {
+            return;
         }
+
+        $floatFields = ['lat', 'lng', 'humidity', 'temperature'];
+        $intFields = ['pm25'];
+
+        foreach ($floatFields as $field) {
+            $record[$field] = isset($record[$field]) ? floatval($record[$field]) : null;
+
+            if ($record[$field] > 999) {
+                // logger(sprintf('device %s-%s outofrange %s:$s', $this->group->id, $record['uuid'], $field, $record[$field]));
+                return false;
+            }
+        }
+        foreach ($intFields as $field) {
+            $record[$field] = isset($record[$field]) ? intval($record[$field]) : null;
+
+            if ($record[$field] > 999) {
+                // logger(sprintf('device %s-%s outofrange %s:$s', $this->group->id, $record['uuid'], $field, $record[$field]));
+                return false;
+            }
+        }
+
+        $record['group_id'] = $this->group->id;
+        $record['fetch_id'] = $fetch->id;
+        $record['created_at'] = date('Y-m-d H:i:s');
+        $record['updated_at'] = date('Y-m-d H:i:s');
+
+        $this->records[] = $record;
     }
 
     protected function saveRecords()
@@ -158,6 +160,10 @@ abstract class FeedsFetcher implements ShouldQueue
     {
         $response = HttpClient::getJson($url);
 
+        if ($response['success'] === false) {
+            return [];
+        }
+        
         $feeds = $this->feeds($response['data']);
 
         $this->fetch = Fetch::create([

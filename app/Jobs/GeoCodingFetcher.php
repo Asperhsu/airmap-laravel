@@ -2,8 +2,10 @@
 
 namespace App\Jobs;
 
+use DB;
 use App\Models\Record;
 use App\Service\GeoCoding;
+use App\Models\LatestRecord;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -46,31 +48,42 @@ class GeoCodingFetcher implements ShouldQueue
     public function handle()
     {
         $geoService = new GeoCoding();
-        $cnt = 0;
-        $max = 500;
-        $chunk = 100;
 
-        Record::where('lat', '<>', 0)
-            ->where('lng', '<>', 0)
-            ->whereNotIn('id', function ($query) {
-                $query->select('record_id')->from('geometry_record');
-            })
-            ->orderBy('id', 'desc')
-            ->chunk($chunk, function ($records) use ($geoService, &$cnt, $max, $chunk) {
-                $cnt += $chunk;
+        LatestRecord::whereNull('geometry_id')
+            ->orderBy('record_id')
+            ->chunk(100, function ($records) use ($geoService) {
+                foreach ($records as $record) {
+                    $geometry = $geoService->findLatLng($record->lat, $record->lng);
 
-                $results = $records->map(function ($record) use ($geoService) {
-                    $bound = $geoService->findLatLng($record->lat, $record->lng);
-                    
-                    if ($bound) {
-                        $record->geometries()->attach($bound->id);
-                        return $record->id;
+                    if ($geometry) {
+                        DB::table('site_geometries')->insert([
+                            'group_id'    => $record->group_id,
+                            'uuid'        => $record->uuid,
+                            'geometry_id' => $geometry->id,
+                        ]);
                     }
+                }
+            });
 
-                    return false;
-                });
+        return false;
 
-                if ($cnt >= $max) { return false; }
+        Record::join('latest_records', function ($join) {
+                $join->on('records.id', '=', 'latest_records.record_id');
+                $join->whereNull('geometry_id');
+                $join->where('latest_records.lat', '<>', 0);
+                $join->where('latest_records.lng', '<>', 0);
+            })
+            ->take(500)
+            ->get()
+            ->map(function ($record) use ($geoService) {
+                $bound = $geoService->findLatLng($record->lat, $record->lng);
+                
+                if ($bound) {
+                    $record->geometries()->attach($bound->id);
+                    return $record->id;
+                }
+
+                return false;
             });
     }
 }

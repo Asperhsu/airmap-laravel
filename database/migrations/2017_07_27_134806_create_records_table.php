@@ -33,6 +33,8 @@ class CreateRecordsTable extends Migration
             $table->unique(['uuid', 'group_id', 'published_at']);
             $table->index('uuid');
             $table->index('name');
+            $table->index('lat');
+            $table->index('lng');
             $table->index('published_at');
         });
         

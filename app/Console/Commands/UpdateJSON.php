@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\UpdateJSON as Job;
 use Illuminate\Console\Command;
-use App\Repository\JSONRepository;
 
 class UpdateJSON extends Command
 {
@@ -38,6 +38,7 @@ class UpdateJSON extends Command
      */
     public function handle()
     {
-        JSONRepository::groups();
+        $job = new Job();
+        dispatch($job);
     }
 }

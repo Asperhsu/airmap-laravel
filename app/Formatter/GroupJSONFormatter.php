@@ -6,10 +6,11 @@ use Illuminate\Support\Collection;
 use Carbon\Carbon;
 use App\Models\Record;
 use App\Models\Group;
+use App\Models\LatestRecord;
 
 class GroupJSONFormatter
 {
-    public static function format(Group $group, Record $record)
+    public static function format(Group $group, LatestRecord $record)
     {
         return collect([
             'uniqueKey' => $record->uuid,

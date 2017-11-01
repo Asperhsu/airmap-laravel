@@ -57,6 +57,7 @@ class FbBotController extends Controller
 
         $elements = RecordsToBotElements::toSubRegion(collect([
             'regions' => $records->pluck('regions')->flatten()->unique(),
+            'site_count' => $records->pluck('site_count')->sum(),
             'pm25' => round($records->pluck('pm25')->avg(), 2),
             'humidity' => round($records->pluck('humidity')->avg(), 2),
             'temperature' => round($records->pluck('temperature')->avg(), 2),
@@ -64,6 +65,27 @@ class FbBotController extends Controller
         ]), $userId);
 
         $response = FbBotResponse::galleries($elements);
+        return response()->json($response);
+    }
+
+    public function searchNearby(Request $request)
+    {
+        $userId = $request->input('messenger_user_id');
+        $lat = $request->input('latitude');
+        $lng = $request->input('longitude');
+
+        if (!$lat || !$lng) {
+            return FbBotResponse::text('無法取得您的位置');
+        }
+
+        $elements = SearchRepository::searchNearBy($lat, $lng)->map(function ($record) use ($userId) {
+            return RecordsToBotElements::toSubSite($record, $userId);
+        });
+
+        $noResult = '沒有找到您附近的站台';
+        $tooMuch = FbBotResponse::tooMuchRecordsElement();
+        $response = FbBotResponse::items($elements, $noResult, $tooMuch);
+
         return response()->json($response);
     }
 
@@ -77,26 +99,29 @@ class FbBotController extends Controller
         return response()->json($response);
     }
 
-    public function addUserFavoriteSite(Request $request, string $fbmid, string $group, string $name)
+    public function addUserFavoriteSite(Request $request, string $group, string $uuid)
     {
+        $fbmid = $request->input('messenger_user_id');
         $repo = new UserSubscriptRepository($fbmid);
-        $response = $repo->addFavoriteSite($group, $name);
+        $response = $repo->addFavoriteSite($group, $uuid);
         
         return response()->json($response);
     }
 
-    public function addUserFavoriteRegion(Request $request, string $fbmid, string $region)
+    public function addUserFavoriteRegion(Request $request, string $region)
     {
         $ids = explode('-', $region);
         
+        $fbmid = $request->input('messenger_user_id');
         $repo = new UserSubscriptRepository($fbmid);
         $response = $repo->addFavoriteRegion($ids);
         
         return response()->json($response);
     }
 
-    public function removeUserFavorite(Request $request, string $fbmid, int $id)
+    public function removeUserFavorite(Request $request, int $id)
     {
+        $fbmid = $request->input('messenger_user_id');
         $repo = new UserSubscriptRepository($fbmid);
         $response = $repo->removeFavorite($id);
         

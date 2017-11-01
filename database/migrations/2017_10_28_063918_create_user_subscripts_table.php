@@ -17,11 +17,11 @@ class CreateUserSubscriptsTable extends Migration
             $table->increments('id');
             $table->string('fb_m_id');
             $table->integer('group_id')->nullable();
-            $table->string('name')->nullable();
+            $table->string('uuid')->nullable();
             $table->mediumText('geometry_ids')->nullable();
             $table->timestamps();
 
-            $table->unique(['fb_m_id', 'group_id', 'name']);
+            $table->unique(['fb_m_id', 'group_id', 'uuid']);
         });
     }
 

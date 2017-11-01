@@ -9,7 +9,7 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 Route::get('/{latlng?}', 'HomeController@map')->where('latlng', '@[0-9.]+,[0-9.]+')->name('map');
 Route::get('/list', 'HomeController@list')->name('list');
 Route::get('/site', 'HomeController@site')->name('site');
@@ -19,7 +19,7 @@ Route::get('/datasource', 'HomeController@datasource')->name('datasource');
 Route::group(['prefix' => 'json'], function () {
     Route::get('airmap.json', 'JsonController@airmap');
     Route::get('{json}', 'JsonController@group')
-         ->where('json', '.*\.json$')->name('json');
+        ->where('json', '.*\.json$')->name('json');
 
     Route::get('query-lastest', 'JsonController@lastest');
     Route::get('query-history', 'JsonController@history');
@@ -53,14 +53,14 @@ Route::group(['namespace' => 'Auth'], function () {
 
 Route::group(['prefix' => 'manager', 'middleware' => 'auth'], function () {
     Route::get('/', 'ManagerController@index')->name('manager.index');
-    
+
     Route::get('/users', 'ManagerController@users')->name('manager.users');
     Route::get('/chgpass', 'ManagerController@showChangePassword')->name('manager.chgpassword');
     Route::post('/chgpass', 'ManagerController@storeChangePassword');
-    
+
     Route::get('/probecube', 'ManagerController@probecube')->name('manager.probecube');
     Route::get('/independent', 'ManagerController@independent')->name('manager.independent');
-    
+
 
     Route::resource('thingspeak', 'ThingspeakController');
     Route::get('thingspeak/{thingspeak}/fetch', 'ThingspeakController@fetch')->name('thingspeak.fetch');
@@ -71,4 +71,5 @@ Route::group(['prefix' => 'manager', 'middleware' => 'auth'], function () {
     //     Route::get('{id}/edit', 'ManagerController@editThingspeak')->name('manager.thingspeak.edit');
     //     Route::get('{id}/delete', 'ManagerController@deletedThingspeak')->name('manager.thingspeak.delete');
     // });
+
 });

@@ -13,7 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \Log::getMonolog()->popHandler();
+        \Log::useDailyFiles(storage_path('/logs/laravel-').gethostname().'.log');
     }
 
     /**

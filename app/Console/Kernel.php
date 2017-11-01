@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
@@ -32,18 +31,26 @@ class Kernel extends ConsoleKernel
         // })->everyMinute();
 
         $schedule->command('fetch:record')
+                 ->timezone('Asia/Taipei')
+                 ->between('6:00', '23:50')
                  ->everyFiveMinutes();
 
         $schedule->command('fetch:lass-analysis')
-                 ->everyFiveMinutes();
+                 ->timezone('Asia/Taipei')
+                 ->between('6:00', '23:50')
+                 ->everyTenMinutes();
 
         $schedule->command('record:update-json')
+                 ->timezone('Asia/Taipei')
+                 ->between('6:00', '23:50')
                  ->everyFiveMinutes();
 
-        $schedule->command('fetch:geocoding')
-                ->everyTenMinutes();
+        // $schedule->command('fetch:geocoding')
+        //          ->timezone('Asia/Taipei')
+        //          ->everyFiveMinutes();
 
         $schedule->command('record:clear-expired')
+                 ->timezone('Asia/Taipei')
                  ->daily();
     }
 
@@ -54,7 +61,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

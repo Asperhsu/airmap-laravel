@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Record;
+use App\Jobs\ClearExpiredRecord as Job;
 use Illuminate\Console\Command;
 
 class ClearExpiredRecord extends Command
@@ -38,11 +38,7 @@ class ClearExpiredRecord extends Command
      */
     public function handle()
     {
-        $expiredDays = config('datasource.expire-days');
-
-        if ($expiredDays && $expiredDays > 0) {
-            $time = date('Y-m-d H:i:s', strtotime('-'.$expiredDays.' days'));
-            Record::where('created_at', '<', $time)->delete();
-        }
+        $job = new Job();
+        dispatch($job);
     }
 }
