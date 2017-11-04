@@ -35,8 +35,8 @@ class ClearExpiredRecord implements ShouldQueue
         $expiredDays = config('datasource.expire-days');
 
         if ($expiredDays && $expiredDays > 0) {
-            $time = date('Y-m-d H:i:s', strtotime('-'.$expiredDays.' days'));
-            DB::table('records')->where('created_at', '<', $time)->delete();
+            $time = date('Y-m-d H:00', strtotime('-'.$expiredDays.' days'));
+            DB::table('records')->where('published_at', '<', $time)->delete();
         }
     }
 }

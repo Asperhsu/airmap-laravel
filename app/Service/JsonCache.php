@@ -6,10 +6,10 @@ use Cache;
 use Illuminate\Support\Collection;
 
 class JsonCache {
-    public static $groupExpireMins = 5;
+    public static $groupExpireMins = 10;
     public static $latestExpireMins = 1;
     public static $historyExpireMins = 1;
-    public static $geometryExpireMins = 5;
+    public static $geometryExpireMins = 10;
 
     public static function cacheKey($key)
     {

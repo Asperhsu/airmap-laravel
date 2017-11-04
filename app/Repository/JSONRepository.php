@@ -116,9 +116,14 @@ class JSONRepository
             ->orderBy('published_at', 'desc')
             ->select(['latest_records.*', 'lass_analyses.*', 'latest_records.uuid as uuid'])
             ->first();
-        $record = GroupJSONFormatter::format($group, $record);
+        
+        if ($record) {
+            $record = GroupJSONFormatter::format($group, $record);
+            JsonCache::latest($group->id, $uuid, $record);
+        } else {
+            $record = collect();
+        }
 
-        JsonCache::latest($group->id, $uuid, $record);
         return $record;
     }
 

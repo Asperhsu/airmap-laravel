@@ -160,7 +160,7 @@ abstract class FeedsFetcher implements ShouldQueue
     {
         $response = HttpClient::getJson($url);
 
-        if ($response['success'] === false) {
+        if ($response['success'] === false || !is_array($response['data'])) {
             return [];
         }
         

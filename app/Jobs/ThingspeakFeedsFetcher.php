@@ -20,6 +20,11 @@ class ThingspeakFeedsFetcher extends FeedsFetcher
 
     public function feeds(array $data)
     {
+        if (!isset($data['channel']['id'])) {
+            logger($data);
+            return [];
+        }
+        
         $info = [
             'id' => $data['channel']['id'],
             'name' => $data['channel']['name'],

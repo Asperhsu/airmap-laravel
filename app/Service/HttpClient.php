@@ -14,6 +14,8 @@ class HttpClient
         $client = new Client();
         $success = false;
         $status = [];
+        $data = [];
+        
         $options = [
             'on_stats' => function (TransferStats $stats) use (&$status) {
                 $status['transferTime'] = $stats->getTransferTime() * 1000;
@@ -26,20 +28,23 @@ class HttpClient
         ];
 
         try {
-            $response = $client->request('GET', $url, $options);
             $success = true;
+            $response = $client->request('GET', $url, $options);
+            $data = json_decode((string) $response->getBody(), true);
         } catch (ServerException $e) {
             $response = $e->getResponse();
             $status['httpCode'] = $response->getStatusCode();
         } catch (RequestException $e) {
             $response = $e->getResponse();
-            $status['httpCode'] = $response->getStatusCode();
+            if ($response) {
+                $status['httpCode'] = $response->getStatusCode();
+            }
         }
 
         return [
             'success' => $success,
             'status' => $status,
-            'data' => json_decode((string) $response->getBody(), true),
+            'data' => $data,
         ];
     }
 }

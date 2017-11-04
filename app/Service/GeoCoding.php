@@ -44,7 +44,7 @@ class GeoCoding
             return $bound;
         }
 
-        return $this->bounds->where('country', 'default')->first();
+        return null;
     }
 
     protected function fetchGeocoding(float $lat, float $lng)
@@ -112,7 +112,7 @@ class GeoCoding
             }
         }
 
-        if (!$geometry->level1 && !$geometry->level2 
+        if (!$geometry->level1 && !$geometry->level2
             && !$geometry->level3 && !$geometry->level4) {
             return false;
         }

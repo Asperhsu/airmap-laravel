@@ -45,13 +45,13 @@ class Kernel extends ConsoleKernel
                  ->between('6:00', '23:50')
                  ->everyFiveMinutes();
 
-        // $schedule->command('fetch:geocoding')
-        //          ->timezone('Asia/Taipei')
-        //          ->everyFiveMinutes();
+        $schedule->command('fetch:geocoding')
+                 ->timezone('Asia/Taipei')
+                 ->everyFiveMinutes();
 
         $schedule->command('record:clear-expired')
                  ->timezone('Asia/Taipei')
-                 ->daily();
+                 ->hourlyAt(3);
     }
 
     /**
