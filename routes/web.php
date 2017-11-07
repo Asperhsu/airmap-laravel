@@ -25,6 +25,7 @@ Route::group(['prefix' => 'json'], function () {
     Route::get('query-history', 'JsonController@history');
 
     Route::get('query-region', 'JsonController@region');
+    Route::get('query-bounds', 'JsonController@bounds')->middleware('cors');
 });
 
 Route::get('fetchlog/{group}', 'FetchLogController@show')->name('fetchlog');
@@ -71,5 +72,4 @@ Route::group(['prefix' => 'manager', 'middleware' => 'auth'], function () {
     //     Route::get('{id}/edit', 'ManagerController@editThingspeak')->name('manager.thingspeak.edit');
     //     Route::get('{id}/delete', 'ManagerController@deletedThingspeak')->name('manager.thingspeak.delete');
     // });
-
 });

@@ -31,7 +31,7 @@ class CreateRecordsTable extends Migration
             $table->timestamps();
 
             $table->unique(['uuid', 'group_id', 'published_at']);
-            $table->index('uuid');
+            $table->index(['group_id', 'uuid']);
             $table->index('name');
             $table->index('lat');
             $table->index('lng');

@@ -27,6 +27,9 @@ class WidgetController extends Controller
     {
         abort_unless($group && $uuid, 402);
         $record = JSONRepository::latest($group, $uuid);
+        if (!$record) {
+            return 'site not found.';
+        }
         
         $view = 'widget.'.$type;
         if (!View::exists($view)) {

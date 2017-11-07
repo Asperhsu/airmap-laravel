@@ -17,7 +17,9 @@ class EdimaxFeedsFetcher extends FeedsFetcher
 
     public function filter(array $raw)
     {
-        return $raw['type'] != "lass-airbox";
+        $macFirstFourDigits = substr($raw['id'], 0, 4);
+
+        return in_array($macFirstFourDigits, ['28C2', '74DA']);
     }
 
     public function feeds(array $data)

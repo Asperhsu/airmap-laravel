@@ -57,7 +57,7 @@ class RecordsToBotElements
             'image_url' => static::icon($record->pm25),
             'default_action' => [
                 'type' => 'web_url',
-                'url' => route('site').sprintf('#%s$%s', static::group($record), $record->name),
+                'url' => route('site').sprintf('#%s$%s', static::group($record), $record->uuid),
             ],
             'buttons' => [
                 [
@@ -80,7 +80,7 @@ class RecordsToBotElements
             'image_url' => static::icon($record->pm25),
             'default_action' => [
                 'type' => 'web_url',
-                'url' => route('site').sprintf('#%s$%s', static::group($record), $record->name),
+                'url' => route('site').sprintf('#%s$%s', static::group($record), $record->uuid),
             ],
             'buttons' => [
                 [

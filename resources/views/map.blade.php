@@ -57,6 +57,11 @@
                 <div class="popover-content" data-lang="recruit">自造站點募集中</div>
             </a>
         </div>
+        <div id="fb-bot" title="Facebook Messenger 機器人">
+            <a href="https://m.me/g0vairmap" target="_blank">
+                <img src="https://static.xx.fbcdn.net/rsrc.php/v3/yM/r/a_HNTVVyh4W.png" alt="Facebook Messenger Bot" class="img-responsive">
+            </a>
+        </div>
     
         <div id="map-container"></div>
     

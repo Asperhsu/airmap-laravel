@@ -2,9 +2,6 @@ var DataSource = {
 	autoUpdateFlag: true,
 	autoUpdateTS: null,
 	autoUpdateIntervalms: 5 * 60 * 1000,
-	sources: [
-		"/json/airmap.json",
-	],
 	boot: function(){
 		this.loadSources();
 		this.autoUpdate(true);
@@ -12,20 +9,11 @@ var DataSource = {
 	loadSources: function(){
 		$("body").trigger("dataSourceLoadSources");
 
-		if( !this.sources.length ){
-			$("body").trigger("dataSourceLoadCompelete");
-			return;
-		}
+		var bounds = MapHandler.getInstance().getBounds().toUrlValue();
+		var source = '/json/query-bounds?bounds=' + bounds;
 
-		var jobs = [];
-
-		this.sources.map(source => {
-			jobs.push(this.fetch(source));
-		});
-
-		Promise.all(jobs).then(results => {
-			var merged = [].concat.apply([], results);
-			$("body").trigger("dataSourceLoadCompelete", [merged]);
+		this.fetch(source).then(results => {
+			$("body").trigger("dataSourceLoadCompelete", [results]);
 		});
 	},
 	fetch: function(source){
@@ -45,8 +33,11 @@ var DataSource = {
 		}else{
 			clearInterval(this.autoUpdateTS);
 		}
-	}
-
+	},
+	resetUpdate: function(){
+		this.autoUpdate(false);
+		this.autoUpdate(true);
+	},
 }
 
 module.exports = DataSource;

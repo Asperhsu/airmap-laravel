@@ -38,6 +38,13 @@ class JSONRepository
      */
     public static function findGroup(string $group)
     {
+        if ($group == 'Edimax-Airbox') {
+            $group = 'edimax';
+        }
+        if ($group == 'Asus-Airbox') {
+            $group = 'asus';
+        }
+        
         return Group::where('enable', true)
             ->where('name', $group)
             ->first();
@@ -64,11 +71,12 @@ class JSONRepository
         $records = LatestRecord::where('group_id', $group->id)
             ->leftJoin('lass_analyses', 'latest_records.uuid', 'lass_analyses.uuid')
             ->where('published_at', '>=', static::validTime())
+            ->select(['latest_records.*', 'lass_analyses.*', 'latest_records.uuid as uuid'])
             ->get()
-            ->map(function ($record) use ($group) {
-                return GroupJSONFormatter::format($group, $record);
-            });
-        
+            ->map(function ($record) {
+            return GroupJSONFormatter::format($record);
+        });
+
         JsonCache::group($group->id, $records);
         return $records;
     }
@@ -116,12 +124,12 @@ class JSONRepository
             ->orderBy('published_at', 'desc')
             ->select(['latest_records.*', 'lass_analyses.*', 'latest_records.uuid as uuid'])
             ->first();
-        
+
         if ($record) {
-            $record = GroupJSONFormatter::format($group, $record);
+            $record = GroupJSONFormatter::format($record);
             JsonCache::latest($group->id, $uuid, $record);
         } else {
-            $record = collect();
+            $record = null;
         }
 
         return $record;
@@ -163,7 +171,7 @@ class JSONRepository
         return $records;
     }
 
-    
+
     public static function region(Geometry $geometry)
     {
         // if cache exists, return cache
@@ -193,5 +201,21 @@ class JSONRepository
         JsonCache::geometry($geometry->id, $record);
         return $record;
     }
-    
+
+    public static function bounds(array $northEast, array $sourthWest)
+    {
+        $westlng = $sourthWest['lng'];
+        $eastlng = $northEast['lng'];
+        $northlat = $northEast['lat'];
+        $southlat = $sourthWest['lat'];
+
+        $records = LatestRecord::whereBetween('lat', [$southlat, $northlat])
+            ->whereBetween('lng', [$westlng, $eastlng])
+            ->get()
+            ->map(function ($record) {
+            return GroupJSONFormatter::format($record);
+        });
+
+        return $records;
+    }
 }

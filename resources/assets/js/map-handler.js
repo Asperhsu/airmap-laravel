@@ -1,9 +1,12 @@
+var debounce = require('debounce');
+
 var MapHandler = (function(){
 	var userOptions = {};
 	var instance = null;
 	var googleApi = null;
 	var language = 'zh-TW';
 	var container = '#map-container';
+	var bounds;
 
 	var getMapOption = function(userOptions){
 		var options = {
@@ -137,6 +140,23 @@ var MapHandler = (function(){
 		map.controls[googleApi.ControlPosition.RIGHT_BOTTOM].push(controlDiv);
 	};
 
+	var registerBoundsChanged = function () {
+		googleApi.event.addListener(instance, 'bounds_changed', function () {
+			var status = 'larger';
+			var newBounds = instance.getBounds().toJSON();
+
+			if (newBounds.east < bounds.east
+				&& newBounds.east < bounds.east
+				&& newBounds.east < bounds.east
+				&& newBounds.east < bounds.east){
+					status = 'smaller';
+				}
+
+			$("body").trigger("mapBoundsChanged", [status]);
+			bounds = newBounds;
+		});
+	}
+
 	var initMap = function(){
 		googleApi = google.maps;
 		var options = $.extend({}, getMapOption(), userOptions);		
@@ -148,7 +168,11 @@ var MapHandler = (function(){
 
 		addUserLocationButton(instance);
 
-		$("body").trigger("mapBootCompelete");
+		googleApi.event.addListenerOnce(instance, 'idle', function () {
+			bounds = instance.getBounds().toJSON();
+			$("body").trigger("mapBootCompelete");
+			registerBoundsChanged();
+		});
 	};
 
 	var loadScript = function() {
@@ -160,8 +184,6 @@ var MapHandler = (function(){
         script.id = "google-maps-script";
         document.body.appendChild(script);
     } 
-
-    
 
 	return {
 		boot: function(options){
@@ -214,7 +236,7 @@ var MapHandler = (function(){
 
 			language = lang;
 			loadScript(lang);
-		}
+		},
 	}
 })();
 

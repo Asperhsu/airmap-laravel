@@ -38,14 +38,22 @@ html, body{
 	opacity: 0.9;
 	display: inline-block;
 	position: absolute;
-	left: 170px;
-	top: 0.6em;
+	left: 205px;
+	top: 0.5em;
 	z-index: 80;
 	cursor: pointer;
 }
 #recruit .popover-content{
 	padding: 3px 8px;
 	font-size: 0.8em;
+}
+#fb-bot {
+	opacity: 0.9;
+	position: absolute;
+	width: 40px;
+	left: 170px;
+	top: 0;
+	z-index: 80;
 }
 
 #map-container{

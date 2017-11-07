@@ -10,12 +10,21 @@ use App\Models\LatestRecord;
 
 class GroupJSONFormatter
 {
-    public static function format(Group $group, LatestRecord $record)
+    public static function format($record)
     {
+        $isRecord = is_a($record, Record::class);
+        $isLatestRecord = is_a($record, LatestRecord::class);
+        
+        if (!$isRecord && !$isLatestRecord) {
+            throw new \TypeError('Record should be Record or LatestRecord instance.');
+        }
+
+        $siteGroup = $isRecord ? $record->group->name : $record->group_name;
+        
         return collect([
             'uniqueKey' => $record->uuid,
             'SiteName'  => $record->name,
-            'SiteGroup' => $group->name,
+            'SiteGroup' => $siteGroup,
             'Maker'     => $record->maker,
             'LatLng'    => collect([
                 'lat'   => $record->lat,
@@ -34,7 +43,8 @@ class GroupJSONFormatter
         ]);
     }
 
-    public static function analyseStatus($indoor, $shortterm_pollution, $longterm_pollution) {
+    public static function analyseStatus($indoor, $shortterm_pollution, $longterm_pollution)
+    {
         $status = [];
 
         if ($indoor) {

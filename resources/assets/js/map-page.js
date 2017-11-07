@@ -1,6 +1,7 @@
 require("css/common.css");
 require("css/map.css");
 
+var debounce = require('debounce');
 var Indicator = require("js/measure-indicator");
 var DataSource = require("js/datasource-loader");
 var siteTool = require("js/site-tool");
@@ -37,7 +38,13 @@ if( isIE || isEdge ){
 		.on("dataSourceLoadCompelete", function(e, data){
 			siteTool.loadSites(data);
 			$("#loading").hide();
-		});
+		})
+		.on("mapBoundsChanged", debounce(function (e, status) {
+			if (status == 'larger') {
+				DataSource.loadSources();
+				DataSource.resetUpdate();
+			}
+		}, 500));
 
 	$("body").on("dataSourceReachAuotUpdateTimes", function(){
 		$("#loading").show().find(".msg").text('Idle time reached, already stop auto reload. If need update data, please refresh page.');

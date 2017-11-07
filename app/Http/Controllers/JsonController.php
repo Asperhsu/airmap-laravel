@@ -46,4 +46,21 @@ class JsonController extends Controller
         $records = JSONRepository::history($group, $uuid, $start, $end);
         return response()->json($records);
     }
+
+    public function bounds(Request $request)
+    {
+        $bounds = $request->input('bounds');
+        abort_unless($bounds, 402);
+
+        $northEast = $sourthWest = [];
+        [
+            $sourthWest['lat'], $sourthWest['lng'], 
+            $northEast['lat'], $northEast['lng']
+        ] = array_map(function ($value) {
+            return floatval($value);
+        }, explode(',', $bounds));
+
+        $records = JSONRepository::bounds($northEast, $sourthWest);
+        return response()->json($records);
+    }
 }
