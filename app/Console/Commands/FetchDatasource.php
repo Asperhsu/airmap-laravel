@@ -12,7 +12,7 @@ class FetchDatasource extends Command
      *
      * @var string
      */
-    protected $signature = 'fetch:record {--group= : what group to be fetch.}';
+    protected $signature = 'fetch:record {--G|group=all}';
 
     /**
      * The console command description.
@@ -39,11 +39,12 @@ class FetchDatasource extends Command
     public function handle()
     {
         $group = $this->option('group');
+        
         $where = [
             ['enable', '=', true]
         ];
 
-        if ($group) {
+        if ($group !== 'all') {
             $where[] = ['name', '=', $group];
         }
         

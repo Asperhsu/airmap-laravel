@@ -73,3 +73,5 @@ Route::group(['prefix' => 'manager', 'middleware' => 'auth'], function () {
     //     Route::get('{id}/delete', 'ManagerController@deletedThingspeak')->name('manager.thingspeak.delete');
     // });
 });
+
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');

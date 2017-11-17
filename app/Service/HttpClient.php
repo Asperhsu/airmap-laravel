@@ -11,7 +11,9 @@ class HttpClient
 {
     public static function getJson($url)
     {
-        $client = new Client();
+        $client = new Client([
+            'verify' => false,
+        ]);
         $success = false;
         $status = [];
         $data = [];
@@ -34,11 +36,13 @@ class HttpClient
         } catch (ServerException $e) {
             $response = $e->getResponse();
             $status['httpCode'] = $response->getStatusCode();
+            logger('HttpClient::getJson ServerException', (array) $e);
         } catch (RequestException $e) {
             $response = $e->getResponse();
             if ($response) {
                 $status['httpCode'] = $response->getStatusCode();
             }
+            logger('HttpClient::getJson RequestException', (array) $e);
         }
 
         return [

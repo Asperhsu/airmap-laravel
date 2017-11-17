@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
         Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 
         /*
          * Application Service Providers...

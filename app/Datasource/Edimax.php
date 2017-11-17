@@ -9,7 +9,7 @@ class Edimax implements Contract
 {
     public static function feedResource()
     {
-        return "http://airbox.edimaxcloud.com/devices?token=" . config('datasource.edimax.token');
+        return "https://airbox.edimaxcloud.com/devices?token=" . config('datasource.edimax.token');
     }
 
     public static function parse(array $raw)

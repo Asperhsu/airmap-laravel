@@ -211,6 +211,8 @@ class JSONRepository
 
         $records = LatestRecord::whereBetween('lat', [$southlat, $northlat])
             ->whereBetween('lng', [$westlng, $eastlng])
+            ->leftJoin('lass_analyses', 'latest_records.uuid', 'lass_analyses.uuid')
+            ->select(['latest_records.*', 'lass_analyses.*', 'latest_records.uuid as uuid'])
             ->get()
             ->map(function ($record) {
             return GroupJSONFormatter::format($record);

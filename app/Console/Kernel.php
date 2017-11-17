@@ -12,10 +12,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\ClearExpiredRecord',
-        'App\Console\Commands\FetchDatasource',
-        'App\Console\Commands\FetchLassAnalysis',
-        'App\Console\Commands\UpdateJSON',
+        //
     ];
 
     /**

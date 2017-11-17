@@ -9,8 +9,9 @@ var DataSource = {
 	loadSources: function(){
 		$("body").trigger("dataSourceLoadSources");
 
-		var bounds = MapHandler.getInstance().getBounds().toUrlValue();
-		var source = '/json/query-bounds?bounds=' + bounds;
+		// var bounds = MapHandler.getInstance().getBounds().toUrlValue();
+		// var source = '/json/query-bounds?bounds=' + bounds;
+		var source = '/json/airmap.json';
 
 		this.fetch(source).then(results => {
 			$("body").trigger("dataSourceLoadCompelete", [results]);
