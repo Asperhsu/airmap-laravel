@@ -20,6 +20,11 @@ class HomeController extends Controller
     {
         return view('site');
     }
+
+    public function recruit()
+    {
+        return view('recruit');
+    }
     
     public function datasource()
     {

@@ -151,11 +151,6 @@ class JSONRepository
             return false;
         }
 
-        // if cache exists, return cache
-        if ($value = JsonCache::history($group->id, $uuid)) {
-            return $value;
-        }
-
         $start = Carbon::createFromTimeStampUTC($start);
         $end = Carbon::createFromTimeStampUTC($end);
 
@@ -166,8 +161,6 @@ class JSONRepository
             ->get();
 
         $records = RecordsToChartFormatter::format($records);
-
-        JsonCache::history($group->id, $uuid, $records);
         return $records;
     }
 

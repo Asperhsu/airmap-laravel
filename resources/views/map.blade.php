@@ -382,6 +382,16 @@
                 </li>
 
                 <li id="footer">
+                    <div class="text-center" style="color: #d52f72;">
+                        <h4>
+                            <span class="glyphicon glyphicon-heart"></span>
+                            特別致謝
+                            <span class="glyphicon glyphicon-heart"></span>
+                        </h4>
+                        <img src="https://i.imgur.com/z11DvN7.png" width="100px" />
+                        <p>本站硬體由 ProbeCube 團隊熱心支援</p>
+                    </div>
+                    <hr>
                     <p class="disclaimer" data-lang="disclaimer">
                         本零時空汙觀測網僅彙整公開資料提供視覺化參考，並不對資料數據提供保證，實際測值以各資料來源為準。
                     </p>
@@ -401,7 +411,6 @@
                     </p>
                     <p class="about">Asper &copy; 2017 &nbsp;&nbsp;<a href="/about">About</a></p>
                     <p class="link">
-                        <a href="https://g0vairmap.blogspot.tw/" target="_blank">g0v空汙網的攻城獅日記</a> |
                         <a href="https://www.facebook.com/g0vairmap/" target="_blank">Facebook Page</a>
                     </p>
                 </li>

@@ -13,6 +13,7 @@
 Route::get('/{latlng?}', 'HomeController@map')->where('latlng', '@[0-9.]+,[0-9.]+')->name('map');
 Route::get('/list', 'HomeController@list')->name('list');
 Route::get('/site', 'HomeController@site')->name('site');
+Route::get('/recruit', 'HomeController@recruit')->name('recruit');
 Route::get('/datasource', 'HomeController@datasource')->name('datasource');
 
 /* JSON */
