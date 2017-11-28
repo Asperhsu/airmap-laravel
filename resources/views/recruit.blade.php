@@ -61,7 +61,7 @@
                         <p class="text-center">( 
                             <a target="_blank" href="https://github.com/Lafudoci/ProbeCube">GitHub原始碼</a> | 
                             <a target="_blank" href="http://beta.hackfoldr.org/g0vairmap/g0v--rp53Cw7woim"> Hackpad共筆</a> | 
-                            <a target="_blank" href="https://www.facebook.com/groups/g0v.general/"> 社群討論</a> )</p>
+                            <a target="_blank" href="https://www.facebook.com/groups/491642281023600/"> FB社群討論</a> )</p>
                     </div>
                 </div>
 
@@ -73,8 +73,8 @@
                         <p class="text-center">LASS是開源公益的環境感測器網路計畫，系統完成度高、門檻低，支援平台眾多，賦予Maker自行客製各種感測能力，所有感測資料皆自由開放以利各種衍生專案與應用。</p>
                         <p class="text-center">( 
                             <a target="_blank" href="https://github.com/LinkItONEDevGroup/LASS">GitHub原始碼</a> | 
-                            <a target="_blank" href="https://lass.hackpad.com/"> Hackpad共筆</a> | 
-                            <a target="_blank" href="https://www.facebook.com/groups/1607718702812067/"> 社群討論</a> )</p>
+                            <a target="_blank" href="https://lass.hackpad.tw/"> Hackpad共筆</a> | 
+                            <a target="_blank" href="https://www.facebook.com/groups/1607718702812067/"> FB社群討論</a> )</p>
                     </div>
                 </div>
 
