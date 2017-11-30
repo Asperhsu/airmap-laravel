@@ -25,6 +25,11 @@ class HomeController extends Controller
     {
         return view('recruit');
     }
+
+    public function about()
+    {
+        return view('about');
+    }
     
     public function datasource()
     {
