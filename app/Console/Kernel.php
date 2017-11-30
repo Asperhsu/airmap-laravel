@@ -29,17 +29,14 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('fetch:record')
                  ->timezone('Asia/Taipei')
-                 ->between('6:00', '23:50')
                  ->everyFiveMinutes();
 
         $schedule->command('fetch:lass-analysis')
                  ->timezone('Asia/Taipei')
-                 ->between('6:00', '23:50')
                  ->everyTenMinutes();
 
         $schedule->command('record:update-json')
                  ->timezone('Asia/Taipei')
-                 ->between('6:00', '23:50')
                  ->everyFiveMinutes();
 
         $schedule->command('fetch:geocoding')
