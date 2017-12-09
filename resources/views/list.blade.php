@@ -114,7 +114,6 @@
     <div class="container-fluid" id="footer">
         <p>Asper &copy; 2017 <a href='/about'>About</a></p>
         <p>
-            <a href="https://g0vairmap.blogspot.tw/" target="_blank">g0v空汙網的攻城獅日記</a> |
             <a href="https://www.facebook.com/g0vairmap/" target="_blank">Facebook Page</a> 
         </p>
     </div>
