@@ -21,8 +21,13 @@ var LANG = {
 			"measureType": 				"Measure Type",
 			"districtChange": 			"District Change",
 			"voronoiDiagram": 			"Voronoi Diagram",
+			"windLayer": 				"Wind Layer",
+			"windResourceAlert": 		"Wind layer consume lots resources, easy to cause browser crash. at your discretion.",
 			"lastUpdate": 				"Last update",
 			"halfHourUpdate": 			"update at half clock",
+
+			"windFillOpacity": 			"Wind opacity",
+			"windMoveSpeed": 			"Wing flow speed",
 
 			"resourceLayer": 			"Resource Layer",
 			"emissionLayer": 			"Emission",
@@ -65,8 +70,13 @@ var LANG = {
 			"measureType": 				"量測類別",
 			"districtChange": 			"區域切換",
 			"voronoiDiagram": 			"勢力地圖",
+			"windLayer": 				"風力線",
+			"windResourceAlert": 		"風力線十分消耗資源，容易造成瀏覽器當機，請斟酌使用。",
 			"lastUpdate": 				"資料時間",
 			"halfHourUpdate": 			"半整點更新資料",
+
+			"windFillOpacity":			"線條亮度",
+			"windMoveSpeed": 			"移動速度",
 
 			"resourceLayer": 			"資源圖層",
 			"emissionLayer": 			"固定汙染源",

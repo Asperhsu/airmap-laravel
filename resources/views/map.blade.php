@@ -216,6 +216,52 @@
                     </div>
                 </li>
 
+                <li class="list-group-item" data-name="windLayer">
+                    <h4 class="list-group-item-heading" v-on:click="changeActiveItem">
+                        <span data-lang="windLayer">風力線</span>
+                        <input type="checkbox" class="bs-switch layerToggle windLayer">
+                    </h4>
+                    <div class="list-group-item-text" v-show="showItemText('windLayer')" transition="slide">
+                        <div class="loading" v-show="wind.loading">
+                            <div class="spinner">
+                                <div class="rect1"></div>
+                                <div class="rect2"></div>
+                                <div class="rect3"></div>
+                                <div class="rect4"></div>
+                                <div class="rect5"></div>
+                            </div>
+                        </div>
+
+                        <div class="blockquote-content">
+                            <div class="help-block">
+                                <div>
+                                    <span class="glyphicon glyphicon-alert"></span>
+                                    <span data-lang="windResourceAlert">風力線十分消耗資源，容易造成瀏覽器當機，請斟酌使用。</span>
+                                </div>
+                                <div v-show="wind.dateUpdateTime">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                    <span data-lang="lastUpdate">資料時間</span>: @{{ wind.dateUpdateTime }}
+                                    UTC+8 (5, 11, 17, 23 <span data-lang="halfHourUpdate">半整點更新資料</span>)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="blockquote">
+                            <span class="title">
+                                <span data-lang="windFillOpacity">線條亮度</span> <code>@{{ wind.lineOpacity }}</code>
+                            </span>
+                            <input type="text" class="wind-lineOpacity" data-provide="slider" data-slider-min="1" data-slider-max="9" data-slider-step="1" data-slider-value="@{{ wind.lineOpacity }}" lang="zh-tw" v-model="wind.lineOpacity">
+                        </div>
+
+                        <div class="blockquote">
+                            <span class="title">
+                                <span data-lang="windMoveSpeed">移動速度</span> <code>@{{ wind_movingSpeedText }}</code>
+                            </span>
+                            <input type="text" class="wind-movingSpeed" data-provide="slider" data-slider-min="1" data-slider-max="10" data-slider-step="1" data-slider-value="@{{ wind.movingSpeed }}" data-slider-reversed=true lang="zh-tw" v-model="wind.movingSpeed">
+                        </div>
+                    </div>
+                </li>
+
                 <li class="list-group-item" data-name="mapTool" >
                     <h4 class="list-group-item-heading" v-on:click="changeActiveItem">
                         <span data-lang="mapTool">地圖工具</span>

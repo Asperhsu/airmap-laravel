@@ -88,6 +88,12 @@ $(".bs-switch.siteVoronoi").on('switchChange.bootstrapSwitch', function(event, s
 	state ? $("#siteVoronoi").fadeIn('fast') : $("#siteVoronoi").fadeOut('fast');
 });
 
+// windLayer
+$(".layerToggle.windLayer").on('switchChange.bootstrapSwitch', function (event, state) {
+	var WindLayer = require("js/wind-layer");
+	WindLayer.boot();
+	state ? WindLayer.enable() : WindLayer.disable();
+});
 
 //emission layer
 $(".bs-switch.emissionSites").on('switchChange.bootstrapSwitch', function(event, state){

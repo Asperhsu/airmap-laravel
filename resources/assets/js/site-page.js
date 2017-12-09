@@ -217,6 +217,7 @@ var isNullMsg = function(value, msg){
 function initDetailTable(Site){
 	var $detail = $("#detail .body .row");
 	var obj = {
+		ID:     			Site.getProperty('uniqueKey'),
 		SiteGroup: 			Site.getProperty('SiteGroup'),
 		SiteName: 			Site.getProperty('SiteName'),
 		Maker: 				Site.getProperty('Maker'),
