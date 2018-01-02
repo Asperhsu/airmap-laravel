@@ -392,11 +392,6 @@
                                     <span class="visible-xs-inline visible-sm-inline">W</span>
                                     <span class="visible-md-inline visible-lg-inline">Weekly</span>
                                 </span>
-
-                                <span class="btn btn-xs" data-lang="lastMonthChart" title="過去一個月歷史數值" v-on:click="changeChartInterval('Monthly')" v-bind:class="{'btn-primary': site_chartIntervalActive('Monthly'), 'btn-default': !site_chartIntervalActive('Monthly') }">
-                                    <span class="visible-xs-inline visible-sm-inline">M</span>
-                                    <span class="visible-md-inline visible-lg-inline">Monthly</span>
-                                </span>
                             </div>
                         </div>
                     </div>

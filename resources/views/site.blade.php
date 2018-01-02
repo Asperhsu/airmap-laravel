@@ -175,8 +175,6 @@
                         <span class="btn btn-default" data-offset-hours="24" lang="zh-tw" title="過去一天歷史數值">Daily</span>
 
                         <span class="btn btn-default" data-offset-hours="168" lang="zh-tw" title="過去一週歷史數值">Weekly</span>
-
-                        <span class="btn btn-default" data-offset-hours="720" lang="zh-tw" title="過去一個月歷史數值">Monthly</span>
                     </div>
                 </div>
                 <div class="header">
