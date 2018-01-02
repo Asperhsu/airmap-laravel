@@ -60,7 +60,7 @@ class GeoCoding
         $resource = str_replace('%2C', ',', $resource);
 
         $data = HttpClient::getJson($resource)['data'];
-        if ($data['status'] != "OK" || !count($data['results'])) {
+        if (!isset($data['status']) || !isset($data['results']) || $data['status'] != "OK" || !count($data['results'])) {
             return false;
         }
         
