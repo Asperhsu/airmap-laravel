@@ -24,7 +24,7 @@ class ThingspeakFeedsFetcher extends FeedsFetcher
             logger($data);
             return [];
         }
-        
+
         $info = [
             'id' => $data['channel']['id'],
             'name' => $data['channel']['name'],
@@ -50,7 +50,7 @@ class ThingspeakFeedsFetcher extends FeedsFetcher
             $feeds = $this->fetch($url);
 
             foreach ($feeds as $feed) {
-                $feed['party'] = $ts->party;
+                $feed['maker'] = $ts->maker;
                 $feed['fieldsMap'] = $ts->fields_map;
 
                 try {

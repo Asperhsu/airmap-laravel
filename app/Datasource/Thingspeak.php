@@ -17,11 +17,11 @@ class Thingspeak implements Contract
     {
         $raw        = collect($raw);
         $mapping    = $raw->get('fieldsMap');
-        
+
         return [
             'uuid'          => $raw->get('id'),
             'name'          => $raw->get('name'),
-            'maker'         => $raw->get('party'),
+            'maker'         => $raw->get('maker'),
             'lat'           => $raw->get('latitude'),
             'lng'           => $raw->get('longitude'),
             'published_at'  => Carbon::parse($raw->get('created_at')),
