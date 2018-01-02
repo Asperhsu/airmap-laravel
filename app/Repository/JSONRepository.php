@@ -113,11 +113,6 @@ class JSONRepository
             return false;
         }
 
-        // if cache exists, return cache
-        if ($value = JsonCache::latest($group->id, $uuid)) {
-            return $value;
-        }
-
         $record = LatestRecord::where('group_id', $group->id)
             ->leftJoin('lass_analyses', 'latest_records.uuid', 'lass_analyses.uuid')
             ->where('latest_records.uuid', $uuid)
@@ -127,7 +122,6 @@ class JSONRepository
 
         if ($record) {
             $record = GroupJSONFormatter::format($record);
-            JsonCache::latest($group->id, $uuid, $record);
         } else {
             $record = null;
         }
