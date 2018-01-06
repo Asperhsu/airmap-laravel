@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Models\User;
+use App\Models\Admin;
 
-class DefaultUserSeeder extends Seeder
+class DefaultAdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +13,7 @@ class DefaultUserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        Admin::create([
             'name' => 'admin',
             'email' => 'asperwon@gmail.com',
             'password' => bcrypt('g0vairmap'),

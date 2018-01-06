@@ -1,4 +1,4 @@
-@extends('layouts.manager')
+@extends('layouts.admin')
 
 @section('content')
     <div class="d-flex justify-content-center align-items-center" style="height: calc(100vh - 80px)">
@@ -66,7 +66,7 @@
                     <div class="col-sm-4"></div>
                     <div class="col-sm-8">
                         <button type="submit" class="btn btn-primary">
-                            Register
+                            新增
                         </button>
                     </div>
                 </div>
