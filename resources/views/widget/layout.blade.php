@@ -21,5 +21,7 @@
 @endsection
 
 @if (isset($type) && isset($record))
-@section('body-attributes', 'data-widget-type="'.$type.'" data-site='.json_encode($record))
+@section('body-attributes')
+data-widget-type="{{ $type }}" data-site='{!! $record->toJson() !!}'
+@endsection
 @endif

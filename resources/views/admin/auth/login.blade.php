@@ -43,10 +43,6 @@
                     <button type="submit" class="btn btn-primary">
                         登入
                     </button>
-
-                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                        忘記密碼?
-                    </a>
                 </div>
             </form>
         </div>
