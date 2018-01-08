@@ -44,16 +44,16 @@ var GaugeChart = {
 		}
 
 		return gauge;
-	},	
+	},
 	draw: function(userOptions){
 		var config = this.getConfig(userOptions);
 		var data = this.getData(config);
-		
+
 		//clear content, prevent show previous value
 		var $target = $(config.element);
 		$target.html('');
 
-		if( data === false ){ 
+		if( data === false ){
 			var html = [
 				'<div class="gauge-no-data">',
 					'<span class="glyphicon glyphicon-question-sign"></span>',
@@ -61,7 +61,7 @@ var GaugeChart = {
 				'</div>',
 			].join('');
 			$target.html(html)
-			return false; 
+			return false;
 		}
 
 		var sizeSetting = this.getSizeSetting(config);
@@ -76,7 +76,7 @@ var GaugeChart = {
 	},
 	getData: function(config){
 		var value = config.site.getMeasure(config.measureType);
-		return value || false;
+		return isNaN(value) ? false : value;
 	},
 	getSizeSetting: function(config){
 		if(typeof this.options[config.size] !== "undefined"){

@@ -15,7 +15,7 @@ function Site(data){
  */
 Site.prototype.isValid = function(){
 	var item = this.property;
-	
+
 	//time filter
 	// if( item.Data && moment().diff(moment(item.Data.Create_at), 'minutes') > 30 ){
 	// 	return false;
@@ -109,7 +109,7 @@ Site.prototype.getPosition = function(){
 	var LatLng = this.getProperty('LatLng');
 	if( LatLng && LatLng.lat && LatLng.lng ){
 		if(MapHandler.getApi()){
-			return MapHandler.createLatLng(LatLng.lat, LatLng.lng); 
+			return MapHandler.createLatLng(LatLng.lat, LatLng.lng);
 		}else{
 			return { lat: +LatLng.lat, lng: +LatLng.lng };
 		}
@@ -127,7 +127,7 @@ Site.prototype.getPosition = function(){
 Site.prototype.fetchLastest = function(group, id, includeRaw=false){
 	var urlTemplate = "/json/query-lastest?group={{group}}&id={{id}}";
 	if(includeRaw){ urlTemplate = urlTemplate+"&raw=1"; }
-	
+
 	var url = urlTemplate.replace('{{group}}', group).replace('{{id}}', id);
 	return new Promise((resolve, reject) => {
 		$.getJSON(url).then((data) => {
@@ -174,7 +174,7 @@ Site.prototype.fetchHistory = function(offsetHours){
 					});
 					continue;
 				}
-				
+
 				datasets.push({
 					label: index,
 					data: history[index],
@@ -202,7 +202,7 @@ Site.prototype.fetchHistory = function(offsetHours){
  */
 
 Site.prototype.createMarker = function(options){
-	options = options || {};	
+	options = options || {};
 	var position = this.getPosition();
 	if( !position ){
 		console.log(this.getProperty('SiteName') + " position not avaliable");
@@ -260,7 +260,8 @@ Site.prototype.getIconSVG = function(){
 
 	if( typeof Indicator !== "undefined" ){
 		var measureType = Indicator.getPresentType();
-		text = this.getMeasure(measureType) || '';
+        text = this.getMeasure(measureType);
+        if (isNaN(text)) { text = ''; }
 		color = this.getMeasureColor();
 	}
 
@@ -308,7 +309,7 @@ Site.prototype.getIconImage = function(){
  * =======================
  */
 
-Site.prototype.openInfoWindow = function(){	
+Site.prototype.openInfoWindow = function(){
 	var InfoWindowLayer = require("js/map-infowindow-layer");
 	InfoWindowLayer.putOn(this);
 }
