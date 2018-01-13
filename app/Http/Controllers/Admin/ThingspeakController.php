@@ -26,7 +26,7 @@ class ThingspeakController extends Controller
                 return 'field' . $number;
             }
 
-            return str_replace('field', '', $value);
+            return str_replace('field', '', $number);
         });
     }
 
