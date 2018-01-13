@@ -10,17 +10,31 @@ class WidgetController extends Controller
 {
     public function create(Request $request, string $group, string $uuid)
     {
-        $iframes = collect([
-                ['type' => 'text', 'height' => 230],
-                ['type' => 'marker', 'height' => 220],
-                ['type' => 'thin', 'height' => 150],
-            ])->mapWithKeys(function ($item) use ($group, $uuid) {
+        $items = collect([
+            ['type' => 'text', 'height' => 230],
+            ['type' => 'marker', 'height' => 220],
+            ['type' => 'thin', 'height' => 150],
+        ]);
+
+        if ($request->has('iframe')) {
+            $iframes = $items->mapWithKeys(function ($item) use ($group, $uuid) {
                 return [ $item['type'] => view('widget.iframe', [
                     'group' => $group, 'uuid' => $uuid, 'type' => $item['type'], 'height' => $item['height']
                 ])->render() ];
             });
 
-        return view('widget.create', compact('group', 'uuid', 'iframes'));
+            return view('widget.create-iframe', compact('group', 'uuid', 'iframes'));
+        }
+
+        $vueScript = '<script src="' . url('js/airmap-widget.js') . '"></script>';
+        $vues = $items->mapWithKeys(function ($item) use ($group, $uuid) {
+            return [$item['type'] => view('widget.vue', [
+                'group' => $group, 'uuid' => $uuid, 'type' => $item['type'], 'height' => $item['height']
+            ])->render()];
+        });
+
+
+        return view('widget.create-js', compact('group', 'uuid', 'vueScript', 'vues'));
     }
 
     public function show(Request $request, string $type, string $group, string $uuid)
@@ -30,7 +44,7 @@ class WidgetController extends Controller
         if (!$record) {
             return 'site not found.';
         }
-        
+
         $view = 'widget.'.$type;
         if (!View::exists($view)) {
             return $type . ' widget not Exists';

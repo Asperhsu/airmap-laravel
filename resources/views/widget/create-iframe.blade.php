@@ -13,7 +13,7 @@
 @section('body')
 <div class="container">
     <div class="jumbotron">
-        <h2>Widget 小工具(測試中</h2>
+        <h2>Widget 小工具 (iframe 版本)</h2>
         <p>如果想把特定測站嵌入網頁，您可以從下方預覽小工具與取得HTML碼</p>
     </div>
 
@@ -70,4 +70,10 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+@parent
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="/js/airmap-widget.js"></script>
 @endsection

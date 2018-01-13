@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('icon/{value}', 'ApiController@makeIcon')->name('pm25icon');
+Route::get('widget/{group}${uuid}', 'ApiController@widget');
