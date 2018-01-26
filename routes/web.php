@@ -16,6 +16,7 @@ Route::get('/site', 'HomeController@site')->name('site');
 Route::get('/recruit', 'HomeController@recruit')->name('recruit');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/datasource', 'HomeController@datasource')->name('datasource');
+Route::get('/dialy-gif', 'HomeController@dialyGif')->name('dialy-gif');
 
 /* JSON */
 Route::group(['prefix' => 'json'], function () {

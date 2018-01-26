@@ -19,6 +19,22 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css" />
+    <style>
+        html, body { height: 100%; }
+        #app {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        footer {
+            color: #888;
+            border-top: 1px dotted #e3e3e3;
+            text-align: center;
+            font-family: monospace;
+            padding: .5em;
+        }
+    </style>
     @yield('style')
 </head>
 <body>
@@ -26,6 +42,10 @@
         @yield('navbar')
 
         @yield('content')
+
+        <footer class="mt-auto">
+            Asper &copy; 2018
+        </footer>
     </div>
 
     <!-- Scripts -->

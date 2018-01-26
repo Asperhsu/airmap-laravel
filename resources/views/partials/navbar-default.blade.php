@@ -9,13 +9,27 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            {{--  <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>  --}}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('map') }}">地圖</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('list') }}">站點列表</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('recruit') }}">自造站點募集</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('dialy-gif') }}">截圖動畫</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('about') }}">關於</a>
+            </li>
         </ul>
-        
+
         <ul class="navbar-nav ml-auto">
-            <li><a href="{{ route('manager.index') }}">管理</a></li>
+            <li class="nav-item">
+                <a href="{{ route('admin.index') }}">管理</a>
+            </li>
         </ul>
     </div>
 </nav>
