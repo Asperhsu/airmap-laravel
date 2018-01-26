@@ -49,7 +49,7 @@
         <div id="siteLogo">
             <a href="http://beta.hackfoldr.org/g0vairmap/g0v--riRTvbB0E5x">
                 <img src="https://i.imgur.com/IWqy7yh.png" class="img-responsive" alt="Image">
-            </a>			
+            </a>
         </div>
         <div id="recruit">
             <a href='/recruit' class="popover right">
@@ -62,9 +62,9 @@
                 <img src="https://static.xx.fbcdn.net/rsrc.php/v3/yM/r/a_HNTVVyh4W.png" alt="Facebook Messenger Bot" class="img-responsive">
             </a>
         </div>
-    
+
         <div id="map-container"></div>
-    
+
         <div id="navigator">
             <button type="button" class="navbar-toggle navigator-toggle" v-on:click="toggleContainer">
                 <span v-show="open" class="glyphicon glyphicon-triangle-left"></span>
@@ -83,7 +83,7 @@
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-search"></span>
                         </span>
-                        <input type="text" id="typeahead" class="form-control typeahead" placeholder="Search Map" 
+                        <input type="text" id="typeahead" class="form-control typeahead" placeholder="Search Map"
                             autocomplete="off">
                     </div>
                 </div>
@@ -95,6 +95,14 @@
                         <span data-lang="siteList">站點清單</span>
                         <a href='/list' class="pull-right btn btn-primary btn-xs" target="_blank">
                             &nbsp;<span class="glyphicon glyphicon-list-alt"></span>&nbsp;
+                        </a>
+                    </h4>
+                </li>
+                <li class="list-group-item" data-name="siteList" >
+                    <h4 class="list-group-item-heading">
+                        <span>截圖動畫</span>
+                        <a href="{{ route('dialy-gif') }}" class="pull-right btn btn-info btn-xs" target="_blank">
+                            &nbsp;<span class="glyphicon glyphicon-blackboard"></span>&nbsp;
                         </a>
                     </h4>
                 </li>
@@ -113,10 +121,10 @@
                             </div>
                         </div>
                         <div class="blockquote-content category">
-                            <button type="button" class="btn btn-sm btn-site" 
+                            <button type="button" class="btn btn-sm btn-site"
                                 data-category="@{{cate.name}}"
                                 v-for="cate in site.category"
-                                v-bind:class="{'btn-default': !cate.active, 'btn-success': cate.active}" 
+                                v-bind:class="{'btn-default': !cate.active, 'btn-success': cate.active}"
                                 v-on:click="site_changeCategory">
                                 <div class="count">@{{ cate.cnt }}</div>
                                 <div class="name">@{{ cate.name }}</div>
@@ -127,9 +135,9 @@
                             <span class="title" data-lang="measureType">量測類別</span>
                         </div>
                         <div class="blockquote-content">
-                            <button type="button" class="btn btn-sm btn-site" 
+                            <button type="button" class="btn btn-sm btn-site"
                                 v-for="measure in site.measure"
-                                v-bind:class="{'btn-default': !measure.active, 'btn-primary': measure.active}" 
+                                v-bind:class="{'btn-default': !measure.active, 'btn-primary': measure.active}"
                                 v-on:click="site_changeMeasure"
                             >@{{ measure.name }}</button>
                         </div>
@@ -198,13 +206,13 @@
                                 <div class="text">
                                     <span class="">可能接近長時間的固定污染源或設備故障</span>
                                 </div>
-                                
+
                                 <input type="checkbox" class="pull-right bs-switch statusToggle" data-status="longterm-pollution">
                             </div>
-                            
+
                             <ul class="about">
                                 <li>
-                                    分析資料由中央研究院資訊科學研究所提供. 
+                                    分析資料由中央研究院資訊科學研究所提供.
                                     <a href="https://sites.google.com/site/pm25opendata/open-data" target="_blank">資料來源</a>
                                 </li>
                                 <li>
@@ -285,7 +293,7 @@
                                 <span class="title" data-lang="display">顯示</span>
                                 <input type="checkbox" class="bs-switch siteVoronoi">
                             </div>
-                            
+
                             <div class="blockquote">
                                 <span class="title">
                                     <span data-lang="opacity">透明度</span> <code>@{{ site.voronoiLayerOpacity }}</code>
@@ -314,7 +322,7 @@
                                 <span class="title" data-lang="voronoiDiagram">勢力地圖</span>
                                 <input type="checkbox" class="bs-switch emissionVoronoiLayer" data-size="small">
                             </div>
-                            
+
                             <div class="blockquote">
                                 <span class="title">
                                     <span data-lang="opacity">透明度</span> <code>@{{ emission_opacity }}</code>
@@ -337,7 +345,7 @@
                                 <span class="title" data-lang="display">顯示</span>
                                 <input type="checkbox" class="bs-switch satelliteLayer" data-size="small">
                             </div>
-                            
+
                             <div class="blockquote">
                                 <span class="title">
                                     <span data-lang="opacity">透明度</span> <code>@{{ satellite_opacity }}</code>
@@ -353,7 +361,7 @@
                         <span data-lang="siteChart">測站圖表</span>
                     </h4>
                     <div class="list-group-item-text" v-show="showItemText('siteChart')" transition="slide">
-                        <div class="loading"  
+                        <div class="loading"
                                 v-bind:style="{display: site.chartLoading ? 'block' : 'none'}">
                             <div class="spinner">
                                 <div class="rect1"></div>
@@ -370,7 +378,7 @@
 
                         <div v-show="site.instance">
                             <h5>@{{site.chartTitle}}</h5>
-                            
+
                             <div v-show="!site.chartLoadingError">
                                 <div id="site-history-chart" height="300"></div>
                             </div>
@@ -475,7 +483,7 @@
             <hr>
             <h1>
                 <span class="glyphicon glyphicon-remove-sign"></span>
-                We don't support IE or Edge. 
+                We don't support IE or Edge.
             </h1>
             <h3>
                 Try Firefox or Chrome.
