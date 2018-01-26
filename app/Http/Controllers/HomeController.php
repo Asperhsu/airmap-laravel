@@ -58,7 +58,9 @@ class HomeController extends Controller
 
     public function dialyGif()
     {
-        $files = Storage::disk('screenshots')->files();
+        $files = collect(Storage::disk('screenshots')->files())->filter(function ($file) {
+            return ends_with($file, '.gif');
+        })->toArray();
         $lastFile = last($files);
 
         $fileCalendar = $calendar = [];
