@@ -41,4 +41,8 @@ return [
         'logo' => '',
     ],
 
+    'epa' => [
+        'logo' => 'https://i.imgur.com/YUQrHRs.png',
+    ],
+
 ];

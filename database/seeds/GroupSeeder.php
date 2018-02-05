@@ -54,6 +54,11 @@ class GroupSeeder extends Seeder
                 'handler' => 'App\Jobs\IndependentFeedsFetcher',
                 'enable'  => true,
             ],
+            [
+                'name'    => 'EPA',
+                'handler' => 'App\Jobs\EpaFeedsFetcher',
+                'enable'  => true,
+            ],
         ];
 
         foreach ($groups as $group) {
