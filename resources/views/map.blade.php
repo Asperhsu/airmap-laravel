@@ -48,7 +48,7 @@
 
         <div id="siteLogo">
             <a href="http://beta.hackfoldr.org/g0vairmap/g0v--riRTvbB0E5x">
-                <img src="https://i.imgur.com/IWqy7yh.png" class="img-responsive" alt="Image">
+                <img src="{{ asset('2018banner.png') }}" class="img-responsive" alt="Image">
             </a>
         </div>
         <div id="recruit">
