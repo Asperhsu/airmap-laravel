@@ -61,7 +61,7 @@ exports.getCircleUrl = function(color, text, size=40){
 	var fillColor = color;
 
 	var path = '\
-		<circle r="{{size}}" stroke="{{strokeColor}}" stroke-width="{{strokeWidth}}" fill="{{fillColor}}" />\
+		<circle r="{{size}}" fill="{{fillColor}}" />\
 	';
 	path = path.replace(/{{size}}/g, size)
 				.replace(/{{strokeWidth}}/g, strokeWidth)
@@ -89,7 +89,7 @@ exports.getHomeUrl = function(color, text){
 	var fillColor = color;
 
 	var path = '\
-		<g fill="{{fillColor}}" stroke="{{strokeColor}}" stroke-width="{{strokeWidth}}" >\
+		<g fill="{{fillColor}}"  >\
 			<path d="M33.609,20.96v12.384c0,1.104-0.896,2-2,2H7.805c-1.104,0-2-0.896-2-2V20.96c0-0.69,0.355-1.332,0.94-1.696l11.901-7.433\
 				c0.648-0.405,1.472-0.405,2.119,0l11.901,7.433C33.253,19.628,33.609,20.269,33.609,20.96z M38.475,15.432L20.768,4.374\
 				c-0.648-0.405-1.471-0.405-2.119,0L0.94,15.432c-0.937,0.585-1.221,1.819-0.637,2.756c0.584,0.938,1.816,1.224,2.756,0.638\
@@ -126,7 +126,7 @@ exports.getCloudUrl = function(color, text){
 	var fillColor = color;
 
 	var path = '\
-		<g fill="{{fillColor}}" stroke="{{strokeColor}}" stroke-width="{{strokeWidth}}">\
+		<g fill="{{fillColor}}" >\
 			<path d="M62.513,153.087c-0.009-0.525-0.02-1.049-0.02-1.575c0-50.155,40.659-90.814,90.814-90.814\
 			c43.222,0,79.388,30.196,88.562,70.643c8.555-4.789,18.409-7.531,28.91-7.531c32.766,0,59.328,26.562,59.328,59.328\
 			c0,1.339-0.06,2.664-0.148,3.981c24.325,9.03,41.661,32.444,41.661,59.911c0,35.286-28.605,63.892-63.892,63.892H79.865\
@@ -162,7 +162,7 @@ exports.getFactoryUrl = function(color, text){
 	var fillColor = color;
 
 	var path = '\
-		<path fill="{{fillColor}}" stroke="{{strokeColor}}" stroke-width="{{strokeWidth}}" \
+		<path fill="{{fillColor}}"  \
 		d="M499.669,495.616C406.528,348.416,373.333,159.595,373.333,32c0-28.885-85.781-32-122.667-32C213.781,0,128,3.115,128,32\
 		c0,104.875-15.04,304.555-115.669,463.616c-2.091,3.285-2.219,7.445-0.341,10.859c1.877,3.413,5.461,5.525,9.344,5.525h469.333\
 		c3.883,0,7.467-2.112,9.344-5.525S501.76,498.923,499.669,495.616z M343.403,32.853c-0.747,0.235-1.429,0.469-2.24,0.683\
