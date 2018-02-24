@@ -59,6 +59,11 @@ class GroupSeeder extends Seeder
                 'handler' => 'App\Jobs\EpaFeedsFetcher',
                 'enable'  => true,
             ],
+            [
+                'name'    => 'Airq',
+                'handler' => 'App\Jobs\AirqFeedsFetcher',
+                'enable'  => true,
+            ],
         ];
 
         foreach ($groups as $group) {

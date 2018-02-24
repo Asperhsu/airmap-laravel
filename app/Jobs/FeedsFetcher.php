@@ -103,7 +103,7 @@ abstract class FeedsFetcher implements ShouldQueue
      * @param array $fetch  Fetch
      * @return void
      */
-    protected function make(Array $record, Fetch $fetch)
+    protected function make(array $record, Fetch $fetch)
     {
         $existRecord = Record::where([
             'uuid' => $record['uuid'],
@@ -163,7 +163,7 @@ abstract class FeedsFetcher implements ShouldQueue
         if ($response['success'] === false || !is_array($response['data'])) {
             return [];
         }
-        
+
         $feeds = $this->feeds($response['data']);
 
         $this->fetch = Fetch::create([
