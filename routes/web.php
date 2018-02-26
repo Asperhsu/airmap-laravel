@@ -19,7 +19,7 @@ Route::get('/datasource', 'HomeController@datasource')->name('datasource');
 Route::get('/dialy-gif', 'HomeController@dialyGif')->name('dialy-gif');
 
 /* JSON */
-Route::group(['prefix' => 'json'], function () {
+Route::group(['prefix' => 'json', 'middleware' => 'cors'], function () {
     Route::get('airmap.json', 'JsonController@airmap');
     Route::get('{json}', 'JsonController@group')
         ->where('json', '.*\.json$')->name('json');
@@ -28,7 +28,7 @@ Route::group(['prefix' => 'json'], function () {
     Route::get('query-history', 'JsonController@history');
 
     Route::get('query-region', 'JsonController@region');
-    Route::get('query-bounds', 'JsonController@bounds')->middleware('cors');
+    Route::get('query-bounds', 'JsonController@bounds');
 });
 
 Route::get('fetchlog/{group}', 'FetchLogController@show')->name('fetchlog');
