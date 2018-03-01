@@ -248,7 +248,7 @@ class JSONRepository
             return $item->country.'-'.$item->town;
         })->map(function ($items, $regionName) {
             [$country, $town] = explode('-', $regionName);
-            list('mean' => $mean, 'valids' => $valids, 'outliners' => $outliners) = static::boxpliot($items, 'pm25');
+            list('mean' => $mean, 'valids' => $valids, 'outliners' => $outliners) = static::boxplot($items, 'pm25');
 
             return [
                 'country' => CountryTownNameFormatter::formatCountry($country),
@@ -268,7 +268,7 @@ class JSONRepository
         return $townmap;
     }
 
-    public static function boxpliot(Collection $records, string $valueIndex)
+    public static function boxplot(Collection $records, string $valueIndex)
     {
         $allValues = $records->pluck($valueIndex)->toArray();
         $quartiles  = \MathPHP\Statistics\Descriptive::quartiles($allValues);
