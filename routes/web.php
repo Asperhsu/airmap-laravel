@@ -21,6 +21,7 @@ Route::get('/dialy-gif', 'HomeController@dialyGif')->name('dialy-gif');
 /* JSON */
 Route::group(['prefix' => 'json', 'middleware' => 'cors'], function () {
     Route::get('airmap.json', 'JsonController@airmap');
+    Route::get('townmap.json', 'JsonController@townmap');
     Route::get('{json}', 'JsonController@group')
         ->where('json', '.*\.json$')->name('json');
 

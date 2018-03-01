@@ -11,7 +11,7 @@ class JsonController extends Controller
     public function group(Request $request, string $json)
     {
         $group = str_replace('.json', '', $json);
-        
+
         $records = JSONRepository::group($group);
         abort_unless($records, 404);
 
@@ -21,6 +21,13 @@ class JsonController extends Controller
     public function airmap(Request $request)
     {
         $records = JSONRepository::groups();
+
+        return response()->json($records);
+    }
+
+    public function townmap(Request $request)
+    {
+        $records = JSONRepository::townmap();
 
         return response()->json($records);
     }
@@ -54,7 +61,7 @@ class JsonController extends Controller
 
         $northEast = $sourthWest = [];
         [
-            $sourthWest['lat'], $sourthWest['lng'], 
+            $sourthWest['lat'], $sourthWest['lng'],
             $northEast['lat'], $northEast['lng']
         ] = array_map(function ($value) {
             return floatval($value);

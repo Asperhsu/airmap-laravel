@@ -5,11 +5,13 @@ namespace App\Service;
 use Cache;
 use Illuminate\Support\Collection;
 
-class JsonCache {
+class JsonCache
+{
     public static $groupExpireMins = 10;
     public static $latestExpireMins = 1;
     public static $historyExpireMins = 1;
     public static $geometryExpireMins = 10;
+    public static $townmapExpireMins = 10;
 
     public static function cacheKey($key)
     {
@@ -19,11 +21,11 @@ class JsonCache {
     public static function group(int $id, Collection $records = null)
     {
         $key = 'group-'.$id;
-        
+
         if (!$records) {
             return Cache::get(static::cacheKey($key));
         }
-        
+
         return Cache::put(static::cacheKey($key), $records, static::$groupExpireMins);
     }
 
@@ -31,7 +33,7 @@ class JsonCache {
     {
         static::forgetLatest($id);
         static::forgetHistory($id);
-        
+
         $key = 'group-'.$id;
         return Cache::forget($key);
     }
@@ -41,13 +43,13 @@ class JsonCache {
         if ($clear) {
             return Cache::forget($key);
         }
-        
+
         // getter
         $collection = Cache::get(static::cacheKey($key), collect());
         if (!$value) {
             return $collection;
         }
-        
+
         // setter
         $collection->push($value);
         return Cache::forever(static::cacheKey($key), $collection);
@@ -97,11 +99,11 @@ class JsonCache {
     public static function geometry(int $id, Collection $record = null)
     {
         $key = 'geometry-'.$id;
-        
+
         if (!$record) {
             return Cache::get(static::cacheKey($key));
         }
-        
+
         return Cache::put(static::cacheKey($key), $record, static::$geometryExpireMins);
     }
 
@@ -111,4 +113,21 @@ class JsonCache {
         return Cache::forget($key);
     }
 
+
+    public static function townmap(array $record = null)
+    {
+        $key = 'townmap';
+
+        if (!$record) {
+            return Cache::get(static::cacheKey($key));
+        }
+
+        return Cache::put(static::cacheKey($key), $record, static::$townmapExpireMins);
+    }
+
+    public static function forgetTownmap(int $id)
+    {
+        $key = 'townmap';
+        return Cache::forget($key);
+    }
 }
