@@ -220,8 +220,9 @@ class JSONRepository
         $records = LatestRecord
             ::join('geometries', 'latest_records.geometry_id', '=', 'geometries.id')
             ->select([
-                DB::raw('IFNULL(geometries.level2, geometries.level1) as country'),
-                "geometries.level3 as town",
+                "geometries.level1",
+                "geometries.level2",
+                "geometries.level3",
                 "latest_records.group_name",
                 "latest_records.uuid",
                 "latest_records.name",
@@ -230,14 +231,21 @@ class JSONRepository
             ->where('published_at', '>=', static::validTime())
             ->whereNotNull('geometries.level3')
             ->whereNotNull('latest_records.pm25')
-            ->orderBy('country', 'town')
-            ->get();
+            ->get()
+            ->map(function ($record) {
+                $record->town = $record->level3;
 
+                if ($record->level1 && $record->level2 && $record->level1 !== '臺灣省') {
+                    $record->country = $record->level1;
+                } else {
+                    $record->country = $record->level2 ?: $record->level1;
+                }
+
+                return $record;
+            });
 
         $grouped = $records->groupBy(function ($item, $key) {
             return $item->country.'-'.$item->town;
-        })->filter(function ($items, $regionName) {
-            return $items->count() >= 3;  // at least 3 sites
         })->map(function ($items, $regionName) {
             [$country, $town] = explode('-', $regionName);
             list('mean' => $mean, 'valids' => $valids, 'outliners' => $outliners) = static::boxpliot($items, 'pm25');
