@@ -9,7 +9,7 @@
         @show
 
         @yield('meta')
-        
+
         @section('style')
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
         @show
@@ -18,7 +18,7 @@
         @yield('body')
 
         @section('script')
-        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         @show
 
         @include('partials.ga')
