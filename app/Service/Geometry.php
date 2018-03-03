@@ -32,6 +32,16 @@ class Geometry
         $this->features = $json['features'];
     }
 
+    public function getFeatureByTownID(string $townCode)
+    {
+        $filterFeatures = array_filter($this->features, function ($feature) use ($townCode) {
+            $featureTownCode = $feature['properties']['TOWNCODE'] ?? null;
+            return $featureTownCode === $townCode;
+        });
+
+        return count($filterFeatures) ? array_shift($filterFeatures) : null;
+    }
+
     public function findFeature(float $lat, float $lng)
     {
         $filterFeatures = array_filter($this->features, function ($feature) use ($lat, $lng) {

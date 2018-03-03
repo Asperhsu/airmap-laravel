@@ -4,6 +4,7 @@ namespace App\Formatter;
 
 use Illuminate\Support\Collection;
 use Carbon\Carbon;
+use Cache;
 use App\Models\Record;
 use App\Models\Group;
 use App\Models\LatestRecord;
@@ -19,15 +20,13 @@ class GroupJSONFormatter
             throw new \TypeError('Record should be Record or LatestRecord instance.');
         }
 
-        // grometry
-        $geometrySrv = resolve('App\Service\Geometry');
-        $feature = $geometrySrv->findFeature($record->lat, $record->lng);
-        $geometry = $feature ? collect($feature['properties']) : null;
+        // computed property
+        $siteGroup = $isRecord ? $record->group->name : $record->group_name;
 
         return collect([
             'uniqueKey' => $record->uuid,
             'SiteName'  => $record->name,
-            'SiteGroup' => $isRecord ? $record->group->name : $record->group_name,
+            'SiteGroup' => $siteGroup,
             'Maker'     => $record->maker,
             'LatLng'    => collect([
                 'lat'   => $record->lat,
@@ -43,7 +42,7 @@ class GroupJSONFormatter
                 'ranking' => $record->ranking,
                 'status'  => static::analyseStatus($record->indoor, $record->shortterm_pollution, $record->longterm_pollution),
             ]),
-            'Geometry' => $geometry,
+            'Geometry' => static::geometry($record),
         ]);
     }
 
@@ -66,6 +65,30 @@ class GroupJSONFormatter
             $status[] = "shortterm-pollution";
         }
 
-        return implode('|', $status);
+        return count($status) ? implode('|', $status) : null;
+    }
+
+    public static function geometry($record)
+    {
+        $group = $record->group_name ?? ($record->group ? $record->group->name : null);
+        $uid = $group.'$'.$record->uuid;
+        $geometrySrv = resolve('App\Service\Geometry');
+
+        if (Cache::tags('GROUP_GEOMETRY')->has($uid)) {
+            $townCode = Cache::tags('GROUP_GEOMETRY')->get($uid);
+            if ($townCode === 'none') {
+                return null;
+            }
+
+            $feature = $geometrySrv->getFeatureByTownID($townCode);
+            return $feature ? collect($feature['properties']) : null;
+        }
+
+        $feature = $geometrySrv->findFeature($record->lat, $record->lng);
+        $geometry = $feature ? collect($feature['properties']) : null;
+        $townCode = $geometry ? $geometry->get('TOWNCODE') : 'none';
+        Cache::tags('GROUP_GEOMETRY')->forever($uid, $townCode);
+
+        return $geometry;
     }
 }
