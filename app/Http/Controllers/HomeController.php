@@ -8,29 +8,19 @@ use Carbon\Carbon;
 
 class HomeController extends Controller
 {
-    public function map()
+    public function index()
     {
-        return view('map');
-    }
-
-    public function list()
-    {
-        return view('list');
-    }
-
-    public function site()
-    {
-        return view('site');
+        return 'home';
     }
 
     public function recruit()
     {
-        return view('recruit');
+        return view('v4.recruit');  //TODO: move to current
     }
 
     public function about()
     {
-        return view('about');
+        return view('v4.about'); //TODO: move to current
     }
 
     public function datasource()
@@ -46,14 +36,7 @@ class HomeController extends Controller
             collect(['group' => 'Independent', 'json' => 'independent.json']),
         ]);
 
-        $fetchLogs = collect([
-            collect(['group' => 'LASS', 'url' => route('fetchlog', ['group' => 'lass'])]),
-            collect(['group' => 'LASS 4U', 'url' => route('fetchlog', ['group' => 'lass-4u'])]),
-            collect(['group' => 'LASS MAPS', 'url' => route('fetchlog', ['group' => 'lass-maps'])]),
-            collect(['group' => 'Edimax Airbox', 'url' => route('fetchlog', ['group' => 'edimax-airbox'])]),
-        ]);
-
-        return view('datasource', compact('datasources', 'fetchLogs'));
+        return view('datasource', compact('datasources'));
     }
 
     public function dialyGif()

@@ -1,4 +1,4 @@
-@extends('app')
+@extends('v4.app')
 
 @section('title')
 <title data-lang="pageTitle">g0v零時空汙觀測網 :: 小工具</title>
@@ -16,8 +16,8 @@
 @section('script')
     @parent
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="{{ asset('js/vendor-common.js') }}"></script>
-    <script src="{{ asset('js/widget.js') }}"></script>
+    {{--  <script src="{{ asset('js/vendor-common.js') }}"></script>
+    <script src="{{ asset('js/widget.js') }}"></script>  --}}
 @endsection
 
 @if (isset($type) && isset($record))

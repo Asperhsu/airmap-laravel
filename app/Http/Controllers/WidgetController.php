@@ -16,16 +16,6 @@ class WidgetController extends Controller
             ['type' => 'thin', 'height' => 150],
         ]);
 
-        if ($request->has('iframe')) {
-            $iframes = $items->mapWithKeys(function ($item) use ($group, $uuid) {
-                return [ $item['type'] => view('widget.iframe', [
-                    'group' => $group, 'uuid' => $uuid, 'type' => $item['type'], 'height' => $item['height']
-                ])->render() ];
-            });
-
-            return view('widget.create-iframe', compact('group', 'uuid', 'iframes'));
-        }
-
         $vueScript = '<script src="' . url('js/airmap-widget.js') . '"></script>';
         $vues = $items->mapWithKeys(function ($item) use ($group, $uuid) {
             return [$item['type'] => view('widget.vue', [

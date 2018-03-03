@@ -1,0 +1,693 @@
+/*
+* Noto Sans TC (Chinese_traditional) http://www.google.com/fonts/earlyaccess
+ */
+@font-face {
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight: 100;
+  src: url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Thin.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Thin.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Thin.otf) format('opentype');
+}
+@font-face {
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight: 300;
+  src: url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Light.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Light.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Light.otf) format('opentype');
+}
+@font-face {
+   font-family: 'Noto Sans TC';
+   font-style: normal;
+   font-weight: 400;
+   src: url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Regular.woff2) format('woff2'),
+        url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Regular.woff) format('woff'),
+        url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Regular.otf) format('opentype');
+ }
+@font-face {
+   font-family: 'Noto Sans TC';
+   font-style: normal;
+   font-weight: 500;
+   src: url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Medium.woff2) format('woff2'),
+        url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Medium.woff) format('woff'),
+        url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Medium.otf) format('opentype');
+ }
+@font-face {
+   font-family: 'Noto Sans TC';
+   font-style: normal;
+   font-weight: 700;
+   src: url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Bold.woff2) format('woff2'),
+        url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Bold.woff) format('woff'),
+        url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Bold.otf) format('opentype');
+ }
+@font-face {
+   font-family: 'Noto Sans TC';
+   font-style: normal;
+   font-weight: 900;
+   src: url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Black.woff2) format('woff2'),
+        url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Black.woff) format('woff'),
+        url(//fonts.gstatic.com/ea/notosanstc/v1/NotoSansTC-Black.otf) format('opentype');
+ }
+
+ html, body{ 
+	font-family: 'Noto Sans TC', sans-serif;
+}
+
+
+.loading{ 
+	background-color: rgba(0,0,0,0.4);
+	width: 100%;
+	height: 100%;   
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    display: none;
+}
+	.spinner {	 
+		position:absolute; 
+		top:50%; 
+		left:50%;
+		margin-left:-25px;
+		margin-top:-25px;
+		height:50px;
+	}
+		.spinner > div {
+		  background-color: #eee;
+		  height: 100%;
+		  width: 6px;
+		  display: inline-block;
+		  
+		  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+		  animation: sk-stretchdelay 1.2s infinite ease-in-out;
+		}
+		.spinner .rect2 {
+		  -webkit-animation-delay: -1.1s;
+		  animation-delay: -1.1s;
+		}
+		.spinner .rect3 {
+		  -webkit-animation-delay: -1.0s;
+		  animation-delay: -1.0s;
+		}
+		.spinner .rect4 {
+		  -webkit-animation-delay: -0.9s;
+		  animation-delay: -0.9s;
+		}
+		.spinner .rect5 {
+		  -webkit-animation-delay: -0.8s;
+		  animation-delay: -0.8s;
+		}
+		@-webkit-keyframes sk-stretchdelay {
+		  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }  
+		  20% { -webkit-transform: scaleY(1.0) }
+		}
+
+		@keyframes sk-stretchdelay {
+		  0%, 40%, 100% { 
+		    transform: scaleY(0.4);
+		    -webkit-transform: scaleY(0.4);
+		  }  20% { 
+		    transform: scaleY(1.0);
+		    -webkit-transform: scaleY(1.0);
+		  }
+		}
+
+.loading .msg {
+		position:absolute; 
+		top:60%; 
+		margin-top:-25px;
+		height:50px;
+		text-align: center;
+		color: #eee;
+		width: 100%;
+		font-size: 1.2em;
+		margin-left: -5px;
+	}
+
+.block-msg{
+	text-align: center;
+	width:100%;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+	.block-msg .content{
+		display: inline-block;
+		text-align: left;
+	}#indicatorLevel{
+	position:absolute;
+	bottom:1.5em; 
+	right:50px;
+	z-index:2;
+	opacity: 0.8;
+	height: 2em;
+	text-align: center;
+	line-height: 2em;
+	cursor: default;
+}
+	#indicatorLevel .title{
+		display: inline-block;
+		height: 1.8em;
+		vertical-align: middle;
+		margin-right: 0.5em;
+		color: #000;
+		text-shadow: 2px 2px #fff;
+	}
+
+	#indicatorLevel .type {
+		/*display: inline-block;*/
+		line-height: 1em;		
+		font-size: 0.8em;
+	}
+
+	#indicatorLevel .unit {
+		/*display: inline-block;*/
+		line-height: 1em;
+		font-style: italic;
+		font-size: 0.6em;
+		text-align: right;
+	}
+
+	#indicatorLevel .levels {
+		text-align:center;
+		display: inline-block;
+	}
+	
+/*	#indicatorLevel .level:first-child::before {
+		content: '<';
+		font-size: 0.8em;
+	}
+
+	#indicatorLevel .level:last-child::before {
+		content: '>';
+		font-size: 0.8em;
+	}*/
+
+	#indicatorLevel .levels > .level {
+		display: inline-block;
+		width: 1.8em;
+		height: 1.8em;
+		font-size:0.9em;
+		line-height: 1.8em;
+		background: red;
+		color: #fff;
+		/*text-shadow: 1px 1px 2px #333, -1px -1px 2px #333, 
+		             1px -1px 2px #333, -1px 1px 2px #333;*/
+		text-shadow: 1px 1px 0px #333, -1px -1px 0px #333, 
+		             1px -1px 0px #333, -1px 1px 0px #333;
+		box-shadow: 2px 2px 2px 0px rgba(51,51,51,0.75);
+	}#iw-container {
+	z-index:200;
+	visibility: hidden;
+	position: absolute;
+	width:300px;
+	border-radius: 10px 10px 10px 10px;
+	box-shadow: 0 0 10px 3px #fff;
+	background-color: rgba(238,238,238,0.7);
+
+	/*background: -moz-linear-gradient(top, rgba(72,182,233,0) 0%, rgba(72,182,233,0.3) 24%, rgba(72,182,233,0.7) 50%, rgba(72,182,233,0.7) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(72,182,233,0.3)), color-stop(24%, rgba(72,182,233,0)), color-stop(50%, rgba(72,182,233,0.7)), color-stop(100%, rgba(72,182,233,0.7)));
+	background: -webkit-linear-gradient(top, rgba(72,182,233,0) 0%, rgba(72,182,233,0.3) 24%, rgba(72,182,233,0.7) 50%, rgba(72,182,233,0.7) 100%);
+	background: -o-linear-gradient(top, rgba(72,182,233,0) 0%, rgba(72,182,233,0.3) 24%, rgba(72,182,233,0.7) 50%, rgba(72,182,233,0.7) 100%);
+	background: -ms-linear-gradient(top, rgba(72,182,233,0) 0%, rgba(72,182,233,0.3) 24%, rgba(72,182,233,0.7) 50%, rgba(72,182,233,0.7) 100%);
+	background: linear-gradient(to bottom, rgba(72,182,233,0) 0%, rgba(72,182,233,0.3) 24%, rgba(72,182,233,0.7) 50%, rgba(72,182,233,0.7) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#48b6e9', endColorstr='#48b6e9', GradientType=0 );*/
+}
+
+	#iw-container .arrow {
+		position: absolute;
+		left: 50%;
+		bottom: -18px;
+		margin-left: -13px;
+
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 20px 15px 0;
+		border-color: #666 transparent transparent transparent;
+	}
+
+
+	#iw-container .iw-header {
+		background-color: #999;
+		color: white;
+		border-radius: 10px 10px 0px 0px;
+		padding: 3px 10px;
+		position: relative;
+		z-index: 210;
+		line-height: 1;
+	}
+
+		#iw-container .iw-header > div {
+			display: inline-block;
+			width:50%;
+		}
+
+		#iw-container .iw-header .ranking {
+			color: #FFC436;
+			font-size: 1.2em;
+		}
+
+		#iw-container .iw-header .ranking .glyphicon-star-empty{
+			opacity: 0.5;
+		}
+
+		#iw-container .iw-header .update-at {
+			text-align: right;
+			padding: 3px 0;
+		}
+
+
+	#iw-container .iw-content {
+		overflow: hidden;
+		padding: 5px 10px;
+		color: #fff;
+	}
+		
+		#iw-container .iw-content .main-garge{ 
+			width: 180px; 
+			float:left; 
+			height:180px; 
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+			#iw-container .iw-content .main-garge svg g text {
+				font-size: 14px;
+				font-family: 'Noto Sans TC', sans-serif;
+			}
+			
+			#iw-container .iw-content .main-garge svg g g text {
+				font-size: 20px;
+				font-family: 'Noto Sans TC', sans-serif;
+			}
+
+
+		#iw-container .iw-content .sub-garge{ 
+			width: 90px; 
+			float:right; 
+			height:100%;
+		}
+			#iw-container .iw-content .sub-garge > div{ 
+				height: 90px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			#iw-container .iw-content .sub-garge svg g text[text-anchor="middle"] { /*title*/
+				font-size: 12px;
+				font-family: 'Noto Sans TC', sans-serif;
+			}
+			
+			#iw-container .iw-content .sub-garge svg g g text {	/*value*/
+				font-size: 12px;
+				font-family: 'Noto Sans TC', sans-serif;
+			}
+
+
+		#iw-container .iw-footer {
+			font-size: 1.1em;
+			font-weight: bolder;
+			padding: 6px 10px;
+			background-color: #666;
+			color: white;
+			margin: 0;
+			border-radius: 0px 0px 10px 10px;
+			position: relative;
+		}
+			#iw-container .iw-footer > div {
+				display: inline-block;
+			}
+
+			#iw-container .iw-footer .iw-name{
+				width: 75%;
+			}
+
+			#iw-container .iw-footer .iw-link{
+				width: 25%;
+				text-align: right;
+			}
+				#iw-container .iw-footer .iw-link a{
+					cursor: pointer;
+					margin: 0 5px;
+					font-size: 1em;
+					color: #fff;
+				}.d3-gauge.simple .outer-circle {
+  fill         :  #ccc;
+  stroke       :  #000;
+  stroke-width :  0.5px;
+}
+
+.d3-gauge.simple .inner-circle {
+  fill         :  #fff;
+  stroke       :  #E0E0E0;
+  stroke-width :  2px;
+}
+
+.d3-gauge.simple .label {
+  fill      :  #333;
+  font-size :  24px;
+}
+
+.d3-gauge.simple .major-tick {
+  stroke       :  #333;
+  stroke-width :  2px;
+}
+
+.d3-gauge.simple .minor-tick {
+  stroke       :  #666;
+  stroke-width :  1px;
+}
+
+.d3-gauge.simple .major-tick-label {
+  fill         :  darkblue;
+  stroke-width :  2px;
+  font-size    :  15px;
+}
+
+.d3-gauge.simple .needle {
+  fill         :  #dc3912;
+  stroke       :  #c63310;
+  fill-opacity :  0.7;
+}
+
+.d3-gauge.simple .needle-container {
+  fill         :  #4684EE;
+  stroke       :  #666;
+  fill-opacity :  1;
+}
+
+.d3-gauge.simple .current-value {
+  fill         :  #000;
+  stroke-width :  0px;
+}
+
+.d3-gauge.simple .green-zone {
+  fill :  #FF9900
+}
+
+.d3-gauge.simple .yellow-zone {
+  fill :  #FF9900
+}
+
+.d3-gauge.simple .red-zone {
+  fill :  #DC3912
+}
+.gauge-no-data {
+	color: #333;
+	font-size: 1.3em;
+}
+
+.d3-gauge .label{
+	fill:  #666;
+}
+
+.d3-gauge .major-tick-label {
+	fill :  #666 !important;
+}
+
+.d3-gauge.simple .green-zone {
+	fill :  #58CE58;
+}
+
+.d3-gauge.size-xl .label{
+	font-size: 26px;
+}
+.d3-gauge.size-l .current-value{
+	font-size: 26px;
+}
+
+.d3-gauge.size-l .label{
+	font-size: 22px;
+}
+.d3-gauge.size-l .current-value{
+	font-size: 22px;
+}
+
+.d3-gauge.size-m .label{
+	font-size: 18px;
+}
+
+.d3-gauge.size-s .label{
+	font-size: 12px;
+}
+
+.d3-gauge.size-s .major-tick-label {
+	font-size: 8px;
+}
+
+/* AQI */
+.d3-gauge.AQI .green-zone {
+	fill : #00FF00
+}
+
+.d3-gauge.AQI .yellow-zone {
+	fill : #FFFF00
+}
+
+.d3-gauge.AQI .orange-zone {
+	fill : #FF7E00
+}
+
+.d3-gauge.AQI .red-zone {
+	fill : #FF0000
+}
+
+.d3-gauge.AQI .purple-zone {
+	fill : #800080
+}
+
+.d3-gauge.AQI .brown-zone {
+	fill : #7E0023
+}
+
+/* PM 2.5 */
+.d3-gauge.pm25 .light-green-zone {
+	fill : #9CFF9C
+}
+
+.d3-gauge.pm25 .green-zone {
+	fill : #31FF00
+}
+
+.d3-gauge.pm25 .dark-green-zone {
+	fill : #31CF00
+}
+
+.d3-gauge.pm25 .yellow-zone {
+	fill : #FFFF00
+}
+
+.d3-gauge.pm25 .golden-zone {
+	fill : #FFCF00
+}
+
+.d3-gauge.pm25 .orange-zone {
+	fill : #FF9A00
+}
+
+.d3-gauge.pm25 .indian-red-zone {
+	fill : #FF6464
+}
+
+.d3-gauge.pm25 .red-zone {
+	fill : #FF0000
+}
+
+.d3-gauge.pm25 .brown-zone {
+	fill : #990000
+}
+
+.d3-gauge.pm25 .purple-zone {
+	fill : #CE30FF
+}html, body{ height: 100%; }
+body {
+	position: relative;
+}
+
+#sidebar > ul { 
+	display: flex;
+	flex-direction: column; 
+	height: 100vh; 
+	width: 35px; 
+	float: left; 
+	padding: 0; 
+	margin-right: 10px;
+	position: fixed;
+}
+#sidebar > ul > li { 
+	font-size: 1.2em;
+	display: flex; 
+	align-items: center;
+	justify-content: center; 
+	border-right: 8px solid; 
+	border-radius: 0 5px 5px 0;
+	flex: 1; 
+	list-style: none; 
+	padding: 10px;
+	margin: 3px 0;
+	box-shadow: 0px 0px 3px 2px #888888;
+}
+#sidebar > ul > li > a { transform: rotate(-90deg); color: #000; }
+#sidebar > ul > li.active { width: 50px; }
+
+#container { 
+	padding-left: 2.5em; 
+}
+
+#navbar {
+	display: flex;
+	justify-content:space-between;
+	align-items: center;
+	padding: 15px;
+	background-color: #E91E63;
+	margin-bottom: 1.5em;
+}
+	#navbar .site-info { 
+		font-size: 1.5em; 
+		color: #fff;
+	}
+	#navbar .site-name { 
+		vertical-align: middle; 
+	}
+
+	#navbar .g0v-logo {
+		text-align: right;
+	}
+	#navbar .g0v-logo img { 
+		height: 3em; 
+		filter: drop-shadow(0px 0px 3px #fff) drop-shadow(0px 0px 5px #fff);
+		-webkit-filter: drop-shadow(0px 0px 3px #fff) drop-shadow(0px 0px 5px #fff);		
+	}
+
+#content > div{ 
+	box-shadow: 0px 3px 5px #888888;
+	margin: 0 1.5em 1.5em 2.5em;
+	border-radius: 5px;
+}
+
+#content .header {
+	padding: 10px;
+	font-size: 1.3em;
+	cursor: default;
+}
+#content .body {
+	padding: 20px;
+	color: white;
+}
+
+	#guide {
+		padding: 10px;
+	}
+
+	#gauge .body a {
+		color: #eee;
+	}
+	
+	#gauge .body .chart-container{
+
+	}
+		#gauge .body .chart-container > div {
+			text-align: center;
+		}
+
+		#gauge .body .bg-info{
+			padding: 5px 10px;
+			border-radius: 5px;
+			color: #333;
+		}
+
+		#gauge .body .chart { 
+			display: inline-block; 
+			width: 25vw; 
+			height: 25vw; 
+			margin: 5px 0; 
+		}
+		
+		#gauge .body .chart.no-data{
+			text-align: center;
+			line-height: 1em;
+			padding: .7em 0;
+			font-size: 5em;
+			opacity: .2;
+		}
+		#gauge .body .chart.no-data::after { 
+			content: 'No Data';
+		}
+
+	#gauge .suggestion {
+		font-size: 1.3em;
+	}
+		#gauge .suggestion .label-suggestion {
+			width: 12em;
+			display: inline-block;
+		}	
+		#gauge .suggestion .datasource {
+			font-size: .8em;
+			margin-top: 1em;
+			border-top: 2px dotted #79B9F2;
+			padding-top: 5px;
+		}
+
+	#gauge .header{
+		font-size: 1em;
+	}
+		#gauge .header .title {
+			font-size: 1.3em;
+		}
+
+		#gauge .header .create-at {
+			line-height: 2em;
+		}
+
+	#locatiion .body {
+		padding: 0;
+		height: 300px;
+	}
+
+	#history .body{
+		position: relative;
+	}
+
+
+	#history .loading-error{ 
+		display: none; 
+		color: red; 
+		font-size:1.3em; 
+		text-align: center;
+	}
+
+	#history .chart-control{
+		margin-top: 10px; 
+		text-align: center;
+	}
+	#history .chart-control .btn.active{ 
+		background-color: #F0AD4E; 
+		color: #fff; 
+	}
+
+	#detail .body{
+		color: black;
+	}
+
+#no-content{ display: none; }
+#error-msg{ display: none; }
+
+
+@media (max-width: 768px) {
+	#gauge .body .chart { 
+		width: 50vw; 
+		height: 50vw; 
+	}
+
+	#gauge .suggestion .targetPeople {
+		text-align: center;
+	}
+	#gauge .suggestion .text {
+		text-align: center;
+	}
+}
+/*# sourceMappingURL=site.css.map*/

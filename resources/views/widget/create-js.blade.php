@@ -72,12 +72,6 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <p>找舊版本的小工具嗎? <a href="{{ route('widget.create', [$group, $uuid]) }}?iframe">請點這裡</a></p>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12">
             <h3>進階使用</h3>
             <ul>
                 <li>
@@ -155,5 +149,5 @@
 
 @section('script')
 @parent
-<script src="/js/airmap-widget.js"></script>
+<script src="/widget/airmap-widget.js"></script>
 @endsection

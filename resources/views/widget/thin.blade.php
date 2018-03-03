@@ -4,13 +4,13 @@
     @parent
     <style>
         body{ overflow-x: hidden; overflow-y: hidden; cursor: default; }
-        .header { 
-                white-space: nowrap; 
-                text-align: center; 
+        .header {
+                white-space: nowrap;
+                text-align: center;
                 border-radius: 5px;
-                padding: 3px; 
-                margin-bottom: 5px; 
-                font-size: .9em; 
+                padding: 3px;
+                margin-bottom: 5px;
+                font-size: .9em;
                 font-weight: bold;
                 background-color: #4F595D;
                 color: #fff;
@@ -18,11 +18,11 @@
         .content{ padding: 0 5px; }
 
         .label-border { border: 1px solid #888; color: #4F595D; }
-        
+
         .item .label { display: inline-block; width: 100%; }
         .item .value-container { text-align: center; font-size: 0.9em;}
         .item .unit { font-size: 0.8em; }
-        
+
         .item.pm25 .value{ font-size: 1.3em; }
         .pm25color{ border: 1px solid #4F595D; color: #000;  }
 
@@ -77,13 +77,13 @@
                 @endif
             </div>
         </div>
-        
 
-        
+
+
     </div>
 
     <div class="footer">
-        <a href="{{ route('site', $group, $uuid) }}" title="site detail page" target="g0vDetail">
+        <a href="{{ route('v4.site', $group, $uuid) }}" title="site detail page" target="g0vDetail">
             <img src="https://i.imgur.com/Gro4juQ.png" alt="g0v icon">
         </a>
         <span class="humanTime"></span>

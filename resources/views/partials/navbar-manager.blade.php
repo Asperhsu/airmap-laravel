@@ -26,7 +26,7 @@
 
         <ul class="navbar-nav ml-auto">
             @if (Auth::check())
-                <li><a href="{{ route('logout') }}">登出</a></li>
+                <li><a href="{{ route('admin.logout') }}">登出</a></li>
             @endif
         </ul>
     </div>

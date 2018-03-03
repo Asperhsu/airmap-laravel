@@ -10,10 +10,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('map') }}">地圖</a>
+                <a class="nav-link" href="{{ route('v4.map') }}">地圖</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('list') }}">站點列表</a>
+                <a class="nav-link" href="{{ route('v4.list') }}">站點列表</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('recruit') }}">自造站點募集</a>

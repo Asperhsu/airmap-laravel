@@ -7,11 +7,11 @@
         .header{ padding: 8px 5px 0; min-height: 32px; }
         .header > div { width: 49%; display: inline-block; margin-right: -4px; }
 
-        .marker { 
-            margin: -10px auto 0; 
-            width:180px; height: 180px; 
-            width: 80vw; height: 80vw; 
-            border-radius: 50%; border: 2px solid #4F595D; 
+        .marker {
+            margin: -10px auto 0;
+            width:180px; height: 180px;
+            width: 80vw; height: 80vw;
+            border-radius: 50%; border: 2px solid #4F595D;
             padding-top: 35px;
             padding-top: 15vw;
             text-align: center;
@@ -58,7 +58,7 @@
 
     <div class="footer">
         <div>
-            <a href="{{ route('site', $group, $uuid) }}" title="site detail page" target="g0vDetail">
+            <a href="{{ route('v4.site', $group, $uuid) }}" title="site detail page" target="g0vDetail">
                 <img src="https://i.imgur.com/Gro4juQ.png" alt="g0v icon">
             </a>
         </div>

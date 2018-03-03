@@ -16,7 +16,7 @@
 
 @section('body')
     <div class="header">
-        <a href="{{ route('site', $group, $uuid) }}" title="site detail page" target="g0vDetail">
+        <a href="{{ route('v4.site', $group, $uuid) }}" title="site detail page" target="g0vDetail">
             <img src="https://i.imgur.com/IWqy7yh.png" alt="g0v icon">
         </a>
     </div>
