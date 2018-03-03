@@ -8,6 +8,7 @@
         "php": ">=7.0.0",
         "fideloper/proxy": "~3.3",
         "guzzlehttp/guzzle": "^6.3",
+        "hannesvdvreken/pip": "^1.0",
         "laravel/framework": "5.5.15",
         "laravel/tinker": "~1.0",
         "markrogoyski/math-php": "^0.39.0",

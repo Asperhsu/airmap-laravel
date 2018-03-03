@@ -3,7 +3,6 @@
 namespace App\Formatter;
 
 use Illuminate\Support\Collection;
-use App\Models\LatestRecord;
 
 class CountryTownNameFormatter
 {
@@ -24,19 +23,26 @@ class CountryTownNameFormatter
         return static::transferWord($name);
     }
 
-    public static function formatRecord(LatestRecord $record)
+    public static function formatRecord(Collection $record)
     {
         return [
-            'uid' => $record->group_name.'$'.$record->uuid,
-            'name' => $record->name,
-            'pm25' => $record->pm25,
+            'uid' => $record->get('SiteGroup').'$'.$record->get('uniqueKey'),
+            'name' => $record->get('SiteName'),
+            'pm25' => $record->get('Data')->get('Dust2_5'),
         ];
     }
 
-    public static function formatRecords(Collection $records)
+    public static function formatRecordsFromUids(Collection $records, Collection $uids)
     {
-        return $records->map(function ($record) {
-            return static::formatRecord($record);
-        });
+        $uids = $uids->toArray();
+
+        return $records
+            ->filter(function ($record) use ($uids) {
+                $uid = $record->get('SiteGroup').'$'.$record->get('uniqueKey');
+                return in_array($uid, $uids);
+            })
+            ->map(function ($record) {
+                return static::formatRecord($record);
+            });
     }
 }

@@ -14,17 +14,20 @@ class GroupJSONFormatter
     {
         $isRecord = is_a($record, Record::class);
         $isLatestRecord = is_a($record, LatestRecord::class);
-        
+
         if (!$isRecord && !$isLatestRecord) {
             throw new \TypeError('Record should be Record or LatestRecord instance.');
         }
 
-        $siteGroup = $isRecord ? $record->group->name : $record->group_name;
-        
+        // grometry
+        $geometrySrv = resolve('App\Service\Geometry');
+        $feature = $geometrySrv->findFeature($record->lat, $record->lng);
+        $geometry = $feature ? collect($feature['properties']) : null;
+
         return collect([
             'uniqueKey' => $record->uuid,
             'SiteName'  => $record->name,
-            'SiteGroup' => $siteGroup,
+            'SiteGroup' => $isRecord ? $record->group->name : $record->group_name,
             'Maker'     => $record->maker,
             'LatLng'    => collect([
                 'lat'   => $record->lat,
@@ -40,6 +43,7 @@ class GroupJSONFormatter
                 'ranking' => $record->ranking,
                 'status'  => static::analyseStatus($record->indoor, $record->shortterm_pollution, $record->longterm_pollution),
             ]),
+            'Geometry' => $geometry,
         ]);
     }
 

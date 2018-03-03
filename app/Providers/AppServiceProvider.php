@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Service\Geometry;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(Geometry::class, function ($app) {
+            return new Geometry();
+        });
     }
 }

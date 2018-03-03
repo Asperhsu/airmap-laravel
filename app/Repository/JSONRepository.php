@@ -10,6 +10,7 @@ use App\Models\Geometry;
 use App\Formatter\GroupJSONFormatter;
 use App\Formatter\RecordsToChartFormatter;
 use App\Service\JsonCache;
+use App\Service\Geometry as GeometrySrv;
 use Illuminate\Support\Collection;
 use App\Formatter\CountryTownNameFormatter;
 
@@ -217,45 +218,28 @@ class JSONRepository
             return $value;
         }
 
-        $records = LatestRecord
-            ::join('geometries', 'latest_records.geometry_id', '=', 'geometries.id')
-            ->select([
-                "geometries.level1",
-                "geometries.level2",
-                "geometries.level3",
-                "latest_records.group_name",
-                "latest_records.uuid",
-                "latest_records.name",
-                "latest_records.pm25",
-            ])
-            ->where('published_at', '>=', static::validTime())
-            ->whereNotNull('geometries.level3')
-            ->whereNotNull('latest_records.pm25')
-            ->get()
-            ->map(function ($record) {
-                $record->town = $record->level3;
+        $grouped = static::groups()->groupBy(function ($item, $key) {
+            $geometry = $item->get('Geometry');
 
-                if ($record->level1 && $record->level2 && $record->level1 !== '臺灣省') {
-                    $record->country = $record->level1;
-                } else {
-                    $record->country = $record->level2 ?: $record->level1;
-                }
-
-                return $record;
-            });
-
-        $grouped = $records->groupBy(function ($item, $key) {
-            return $item->country.'-'.$item->town;
+            return $geometry ? $geometry->get('COUNTYNAME').'-'.$geometry->get('TOWNNAME') : 'noneGeometry';
+        })->filter(function ($items, $regionName) {
+            return $regionName !== 'noneGeometry';
         })->map(function ($items, $regionName) {
             [$country, $town] = explode('-', $regionName);
-            list('mean' => $mean, 'valids' => $valids, 'outliners' => $outliners) = static::boxplot($items, 'pm25');
+
+            $sitesPm25 = $items->mapWithKeys(function ($item) {
+                $key = $item->get('SiteGroup').'$'.$item->get('uniqueKey');
+                return [$key => $item->get('Data')->get('Dust2_5')];
+            });
+
+            list('mean' => $mean, 'valids' => $valids, 'outliners' => $outliners) = GeometrySrv::boxplot($sitesPm25);
 
             return [
                 'country' => CountryTownNameFormatter::formatCountry($country),
                 'town' => CountryTownNameFormatter::formatTown($town),
                 'pm25' => $mean,
-                'valids' => CountryTownNameFormatter::formatRecords($valids),
-                'outliners' => CountryTownNameFormatter::formatRecords($outliners),
+                'valids' => CountryTownNameFormatter::formatRecordsFromUids($items, $valids),
+                'outliners' => CountryTownNameFormatter::formatRecordsFromUids($items, $outliners),
             ];
         })->values();
 
@@ -266,34 +250,5 @@ class JSONRepository
 
         JsonCache::townmap($townmap);
         return $townmap;
-    }
-
-    public static function boxplot(Collection $records, string $valueIndex)
-    {
-        $allValues = $records->pluck($valueIndex)->toArray();
-        $quartiles  = \MathPHP\Statistics\Descriptive::quartiles($allValues);
-        $outlinerMin = $quartiles['Q1'] - $quartiles['IQR'] * 1.5;  // Q1-1.5ΔQ
-        $outlinerMax = $quartiles['Q3'] + $quartiles['IQR'] * 1.5;  // Q3+1.5ΔQ
-
-        $valids = collect();
-        $outliners = collect();
-        $values = [];
-        $records->map(function ($item) use ($valueIndex, $outlinerMin, $outlinerMax, &$valids, &$outliners, &$values) {
-            // valid value should be: Q1-1.5ΔQ < value < Q3+1.5ΔQ
-            $isOutliner = ($item[$valueIndex] < $outlinerMin) || ($item[$valueIndex] > $outlinerMax);
-
-            if ($isOutliner) {
-                $outliners->push($item);
-            } else {
-                $valids->push($item);
-                $values[] = $item[$valueIndex];
-            }
-        });
-
-        return [
-            'mean' => \MathPHP\Statistics\Average::mean($values),
-            'valids' => $valids,
-            'outliners' => $outliners,
-        ];
     }
 }

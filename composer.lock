@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2eaa4fe17d0eff6ed65e55aa4fdc9948",
+    "content-hash": "39d802d66fc724eb8f73593b640a7870",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -499,6 +499,50 @@
                 "url"
             ],
             "time": "2017-03-20T17:10:46+00:00"
+        },
+        {
+            "name": "hannesvdvreken/pip",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hannesvdvreken/pip.git",
+                "reference": "57d870fdb605a57b88f07966ff76b806bbac3a40"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hannesvdvreken/pip/zipball/57d870fdb605a57b88f07966ff76b806bbac3a40",
+                "reference": "57d870fdb605a57b88f07966ff76b806bbac3a40",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Geometry": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hannes Van De Vreken",
+                    "email": "vandevreken.hannes@gmail.com"
+                }
+            ],
+            "description": "The Polygon class",
+            "keywords": [
+                "Point-in-polygon",
+                "Polygon",
+                "geo",
+                "geojson",
+                "geometry",
+                "pip"
+            ],
+            "time": "2014-11-13T17:03:41+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
