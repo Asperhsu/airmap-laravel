@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Repository\JSONRepository;
 use View;
 
-class WidgetController extends Controller
+class WidgetV4Controller extends Controller
 {
     public function create(Request $request, string $group, string $uuid)
     {
@@ -18,13 +18,13 @@ class WidgetController extends Controller
 
         $vueScript = '<script src="' . url('js/airmap-widget.js') . '"></script>';
         $vues = $items->mapWithKeys(function ($item) use ($group, $uuid) {
-            return [$item['type'] => view('widget.vue', [
+            return [$item['type'] => view('v4.widget.vue', [
                 'group' => $group, 'uuid' => $uuid, 'type' => $item['type'], 'height' => $item['height']
             ])->render()];
         });
 
 
-        return view('widget.create-js', compact('group', 'uuid', 'vueScript', 'vues'));
+        return view('v4.widget.create-js', compact('group', 'uuid', 'vueScript', 'vues'));
     }
 
     public function show(Request $request, string $type, string $group, string $uuid)
@@ -35,11 +35,11 @@ class WidgetController extends Controller
             return 'site not found.';
         }
 
-        $view = 'widget.'.$type;
+        $view = 'v4.widget.'.$type;
         if (!View::exists($view)) {
             return $type . ' widget not Exists';
         }
 
-        return view('widget.'.$type, compact('type', 'group', 'uuid', 'record'));
+        return view('v4.widget.'.$type, compact('type', 'group', 'uuid', 'record'));
     }
 }

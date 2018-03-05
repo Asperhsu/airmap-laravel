@@ -1,4 +1,4 @@
-@extends('widget.layout')
+@extends('v4.widget.layout')
 
 @section('style')
     @parent

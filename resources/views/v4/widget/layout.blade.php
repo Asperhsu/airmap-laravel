@@ -16,8 +16,8 @@
 @section('script')
     @parent
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    {{--  <script src="{{ asset('js/vendor-common.js') }}"></script>
-    <script src="{{ asset('js/widget.js') }}"></script>  --}}
+    <script src="{{ asset('v4/js/vendor-common.js') }}"></script>
+    <script src="{{ asset('v4/js/widget.js') }}"></script>
 @endsection
 
 @if (isset($type) && isset($record))

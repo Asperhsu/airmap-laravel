@@ -1,4 +1,4 @@
-@extends('widget.layout')
+@extends('v4.widget.layout')
 
 @section('style')
 @parent
@@ -149,5 +149,5 @@
 
 @section('script')
 @parent
-<script src="/widget/airmap-widget.js"></script>
+<script src="/js/airmap-widget.js"></script>
 @endsection
