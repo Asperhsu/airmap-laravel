@@ -43,6 +43,7 @@ class CountryTownNameFormatter
             })
             ->map(function ($record) {
                 return static::formatRecord($record);
-            });
+            })
+            ->values();
     }
 }
