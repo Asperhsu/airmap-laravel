@@ -39,9 +39,9 @@ class Kernel extends ConsoleKernel
                  ->timezone('Asia/Taipei')
                  ->everyFiveMinutes();
 
-        $schedule->command('fetch:geocoding')
-                 ->timezone('Asia/Taipei')
-                 ->everyFiveMinutes();
+        // $schedule->command('fetch:geocoding')
+        //          ->timezone('Asia/Taipei')
+        //          ->everyFiveMinutes();
 
         $schedule->command('record:clear-expired')
                  ->timezone('Asia/Taipei')
