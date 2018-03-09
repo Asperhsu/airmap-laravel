@@ -80,6 +80,12 @@
                         <div class="col-sm-6">{{ $site->get('Maker') }}</div>
                     </div>
                 </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-sm-6"><strong>ID</strong></div>
+                        <div class="col-sm-6">{{ $site->get('uniqueKey') }}</div>
+                    </div>
+                </li>
                 @foreach ($site->get('Data') as $name => $value)
                 <li class="list-group-item">
                     <div class="row">

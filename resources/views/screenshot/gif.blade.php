@@ -46,9 +46,9 @@
         </div>
 
         @if ($lastFile)
-        <div class="col-sm-auto mx-auto">
+        <div class="col mx-auto">
             <h5 id="date">{{ str_replace('.gif', '', $lastFile) }}</h5>
-            <img id="img" src="{{ asset('screenshots/gif/'.$lastFile) }}" class="rounded mx-auto d-block">
+            <img id="img" src="{{ asset('screenshots/gif/'.$lastFile) }}" class="img-fluid img-thumbnail">
         </div>
         @endif
     </div>
@@ -65,7 +65,7 @@
 
 @push('scripts')
 <script>
-    $(".calendar button").click(function () {
+    $(".month button").click(function () {
         var base = '{{ asset('screenshots/gif') }}';
         var file = $(this).data('file');
 
