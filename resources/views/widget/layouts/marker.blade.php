@@ -1,9 +1,8 @@
-@extends('v4.widget.layout')
+@extends('widget.layouts.base')
 
 @section('style')
     @parent
     <style>
-        body{ overflow-x: hidden; overflow-y: hidden; cursor: default; }
         .header{ padding: 8px 5px 0; min-height: 32px; }
         .header > div { width: 49%; display: inline-block; margin-right: -4px; }
 
@@ -32,7 +31,7 @@
     </style>
 @endsection
 
-@section('body')
+@section('content')
     <div class="header">
         @if ($record->get('Data')->get('Temperature'))
         <div title="溫度">
@@ -49,7 +48,7 @@
         @endif
     </div>
 
-    <div class="marker pm25color">
+    <div class="marker pm25color" style="background-color: {{ $record->get('color') }};">
         <p class="name">{{ $record->get('SiteName') }}</p>
         @if ($record->get('Data')->get('Dust2_5'))
         <p class="value">{{ $record->get('Data')->get('Dust2_5') }}</p>
@@ -58,13 +57,13 @@
 
     <div class="footer">
         <div>
-            <a href="{{ route('v4.site', $group, $uuid) }}" title="site detail page" target="g0vDetail">
+            <a href="{{ url('/') }}" target="_blank">
                 <img src="https://i.imgur.com/Gro4juQ.png" alt="g0v icon">
             </a>
         </div>
 
         <div class="text-right" title="更新時間">
-            <span class="humanTime"></span>
+            <span class="humanTime">{{ $record->get('humanTime') }}</span>
         </div>
     </div>
 @endsection

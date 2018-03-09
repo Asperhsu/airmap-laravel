@@ -8,32 +8,32 @@ use Carbon\Carbon;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request, string $latlng = null)
     {
-        return 'home';
+        $version = $latlng ? 'v4' : 'v5';
+        $redirectTo = $latlng ? route('v4.map').$latlng : url('v5');
+
+        return view('home', compact('version', 'redirectTo'));
     }
 
     public function recruit()
     {
-        return view('v4.recruit');  //TODO: move to current
-    }
-
-    public function about()
-    {
-        return view('v4.about'); //TODO: move to current
+        return view('recruit');
     }
 
     public function datasource()
     {
         $datasources = collect([
-            collect(['group' => 'Single', 'json' => 'airmap.json']),
+            collect(['group' => 'All-in-one', 'json' => 'airmap.json']),
             collect(['group' => 'LASS', 'json' => 'lass.json']),
             collect(['group' => 'LASS 4U', 'json' => 'lass-4u.json']),
             collect(['group' => 'LASS MAPS', 'json' => 'lass-maps.json']),
-            collect(['group' => 'LASS EEVEE', 'json' => 'lass-eevee.json']),
-            collect(['group' => 'Asus Airbox', 'json' => 'asus-airbox.json']),
+            // collect(['group' => 'LASS EEVEE', 'json' => 'lass-eevee.json']),
+            // collect(['group' => 'Asus Airbox', 'json' => 'asus-airbox.json']),
             collect(['group' => 'ProbeCube', 'json' => 'probecube.json']),
             collect(['group' => 'Independent', 'json' => 'independent.json']),
+            collect(['group' => 'EPA', 'json' => 'epa.json']),
+            collect(['group' => 'Airq', 'json' => 'airq.json']),
         ]);
 
         return view('datasource', compact('datasources'));

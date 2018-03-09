@@ -1,11 +1,17 @@
 @extends('layouts.admin')
 
+@section('style')
+@parent
+<style>
+</style>
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-between mt-3 px-3">
         <h3>{{ $title }}</h3>
         <a href="{{ route('admin.thingspeak.create') }}" class="btn btn-primary mr-1">
-            <span class="oi oi-plus"></span> 新增設備
+            <span class="fa fa-plus"></span> 新增設備
         </a>
     </div>
 
@@ -15,74 +21,66 @@
         <div class="card-columns">
             @foreach ($items as $item)
             <div class="card">
-                <div class="card-body pb-2">
-                    <h4 class="card-title">
-                        {{ $item->party }}
-                    </h4>
-                    <h6 class="card-subtitle mb-2 text-muted">
-                        <span class="badge badge-pill badge-primary">Maker</span> {{ $item->maker }}
-                    </h6>
+                <div class="card-header text-white {{ $item->active ? 'bg-success' : 'bg-secondary' }}">
+                    <div class="row">
+                        <div class="col">{{ $item->party }}</div>
+                        <div class="col-auto mr-auto">
+                            <i class="fas fa-toggle-{{ $item->active ? 'on' : 'off' }}"></i>
+                        </div>
+                    </div>
                 </div>
-
-                <table class="table mb-0">
-                    <tbody>
-                        <tr>
-                            <td class="text-right">Channel</td>
-                            <td>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-sm-4 text-right"><strong>Maker</strong></div>
+                            <div class="col">{{ $item->maker }}</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-sm-4 text-right"><strong>Channel</strong></div>
+                            <div class="col">
                                 <a target="_blank" href="https://thingspeak.com/channels/{{ $item->channel }}">
-                                {{ $item->channel }}
+                                    {{ $item->channel }}
                                 </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-right">Fields</td>
-                            <td>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-sm-4 text-right"><strong>Fields</strong></div>
+                            <div class="col">
                                 @foreach ($item->fields_map as $type => $field)
-                                <button type="button" class="btn btn-light" disabled>
+                                <div class="field">
                                     <span class="badge badge-success">{{ str_replace('field', '', $field) }}</span>
                                     {{ ucfirst($type) }}
-                                </button>
+                                </div>
                                 @endforeach
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="card-body p-2 pb-3">
-                    <div class="container">
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
                         <div class="row">
-                            <div class="col-sm">
+                            <div class="col">
                                 <button data-channel="{{ $item->channel }}" class="btn-fetch btn btn-outline-info btn-block">
-                                    <span class="oi oi-pulse"></span> Fetch
+                                    <i class="fas fa-bolt"></i> Fetch
                                 </a>
                             </div>
-                            <div class="col-sm">
+                            <div class="col">
                                 <a href="{{ route('admin.thingspeak.edit', ['id' => $item->id]) }}" class="btn btn-outline-primary btn-block">
-                                    <span class="oi oi-pencil"></span> Edit
+                                    <i class="fas fa-edit"></i> Edit
                                 </a>
                             </div>
-                            <div class="col-sm">
+                            <div class="col">
                                 <button data-target="{{ route('admin.thingspeak.destroy', $item->id) }}" class="btn-destroy btn btn-outline-danger btn-block">
-                                    <span class="oi oi-x"></span> Delete
+                                    <i class="fas fa-trash-alt"></i> Delete
                                 </button>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="col-auto mr-auto">
-                            <small class="text-muted">Updated at {{ $item->updated_at->diffForHumans() }}</small>
-                        </div>
-                        <div class="col-auto">
-                            @if ($item->active)
-                            <span class="badge badge-pill badge-success">Enable <span class="oi oi-media-play"></span></span>
-                            @else
-                            <span class="badge badge-pill badge-dark"><span class="oi oi-media-pause"></span> Disable</span>
-                            @endif
-                        </div>
-                    </div>
+                    </li>
+                </ul>
+                <div class="card-footer text-right">
+                    <small class="text-muted">Updated at {{ $item->updated_at->diffForHumans() }}</small>
                 </div>
             </div>
             @endforeach

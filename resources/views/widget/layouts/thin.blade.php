@@ -1,9 +1,8 @@
-@extends('v4.widget.layout')
+@extends('widget.layouts.base')
 
 @section('style')
     @parent
     <style>
-        body{ overflow-x: hidden; overflow-y: hidden; cursor: default; }
         .header {
                 white-space: nowrap;
                 text-align: center;
@@ -33,7 +32,7 @@
     </style>
 @endsection
 
-@section('body')
+@section('content')
     <div class="header">
         {{ $record->get('SiteName') }}
     </div>
@@ -41,7 +40,7 @@
     <div class="content">
         <div class="item pm25">
             <div class="name">
-                <span class="label pm25color">PM 2.5</span>
+                <span class="label pm25color" style="background-color: {{ $record->get('color') }};">PM 2.5</span>
             </div>
             <div class="value-container">
                 <span class="value">{{ $record->get('Data')->get('Dust2_5') }}</span>
@@ -77,13 +76,10 @@
                 @endif
             </div>
         </div>
-
-
-
     </div>
 
     <div class="footer">
-        <a href="{{ route('v4.site', $group, $uuid) }}" title="site detail page" target="g0vDetail">
+        <a href="{{ url('/') }}" target="_blank">
             <img src="https://i.imgur.com/Gro4juQ.png" alt="g0v icon">
         </a>
         <span class="humanTime"></span>

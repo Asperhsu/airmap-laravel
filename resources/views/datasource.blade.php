@@ -12,9 +12,6 @@
         <li class="nav-item">
             <a class="nav-link" href="#latest" data-toggle="tab" role="tab">最新紀錄</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#fetch-log" data-toggle="tab" role="tab">資料更新紀錄</a>
-        </li>
     </ul>
 
     <hr>
