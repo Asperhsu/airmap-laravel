@@ -98,14 +98,6 @@
                         </a>
                     </h4>
                 </li>
-                <li class="list-group-item" data-name="siteList" >
-                    <h4 class="list-group-item-heading">
-                        <span>截圖動畫</span>
-                        <a href="{{ route('dialy-gif') }}" class="pull-right btn btn-info btn-xs" target="_blank">
-                            &nbsp;<span class="glyphicon glyphicon-blackboard"></span>&nbsp;
-                        </a>
-                    </h4>
-                </li>
 
                 <li class="list-group-item" data-name="siteLayer" >
                     <h4 class="list-group-item-heading" v-on:click="changeActiveItem">
