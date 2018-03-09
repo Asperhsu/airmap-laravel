@@ -67,13 +67,22 @@ class HomeController extends Controller
         return view('datasource', compact('datasources'));
     }
 
-    public function dialyGif()
+    public function screenshotHourly()
     {
-        $files = collect(Storage::disk('screenshots')->files())->filter(function ($file) {
-            return ends_with($file, '.gif');
-        })->toArray();
+        return view('screenshot.hourly');
+    }
+
+    public function screenshotGif()
+    {
+        $dir = '/var/www/screenshots/gif';
+        $publicPath = 'screenshots/gif';
+
+        $files = array_filter(scandir($dir) ?: [], function ($file) {
+            return strpos($file, '.gif');
+        });
         $lastFile = last($files);
 
+        // get whitch day has file
         $fileCalendar = $calendar = [];
         foreach ($files as $file) {
             list($year, $month, $day) = explode('-', $file);
@@ -82,6 +91,8 @@ class HomeController extends Controller
 
         // genreate calendar
         foreach ($fileCalendar as $year => $months) {
+            krsort($months);
+
             foreach ($months as $month => $days) {
                 $dt = Carbon::createFromFormat('Y-m', $year.'-'.$month, 'Asia/Taipei');
                 $rows = $row = [];
@@ -106,6 +117,6 @@ class HomeController extends Controller
             }
         }
 
-        return view('dialy-gif', compact('calendar', 'lastFile'));
+        return view('screenshot.gif', compact('calendar', 'lastFile'));
     }
 }
