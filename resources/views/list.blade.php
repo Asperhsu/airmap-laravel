@@ -2,16 +2,13 @@
 
 @section('style')
 <style>
-    .records-table { font-size: .85em; }
-    .records-table.table td {
-        vertical-align: middle;
-    }
+    .site-card { font-size: .85em; }
 </style>
 @endsection
 
 @section('content')
 <form method="get">
-    <div class="container">
+    <div class="container" style="width: 80%">
         <div class="row mt-4 mb-2">
             <div class="col">
                 <div class="input-group">
@@ -64,75 +61,54 @@
 </form>
 
 @if (count($sites))
-<div class="container-fluid">
-    <table class="table table-hover records-table">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col">SiteName</th>
-                <th scope="col">Group</th>
-                <th scope="col">Data</th>
-                <th scope="col">Position</th>
-                <th scope="col">Func.</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($sites as $site)
-            <tr>
-                <td>{{ $site->get('SiteName') }}</td>
-                <td>
-                    <div class="row">
-                        <div class="col-sm-6 text-md-right">
-                            <span class="badge badge-pill badge-light">Group</span>
-                        </div>
-                        <div class="col-sm-6 text-md-left text-sm-right">{{ $site->get('SiteGroup') }}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6 text-md-right">
-                            <span class="badge badge-pill badge-light">Maker</span>
-                        </div>
-                        <div class="col-sm-6 text-md-left text-sm-right">{{ $site->get('Maker') }}</spadivn>
-                    </div>
-                </td>
-                <td>
-                    @foreach ($site->get('Data')->except('Create_at') as $name => $value)
-                    <div class="row">
-                        <div class="col-sm-6 text-md-right">
-                            <span class="badge badge-pill badge-light">{{ $name }}</span>
-                        </div>
-                        <div class="col-sm-6 text-md-left text-sm-right">{{ $value }}</div>
-                    </div>
-                    @endforeach
-                </td>
-                <td>
-                    @foreach ($site->get('LatLng') as $name => $value)
-                    <div class="row">
-                        <div class="col-sm-4 text-md-right">
-                            <span class="badge badge-pill badge-light">{{ $name }}</span>
-                        </div>
-                        <div class="col-sm-8 text-md-left text-sm-right">{{ $value }}</div>
-                    </div>
-                    @endforeach
+<div class="container">
 
-                    @if ($site->get('Geometry'))
+    <div class="card-columns">
+        @foreach ($sites as $site)
+        <div class="card site-card mb-4">
+            <div class="card-header bg-dark text-white">{{ $site->get('SiteName') }}</div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
                     <div class="row">
-                        <div class="col-sm-4 text-md-right">
-                            <span class="badge badge-pill badge-light">鄉鎮</span>
-                        </div>
-                        <div class="col-sm-8 text-md-left text-sm-right">
-                            {{ $site->get('Geometry')->get('COUNTYNAME') }} {{ $site->get('Geometry')->get('TOWNNAME') }}
-                        </div>
+                        <div class="col-sm-6"><strong>Group</strong></div>
+                        <div class="col-sm-6">{{ $site->get('SiteGroup') }}</div>
                     </div>
-                    @endif
-                </td>
-                <td class="text-center">
-                    <a href="{{ route('widget.create', [$site->get('SiteGroup'), $site->get('uniqueKey')]) }}" class="btn btn-sm btn-outline-primary">
-                        <i class="fas fa-tachometer-alt"></i> Widget
-                    </a>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+                </li>
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-sm-6"><strong>Maker</strong></div>
+                        <div class="col-sm-6">{{ $site->get('Maker') }}</div>
+                    </div>
+                </li>
+                @foreach ($site->get('Data') as $name => $value)
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-sm-6"><strong>{{ $name }}</strong></div>
+                        <div class="col-sm-6">{{ $value }}</div>
+                    </div>
+                </li>
+                @endforeach
+            </ul>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col">
+                        @if ($site->get('Geometry'))
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span class="geometry">{{ $site->get('Geometry')->get('COUNTYNAME') }} {{ $site->get('Geometry')->get('TOWNNAME') }}</span>
+                        @endif
+                    </div>
+
+                    <div class="col-sm-auto mr-0">
+                        <a href="{{ route('widget.create', [$site->get('SiteGroup'), $site->get('uniqueKey')]) }}" class="btn btn-sm btn-outline-primary">
+                            <i class="fas fa-tachometer-alt"></i> Widget
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+
 </div>
 @endif
 @endsection
