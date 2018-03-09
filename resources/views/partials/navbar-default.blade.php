@@ -9,8 +9,8 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item {{ active('v4.list') }}">
-                <a class="nav-link" href="{{ route('v4.list') }}"><i class="fas fa-list-ul"></i> 站點列表</a>
+            <li class="nav-item {{ active('list') }}">
+                <a class="nav-link" href="{{ route('list') }}"><i class="fas fa-list-ul"></i> 站點列表</a>
             </li>
             <li class="nav-item {{ active('widget.document') }}">
                 <a class="nav-link" href="{{ route('widget.document') }}"><i class="fas fa-tachometer-alt"></i> 小工具說明</a>

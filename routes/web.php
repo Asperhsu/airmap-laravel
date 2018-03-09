@@ -12,6 +12,7 @@
  */
 
 Route::get('/{latlng?}', 'HomeController@index')->where('latlng', '@[0-9.]+,[0-9.]+')->name('home');
+Route::get('/list', 'HomeController@list')->name('list');
 Route::get('/datasource', 'HomeController@datasource')->name('datasource');
 // Route::get('/dialy-gif', 'HomeController@dialyGif')->name('dialy-gif');
 Route::get('/recruit', 'HomeController@recruit')->name('recruit');
@@ -42,5 +43,5 @@ Route::group(['prefix' => 'json', 'middleware' => 'cors'], function () {
 
 /* v4 */
 Route::get('/map{latlng?}', 'V4Controller@map')->where('latlng', '@[0-9.]+,[0-9.]+')->name('v4.map');
-Route::get('/list', 'V4Controller@list')->name('v4.list');
+// Route::get('/list', 'V4Controller@list')->name('v4.list');
 Route::get('/site', 'V4Controller@site')->name('v4.site');
