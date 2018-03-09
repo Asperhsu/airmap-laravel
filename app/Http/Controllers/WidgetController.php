@@ -48,7 +48,7 @@ class WidgetController extends Controller
         return view($view, compact('record'));
     }
 
-    public function document()
+    public function index()
     {
         $vueScript = '<script src="' . url('js/airmap-widget.js') . '"></script>';
 

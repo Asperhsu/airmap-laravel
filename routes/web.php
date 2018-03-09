@@ -20,7 +20,7 @@ Route::get('/recruit', 'HomeController@recruit')->name('recruit');
 Route::group(['prefix' => 'widget'], function () {
     Route::get('create/{group}${uuid}', 'WidgetController@create')->name('widget.create');
     Route::get('{type}/{group}${uuid}', 'WidgetController@show')->name('widget.show');
-    Route::get('document', 'WidgetController@document')->name('widget.document');
+    Route::get('/', 'WidgetController@index')->name('widget.index');
 });
 
 

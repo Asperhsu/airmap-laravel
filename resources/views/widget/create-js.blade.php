@@ -107,7 +107,7 @@
 
     <div class="row">
         <div class="col">
-            如需更多說明，請參考<a href="{{ route('widget.document') }}">小工具說明</a>
+            如需更多說明，請參考<a href="{{ route('widget.index') }}">小工具說明</a>
         </div>
     </div>
 </div>

@@ -12,8 +12,8 @@
             <li class="nav-item {{ active('list') }}">
                 <a class="nav-link" href="{{ route('list') }}"><i class="fas fa-list-ul"></i> 站點列表</a>
             </li>
-            <li class="nav-item {{ active('widget.document') }}">
-                <a class="nav-link" href="{{ route('widget.document') }}"><i class="fas fa-tachometer-alt"></i> 小工具說明</a>
+            <li class="nav-item {{ active('widget.index') }}">
+                <a class="nav-link" href="{{ route('widget.index') }}"><i class="fas fa-tachometer-alt"></i> 小工具說明</a>
             </li>
             <li class="nav-item {{ active('recruit') }}">
                 <a class="nav-link" href="{{ route('recruit') }}"><i class="fas fa-sign-in-alt"></i> 自造站點募集</a>
