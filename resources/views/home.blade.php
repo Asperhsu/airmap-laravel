@@ -8,7 +8,7 @@
         passSeconds++;
         $("#countdown").text(seconds - passSeconds);
         if (passSeconds >= seconds) {
-            // location.href = '{{ $redirectTo }}';
+            location.href = '{{ $redirectTo }}';
         }
     }, 1000);
 </script>
