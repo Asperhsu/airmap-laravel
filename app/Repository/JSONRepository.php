@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use App\Models\Group;
 use App\Models\Record;
 use App\Models\LatestRecord;
-use App\Models\Geometry;
 use App\Formatter\GroupJSONFormatter;
 use App\Formatter\RecordsToChartFormatter;
 use App\Service\JsonCache;
@@ -159,37 +158,6 @@ class JSONRepository
 
         $records = RecordsToChartFormatter::format($records);
         return $records;
-    }
-
-
-    public static function region(Geometry $geometry)
-    {
-        // if cache exists, return cache
-        if ($value = JsonCache::geometry($geometry->id)) {
-            return $value;
-        }
-
-        $records = LatestRecord::where('geometry_id', $geometry->id)
-            ->select('pm25', 'humidity', 'temperature')
-            ->get();
-
-        $regions = [];
-        foreach (['country', 'level1', 'level2', 'level3', 'level4'] as $region) {
-            if ($geometry->{$region}) {
-                $regions[] = $geometry->{$region};
-            }
-        }
-
-        $record = collect([
-            'regions' => $regions,
-            'site_count' => $records->count(),
-            'pm25' => $records->pluck('pm25')->avg(),
-            'humidity' => $records->pluck('humidity')->avg(),
-            'temperature' => $records->pluck('temperature')->avg(),
-        ]);
-
-        JsonCache::geometry($geometry->id, $record);
-        return $record;
     }
 
     public static function bounds(array $northEast, array $sourthWest)

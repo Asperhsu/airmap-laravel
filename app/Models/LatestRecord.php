@@ -14,10 +14,5 @@ class LatestRecord extends Model
 
     protected $dates = [
         'published_at',
-    ]; 
-
-    public function geometry()
-    {
-        return $this->belongsTo(Geometry::class);
-    }
+    ];
 }

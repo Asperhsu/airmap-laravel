@@ -15,6 +15,5 @@ class DatabaseSeeder extends Seeder
         $this->call(ProbecubeSeeder::class);
         $this->call(IndependentSeeder::class);
         $this->call(DefaultAdminSeeder::class);
-        $this->call(GeometrySeeder::class);
     }
 }

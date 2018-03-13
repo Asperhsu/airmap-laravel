@@ -45,9 +45,4 @@ class Record extends Model
     {
         return $this->hasMany(LassRanking::class);
     }
-
-    public function geometries()
-    {
-        return $this->belongsToMany(Geometry::class);
-    }
 }
