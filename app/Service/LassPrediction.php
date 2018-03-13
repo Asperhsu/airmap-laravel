@@ -9,14 +9,13 @@ use Illuminate\Support\Facades\Cache;
 
 class LassPrediction
 {
-    // protected $mahajanUrlTemplate = "https://pm25next.lass-net.org/static/overview_{{YmdH}}_0.json";
-    // protected $yangUrlTemplate = "https://pm25next.lass-net.org/static/overview_{{YmdH}}_1.json";
-
-    protected $mahajanUrlTemplate = "http://192.168.100.109:8080/overview_2018031311_0.json";// for dev
-    protected $yangUrlTemplate = "http://192.168.100.109:8080/overview_2018031312_1.json";
-
+    const CACHE_TAG = 'LASS_PREDICTION';
 
     protected $predictions;
+
+    protected $mahajanUrlTemplate = "https://pm25next.lass-net.org/static/overview_{{YmdH}}_0.json";
+    protected $yangUrlTemplate = "https://pm25next.lass-net.org/static/overview_{{YmdH}}_1.json";
+
 
     public function __construct()
     {
@@ -25,6 +24,8 @@ class LassPrediction
 
     public function fetch()
     {
+        Cache::tags(static::CACHE_TAG)->forget('records');
+
         try {
             $this->fetchMahajan();
             $this->fetchYang();
@@ -148,6 +149,10 @@ class LassPrediction
     {
         $response = HttpClient::getJson($url);
 
+        if (!$response['data']) {
+            return false;
+        }
+
         $version = Carbon::createFromFormat('Y-m-d\TH:i:s\Z', $response['data']['version'], 'Asia/Taipei')->timezone('UTC');
 
         foreach ($response['data']['feed'] as $feed) {
@@ -181,9 +186,9 @@ class LassPrediction
 
     public function fetchMahajan()
     {
-        // Mahajan is 2 hours behind
-        $twoHoursDate = Carbon::now('Asia/Taipei')->subHours(2)->format('YmdH');
-        $url = str_replace('{{YmdH}}', $twoHoursDate, $this->mahajanUrlTemplate);
+        // Mahajan is 1 hours behind
+        $date = Carbon::now('Asia/Taipei')->subHours(1)->format('YmdH');
+        $url = str_replace('{{YmdH}}', $date, $this->mahajanUrlTemplate);
 
         return $this->fetchAPI('Mahajan', $url);
     }
@@ -191,8 +196,8 @@ class LassPrediction
     public function fetchYang()
     {
         // Yang is 1 hours behind
-        $oneHoursDate = Carbon::now('Asia/Taipei')->subHours(1)->format('YmdH');
-        $url = str_replace('{{YmdH}}', $oneHoursDate, $this->yangUrlTemplate);
+        $date = Carbon::now('Asia/Taipei')->subHours(1)->format('YmdH');
+        $url = str_replace('{{YmdH}}', $date, $this->yangUrlTemplate);
 
         return $this->fetchAPI('Yang', $url);
     }
@@ -202,8 +207,8 @@ class LassPrediction
 
     protected function validRecords()
     {
-        if (Cache::tags('LASS_PREDICTION')->has('records')) {
-            return Cache::tags('LASS_PREDICTION')->get('records');
+        if (Cache::tags(static::CACHE_TAG)->has('records')) {
+            return Cache::tags(static::CACHE_TAG)->get('records');
         }
 
         $records = DB::table('lass_predictions')
@@ -211,7 +216,7 @@ class LassPrediction
             ->orderBy('published_at', 'desc')
             ->get();
 
-        Cache::tags('LASS_PREDICTION')->put('records', $records, 60);
+        Cache::tags(static::CACHE_TAG)->put('records', $records, 60);
         return $records;
     }
 

@@ -78,6 +78,6 @@ class JsonController extends Controller
         abort_unless($uuid, 402);
 
         $service = new LassPrediction();
-        return $service->findUuid('74DA3895DED4');
+        return $service->findUuid($uuid);
     }
 }
