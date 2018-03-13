@@ -10,13 +10,23 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
-Route::get('/{latlng?}', 'HomeController@map')->where('latlng', '@[0-9.]+,[0-9.]+')->name('map');
+
+Route::get('/{latlng?}', 'HomeController@index')->where('latlng', '@[0-9.]+,[0-9.]+')->name('home');
 Route::get('/list', 'HomeController@list')->name('list');
-Route::get('/site', 'HomeController@site')->name('site');
-Route::get('/recruit', 'HomeController@recruit')->name('recruit');
-Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/datasource', 'HomeController@datasource')->name('datasource');
-Route::get('/dialy-gif', 'HomeController@dialyGif')->name('dialy-gif');
+Route::get('/recruit', 'HomeController@recruit')->name('recruit');
+
+Route::group(['prefix' => 'screenshot'], function () {
+    Route::get('hourly', 'HomeController@screenshotHourly')->name('screenshot.hourly');
+    Route::get('gif', 'HomeController@screenshotGif')->name('screenshot.gif');
+});
+
+Route::group(['prefix' => 'widget'], function () {
+    Route::get('create/{group}${uuid}', 'WidgetController@create')->name('widget.create');
+    Route::get('{type}/{group}${uuid}', 'WidgetController@show')->name('widget.show');
+    Route::get('/', 'WidgetController@index')->name('widget.index');
+});
+
 
 /* JSON */
 Route::group(['prefix' => 'json', 'middleware' => 'cors'], function () {
@@ -32,12 +42,10 @@ Route::group(['prefix' => 'json', 'middleware' => 'cors'], function () {
     Route::get('query-bounds', 'JsonController@bounds');
 });
 
-Route::get('fetchlog/{group}', 'FetchLogController@show')->name('fetchlog');
-
-Route::group(['prefix' => 'widget'], function () {
-    Route::get('create/{group}${uuid}', 'WidgetController@create')->name('widget.create');
-    Route::get('{type}/{group}${uuid}', 'WidgetController@show')->name('widget.show');
-});
+// Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
 
-Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+/* v4 */
+Route::get('/map{latlng?}', 'V4Controller@map')->where('latlng', '@[0-9.]+,[0-9.]+')->name('v4.map');
+// Route::get('/list', 'V4Controller@list')->name('v4.list');
+Route::get('/site', 'V4Controller@site')->name('v4.site');

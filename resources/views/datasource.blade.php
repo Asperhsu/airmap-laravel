@@ -12,9 +12,6 @@
         <li class="nav-item">
             <a class="nav-link" href="#latest" data-toggle="tab" role="tab">最新紀錄</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#fetch-log" data-toggle="tab" role="tab">資料更新紀錄</a>
-        </li>
     </ul>
 
     <hr>
@@ -51,7 +48,7 @@
 
             <h4>必要參數</h4>
             <p class="ml-4">無</p>
-            
+
             <h4>選用參數</h4>
             <p class="ml-4">無</p>
         </div>
@@ -160,29 +157,6 @@
             <ul>
                 <li>{{ url('query-lastest?group=lass&id=xxx') }}</li>
             </ul>
-        </div>
-
-        <div class="tab-pane fade show " id="fetch-log" role="tabpanel" aria-labelledby="home-tab">
-            <h2>
-                資料更新紀錄
-                <small class="text-muted">來源資料記錄數</small>
-            </h2>
-
-            <table class="table ml-4">
-                <tbody>
-                    @foreach ($fetchLogs as $item)
-                    <tr>
-                        <td>{{ $item->get('group') }}</td>
-                        <td>
-                            <a href="{{ $item->get('url') }}">
-                                <span class="badge badge-primary">Link</span>
-                                {{ $item->get('url') }}
-                            </a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
         </div>
     </div>
 </div>

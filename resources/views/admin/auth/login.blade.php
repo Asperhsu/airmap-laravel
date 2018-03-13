@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+<div class="d-flex justify-content-center align-items-center" style="height: 90vh;">
     <div class="card col-6 p-0">
         <h4 class="card-header">管理登入</h4>
 
         <div class="card-body">
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('admin.login') }}">
                 {{ csrf_field() }}
 
                 <div class="form-group">

@@ -2,9 +2,9 @@
 
 // Auth::routes();
 Route::group([], function () {
-    Route::get('login', 'LoginController@showLoginForm')->name('login');
+    Route::get('login', 'LoginController@showLoginForm')->name('admin.login');
     Route::post('login', 'LoginController@login');
-    Route::get('logout', 'LoginController@logout')->name('logout');
+    Route::get('logout', 'LoginController@logout')->name('admin.logout');
 
     // Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
     // Route::post('password/reset', 'ResetPasswordController@reset');

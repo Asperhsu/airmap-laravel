@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repository\JSONRepository;
+use App\Service\Widget as WidgetSrv;
 use View;
 
 class WidgetController extends Controller
 {
+    // js version widget document
     public function create(Request $request, string $group, string $uuid)
     {
         $items = collect([
@@ -16,16 +18,6 @@ class WidgetController extends Controller
             ['type' => 'thin', 'height' => 150],
         ]);
 
-        if ($request->has('iframe')) {
-            $iframes = $items->mapWithKeys(function ($item) use ($group, $uuid) {
-                return [ $item['type'] => view('widget.iframe', [
-                    'group' => $group, 'uuid' => $uuid, 'type' => $item['type'], 'height' => $item['height']
-                ])->render() ];
-            });
-
-            return view('widget.create-iframe', compact('group', 'uuid', 'iframes'));
-        }
-
         $vueScript = '<script src="' . url('js/airmap-widget.js') . '"></script>';
         $vues = $items->mapWithKeys(function ($item) use ($group, $uuid) {
             return [$item['type'] => view('widget.vue', [
@@ -33,10 +25,10 @@ class WidgetController extends Controller
             ])->render()];
         });
 
-
         return view('widget.create-js', compact('group', 'uuid', 'vueScript', 'vues'));
     }
 
+    // html version widget
     public function show(Request $request, string $type, string $group, string $uuid)
     {
         abort_unless($group && $uuid, 402);
@@ -45,11 +37,21 @@ class WidgetController extends Controller
             return 'site not found.';
         }
 
-        $view = 'widget.'.$type;
+        $view = 'widget.layouts.'.$type;
         if (!View::exists($view)) {
             return $type . ' widget not Exists';
         }
 
-        return view('widget.'.$type, compact('type', 'group', 'uuid', 'record'));
+        $record->put('color', WidgetSrv::color($record->get('Data')->get('Dust2_5')));
+        $record->put('humanTime', WidgetSrv::humanTime($record->get('Data')->get('Create_at')));
+
+        return view($view, compact('record'));
+    }
+
+    public function index()
+    {
+        $vueScript = '<script src="' . url('js/airmap-widget.js') . '"></script>';
+
+        return view('widget.document', compact('vueScript'));
     }
 }

@@ -91,4 +91,28 @@ class Geometry
             'outliners' => $outliners,
         ];
     }
+
+    public function countryTowns()
+    {
+        $countries = [];
+        $towns = [];
+
+        foreach ($this->features as $feature) {
+            $countryCode = (string) $feature['properties']['COUNTYCODE'];
+            $countryName = $feature['properties']['COUNTYNAME'];
+            $townCode = (string) $feature['properties']['TOWNCODE'];
+            $townName = $feature['properties']['TOWNNAME'];
+
+            $countries[$countryCode] = $countryName;
+            $towns[$countryCode][] = [
+                'code' => $townCode,
+                'name' => $townName,
+            ];
+        }
+
+        ksort($countries);
+        ksort($towns);
+
+        return compact('countries', 'towns');
+    }
 }

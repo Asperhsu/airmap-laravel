@@ -5,22 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use App\Repository\JSONRepository;
 
 class HomeController extends Controller
 {
-    public function map()
+    public function index(Request $request, string $latlng = null)
     {
-        return view('map');
-    }
+        $version = $latlng ? 'v4' : 'v5';
+        $redirectTo = $latlng ? route('v4.map').$latlng : url('v5');
 
-    public function list()
-    {
-        return view('list');
-    }
-
-    public function site()
-    {
-        return view('site');
+        return view('home', compact('version', 'redirectTo'));
     }
 
     public function recruit()
@@ -28,41 +22,67 @@ class HomeController extends Controller
         return view('recruit');
     }
 
-    public function about()
+    public function list(Request $request)
     {
-        return view('about');
+        $countries = $towns = $sites = [];
+        $country = $request->get('country');
+        $town = $request->get('town');
+        $keyword = $request->get('keyword');
+
+        $geometrySrv = resolve('App\Service\Geometry');
+        ['countries' => $countries, 'towns' => $towns] = $geometrySrv->countryTowns();
+
+        if ($keyword) {
+            $sites = JSONRepository::groups()->filter(function ($record) use ($keyword) {
+                return strpos(strtolower($record->get('SiteName')), strtolower($keyword)) !== false;
+            });
+        }
+
+        if (!$keyword && $country && $town) {
+            $sites = JSONRepository::groups()->filter(function ($record) use ($country, $town) {
+                return $record->get('Geometry')
+                    && ($record->get('Geometry')->get('COUNTYCODE') === $country)
+                    && ($town == 'all' ? true : $record->get('Geometry')->get('TOWNCODE') === $town);
+            });
+        }
+
+        return view('list', compact('countries', 'towns', 'sites', 'country', 'town', 'keyword'));
     }
 
     public function datasource()
     {
         $datasources = collect([
-            collect(['group' => 'Single', 'json' => 'airmap.json']),
+            collect(['group' => 'All-in-one', 'json' => 'airmap.json']),
             collect(['group' => 'LASS', 'json' => 'lass.json']),
             collect(['group' => 'LASS 4U', 'json' => 'lass-4u.json']),
             collect(['group' => 'LASS MAPS', 'json' => 'lass-maps.json']),
-            collect(['group' => 'LASS EEVEE', 'json' => 'lass-eevee.json']),
-            collect(['group' => 'Asus Airbox', 'json' => 'asus-airbox.json']),
+            // collect(['group' => 'LASS EEVEE', 'json' => 'lass-eevee.json']),
+            // collect(['group' => 'Asus Airbox', 'json' => 'asus-airbox.json']),
             collect(['group' => 'ProbeCube', 'json' => 'probecube.json']),
             collect(['group' => 'Independent', 'json' => 'independent.json']),
+            collect(['group' => 'EPA', 'json' => 'epa.json']),
+            collect(['group' => 'Airq', 'json' => 'airq.json']),
         ]);
 
-        $fetchLogs = collect([
-            collect(['group' => 'LASS', 'url' => route('fetchlog', ['group' => 'lass'])]),
-            collect(['group' => 'LASS 4U', 'url' => route('fetchlog', ['group' => 'lass-4u'])]),
-            collect(['group' => 'LASS MAPS', 'url' => route('fetchlog', ['group' => 'lass-maps'])]),
-            collect(['group' => 'Edimax Airbox', 'url' => route('fetchlog', ['group' => 'edimax-airbox'])]),
-        ]);
-
-        return view('datasource', compact('datasources', 'fetchLogs'));
+        return view('datasource', compact('datasources'));
     }
 
-    public function dialyGif()
+    public function screenshotHourly()
     {
-        $files = collect(Storage::disk('screenshots')->files())->filter(function ($file) {
-            return ends_with($file, '.gif');
-        })->toArray();
+        return view('screenshot.hourly');
+    }
+
+    public function screenshotGif()
+    {
+        $dir = '/var/www/screenshots/gif';
+        $publicPath = 'screenshots/gif';
+
+        $files = array_filter(scandir($dir) ?: [], function ($file) {
+            return strpos($file, '.gif');
+        });
         $lastFile = last($files);
 
+        // get whitch day has file
         $fileCalendar = $calendar = [];
         foreach ($files as $file) {
             list($year, $month, $day) = explode('-', $file);
@@ -71,6 +91,8 @@ class HomeController extends Controller
 
         // genreate calendar
         foreach ($fileCalendar as $year => $months) {
+            krsort($months);
+
             foreach ($months as $month => $days) {
                 $dt = Carbon::createFromFormat('Y-m', $year.'-'.$month, 'Asia/Taipei');
                 $rows = $row = [];
@@ -95,6 +117,6 @@ class HomeController extends Controller
             }
         }
 
-        return view('dialy-gif', compact('calendar', 'lastFile'));
+        return view('screenshot.gif', compact('calendar', 'lastFile'));
     }
 }

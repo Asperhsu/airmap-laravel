@@ -35,7 +35,7 @@ class RecordsToBotElements
 
         $time = $record->published_at;
         $items[] = sprintf('%s (%s)', $time->toDateTimeString(), $time->diffForHumans());
-        
+
         return implode(chr(10), $items);
     }
 
@@ -48,7 +48,7 @@ class RecordsToBotElements
     {
         return route('pm25icon', round($value));
     }
-    
+
     public static function toSubSite(Record $record, string $fbmid)
     {
         return [
@@ -57,14 +57,14 @@ class RecordsToBotElements
             'image_url' => static::icon($record->pm25),
             'default_action' => [
                 'type' => 'web_url',
-                'url' => route('site').sprintf('#%s$%s', static::group($record), $record->uuid),
+                'url' => route('v4.site').sprintf('#%s$%s', static::group($record), $record->uuid),
             ],
             'buttons' => [
                 [
                     'type' => 'json_plugin_url',
                     'title' => '加入我的最愛',
                     'url' => route('bot.user.addsite', [
-                        'group' => $record->group_id, 
+                        'group' => $record->group_id,
                         'uuid' => $record->uuid,
                     ]),
                 ]
@@ -80,14 +80,14 @@ class RecordsToBotElements
             'image_url' => static::icon($record->pm25),
             'default_action' => [
                 'type' => 'web_url',
-                'url' => route('site').sprintf('#%s$%s', static::group($record), $record->uuid),
+                'url' => route('v4.site').sprintf('#%s$%s', static::group($record), $record->uuid),
             ],
             'buttons' => [
                 [
                     'type' => 'json_plugin_url',
                     'title' => '從我的最愛移除',
                     'url' => route('bot.user.remove', [
-                        'id' => $subscriptId, 
+                        'id' => $subscriptId,
                     ]),
                 ]
             ]
@@ -102,7 +102,7 @@ class RecordsToBotElements
             sprintf('Avg Temp____: %s 度', $region->get('temperature')),
             sprintf('Avg Humidity: %s %%', $region->get('humidity')),
         ]);
-        
+
         return [
             [
                 'title' => $region->get('regions')->implode(', '),
@@ -129,7 +129,7 @@ class RecordsToBotElements
             sprintf('Avg Temp____: %s 度', $region->get('temperature')),
             sprintf('Avg Humidity: %s %%', $region->get('humidity')),
         ]);
-        
+
         return [
             [
                 'title' => $region->get('regions')->implode(', '),
@@ -140,7 +140,7 @@ class RecordsToBotElements
                         'type' => 'json_plugin_url',
                         'title' => '從我的最愛移除',
                         'url' => route('bot.user.remove', [
-                            'id' => $subscriptId, 
+                            'id' => $subscriptId,
                         ]),
                     ]
                 ]

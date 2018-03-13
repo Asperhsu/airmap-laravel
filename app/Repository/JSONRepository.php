@@ -21,7 +21,7 @@ class JSONRepository
      *
      * @var integer
      */
-    public static $validMins = 30;
+    public static $validMins = 30*1000000000;
 
     /**
      * get valid published time

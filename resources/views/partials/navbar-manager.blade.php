@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-sm bg-info navbar-dark">
-    <a class="navbar-brand" href="{{ url('/') }}">
+<nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
+    <a class="navbar-brand" href="{{ route('admin.index') }}">
         管理介面
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -26,7 +26,7 @@
 
         <ul class="navbar-nav ml-auto">
             @if (Auth::check())
-                <li><a href="{{ route('logout') }}">登出</a></li>
+                <li><a href="{{ route('admin.logout') }}"><i class="fas fa-sign-out-alt"></i> 登出</a></li>
             @endif
         </ul>
     </div>
