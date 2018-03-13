@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repository\JSONRepository;
 use App\Models\Group;
+use App\Service\LassPrediction;
 
 class JsonController extends Controller
 {
@@ -69,5 +70,14 @@ class JsonController extends Controller
 
         $records = JSONRepository::bounds($northEast, $sourthWest);
         return response()->json($records);
+    }
+
+    public function prediction(Request $request)
+    {
+        $uuid   = $request->input('id');
+        abort_unless($uuid, 402);
+
+        $service = new LassPrediction();
+        return $service->findUuid('74DA3895DED4');
     }
 }
