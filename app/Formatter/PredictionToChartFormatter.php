@@ -9,6 +9,13 @@ class PredictionToChartFormatter
 {
     public static function format(Collection $predictions)
     {
+        if (!$predictions->count()) {
+            return [
+                'labels' => null,
+                'data' => null,
+            ];
+        }
+
         // merge all time labels
         $times = $predictions->map(function ($items, $method) {
             return $items->pluck('time');
