@@ -6,6 +6,7 @@ use App\Models\LassPrediction as Model;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
+use App\Formatter\PredictionToChartFormatter;
 
 class LassPrediction
 {
@@ -231,13 +232,13 @@ class LassPrediction
             $publishedAt = Carbon::parse($item->published_at);
 
             $values->push([
-                'iso8601' => $publishedAt->toIso8601String(),
+                'time' => $publishedAt,
                 'value' => $item->current,
             ]);
 
             for ($i=1; $i<=5; $i++) {
                 $values->push([
-                    'iso8601' => $publishedAt->copy()->addHours($i)->toIso8601String(),
+                    'time' => $publishedAt->copy()->addHours($i),
                     'value' => $item->{'add'.$i.'h'},
                 ]);
             }
@@ -245,6 +246,6 @@ class LassPrediction
             $dataset->put($method, $values);
         });
 
-        return $dataset;
+        return PredictionToChartFormatter::format($dataset);
     }
 }
