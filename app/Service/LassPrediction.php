@@ -211,6 +211,7 @@ class LassPrediction
         }
 
         $records = DB::table('lass_predictions')
+            ->where('published_at', '>=', Carbon::now('UTC')->subHours(2))
             ->orderBy('method')
             ->orderBy('published_at', 'desc')
             ->get();
