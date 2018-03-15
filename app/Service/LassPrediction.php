@@ -45,9 +45,7 @@ class LassPrediction
 
     protected function findDifference()
     {
-        $predictionsKeys = $this->predictions->map(function ($item, $uuid) {
-            return $uuid . '-' . $item->get('method');
-        })->values()->toArray();
+        $predictionsKeys = $this->predictions->keys()->toArray();
 
         $existsKeys = Model::select('uuid', 'method')->get()
             ->map(function ($item) {
@@ -63,9 +61,8 @@ class LassPrediction
 
     protected function insert(array $keys)
     {
-        $inserts = $this->predictions->filter(function ($item, $uuid) use ($keys) {
-            $key = $uuid . '-' . $item->get('method');
-            return in_array($key, $keys);
+        $inserts = $this->predictions->filter(function ($item, $index) use ($keys) {
+            return in_array($index, $keys);
         })->map(function ($item, $uuid) {
             return $this->toRecord($uuid);
         })->toArray();
@@ -75,9 +72,8 @@ class LassPrediction
 
     protected function update(array $keys)
     {
-        return $this->predictions->filter(function ($item, $uuid) use ($keys) {
-            $key = $uuid . '-' . $item->get('method');
-            return in_array($key, $keys);
+        return $this->predictions->filter(function ($item, $index) use ($keys) {
+            return in_array($index, $keys);
         })->map(function ($item, $uuid) {
             $data = $this->toRecord($uuid, true);
 
@@ -92,14 +88,14 @@ class LassPrediction
 
     /* Data Structure */
 
-    protected function prediction(string $uuid, array $attributes=null)
+    protected function prediction(string $index, array $attributes=null)
     {
-        if ($this->predictions->has($uuid)) {
-            $item = $this->predictions->get($uuid);
+        if ($this->predictions->has($index)) {
+            $item = $this->predictions->get($index);
 
             if ($attributes) {
                 $item = $item->merge($attributes);
-                $this->predictions->put($uuid, $item);
+                $this->predictions->put($index, $item);
             }
 
             return $item;
@@ -107,6 +103,7 @@ class LassPrediction
 
         if ($attributes) {
             $item = collect([
+                'uuid' => null,
                 'method' => null,
                 'current' => null,
                 'add1h' => null,
@@ -116,7 +113,7 @@ class LassPrediction
                 'add5h' => null,
             ])->merge($attributes);
 
-            $this->predictions->put($uuid, $item);
+            $this->predictions->put($index, $item);
 
             return $item;
         }
@@ -124,9 +121,9 @@ class LassPrediction
         return null;
     }
 
-    protected function toRecord(string $uuid, bool $isUpdate=false)
+    protected function toRecord(string $index, bool $isUpdate=false)
     {
-        $item = $this->prediction($uuid);
+        $item = $this->prediction($index);
 
         if ($isUpdate) {
             $data = array_merge($item->toArray(), [
@@ -134,7 +131,6 @@ class LassPrediction
             ]);
         } else {
             $data = array_merge($item->toArray(), [
-                'uuid'       => (string) $uuid,
                 'created_at' => Carbon::now()->toDateTimeString(),
                 'updated_at' => Carbon::now()->toDateTimeString(),
             ]);
@@ -161,6 +157,7 @@ class LassPrediction
 
             $attributes = [
                 'method' => $method,
+                'uuid' => $uuid,
                 'current' => is_null($feed['now']) ? null : floatval($feed['now']),
                 'add1h' => is_null($feed['now+1h']) ? null : floatval($feed['now+1h']),
                 'add2h' => is_null($feed['now+2h']) ? null : floatval($feed['now+2h']),
@@ -179,7 +176,8 @@ class LassPrediction
                 continue;
             }
 
-            $this->prediction($uuid, $attributes);
+            $index = $uuid . '-' . $method;
+            $this->prediction($index, $attributes);
         }
 
         return true;
