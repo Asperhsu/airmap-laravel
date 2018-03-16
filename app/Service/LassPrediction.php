@@ -63,8 +63,8 @@ class LassPrediction
     {
         $inserts = $this->predictions->filter(function ($item, $index) use ($keys) {
             return in_array($index, $keys);
-        })->map(function ($item, $uuid) {
-            return $this->toRecord($uuid);
+        })->map(function ($item, $index) {
+            return $this->toRecord($index);
         })->toArray();
 
         return Model::insert($inserts);
@@ -74,12 +74,12 @@ class LassPrediction
     {
         return $this->predictions->filter(function ($item, $index) use ($keys) {
             return in_array($index, $keys);
-        })->map(function ($item, $uuid) {
-            $data = $this->toRecord($uuid, true);
+        })->map(function ($item, $index) {
+            $data = $this->toRecord($index, true);
 
             // dd($data);
             return DB::table('lass_predictions')
-                ->where('uuid', (string) $uuid)
+                ->where('uuid', $item->get('uuid'))
                 ->where('method', $item->get('method'))
                 ->update($data);
         })->toArray();
