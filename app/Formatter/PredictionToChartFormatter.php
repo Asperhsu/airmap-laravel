@@ -34,7 +34,7 @@ class PredictionToChartFormatter
 
         // fill unindex values to null
         foreach ($datasets as $method => $values) {
-            for ($i=0; $i<=$times->count(); $i++) {
+            for ($i=0; $i<$times->count(); $i++) {
                 isset($values[$i]) ?: $datasets[$method][$i] = null;
             }
             ksort($datasets[$method]);

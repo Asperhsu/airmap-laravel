@@ -228,7 +228,7 @@ class LassPrediction
         $records->groupBy('method')->map(function ($items, $method) use ($dataset) {
             $values = collect();
             $item = $items->first();
-            $publishedAt = Carbon::parse($item->published_at);
+            $publishedAt = Carbon::parse($item->published_at)->second(0); // ignore second
 
             $values->push([
                 'time' => $publishedAt,
