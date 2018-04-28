@@ -35,6 +35,10 @@ class Kernel extends ConsoleKernel
                  ->timezone('Asia/Taipei')
                  ->everyTenMinutes();
 
+        $schedule->command('fetch:lass-prediction')
+                 ->timezone('Asia/Taipei')
+                 ->hourly();
+
         $schedule->command('record:update-json')
                  ->timezone('Asia/Taipei')
                  ->everyFiveMinutes();

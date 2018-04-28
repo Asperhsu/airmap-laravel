@@ -37,6 +37,7 @@ Route::group(['prefix' => 'json', 'middleware' => 'cors'], function () {
 
     Route::get('query-lastest', 'JsonController@lastest');
     Route::get('query-history', 'JsonController@history');
+    Route::get('query-prediction', 'JsonController@prediction');
 
     Route::get('query-region', 'JsonController@region');
     Route::get('query-bounds', 'JsonController@bounds');
