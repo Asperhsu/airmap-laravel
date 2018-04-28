@@ -87,7 +87,7 @@ class GroupJSONFormatter
         $feature = $geometrySrv->findFeature($record->lat, $record->lng);
         $geometry = $feature ? collect($feature['properties']) : null;
         $townCode = $geometry ? $geometry->get('TOWNCODE') : 'none';
-        Cache::tags('GROUP_GEOMETRY')->forever($uid, $townCode);
+        Cache::tags('GROUP_GEOMETRY')->put($uid, $townCode, 24 * 3600); // cache 24 hours
 
         return $geometry;
     }
