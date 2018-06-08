@@ -20,6 +20,7 @@
 
 @section('script')
     @parent
+    <script>if (window.opener !== null) { window.stop(); }</script>
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script>google.charts.load('current', {'packages':['corechart']});</script>
