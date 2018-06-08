@@ -20,7 +20,7 @@
 
 @section('script')
     @parent
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.gmap.key') }}&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script>google.charts.load('current', {'packages':['corechart']});</script>
     <script src="{{ asset('v4/js/vendor-common.js') }}"></script>
