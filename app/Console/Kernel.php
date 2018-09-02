@@ -29,7 +29,8 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('fetch:record')
                  ->timezone('Asia/Taipei')
-                 ->everyFiveMinutes();
+                 ->everyMinute()
+                 ->withoutOverlapping();
 
         $schedule->command('fetch:lass-analysis')
                  ->timezone('Asia/Taipei')
@@ -39,9 +40,9 @@ class Kernel extends ConsoleKernel
                  ->timezone('Asia/Taipei')
                  ->hourly();
 
-        $schedule->command('record:update-json')
-                 ->timezone('Asia/Taipei')
-                 ->everyFiveMinutes();
+        // $schedule->command('record:update-json')
+        //          ->timezone('Asia/Taipei')
+        //          ->everyFiveMinutes();
 
         $schedule->command('record:clear-expired')
                  ->timezone('Asia/Taipei')
