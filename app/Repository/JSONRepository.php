@@ -65,9 +65,9 @@ class JSONRepository
         }
 
         // if cache exists, return cache
-        if ($value = JsonCache::group($group->id)) {
-            return $value;
-        }
+        // if ($value = JsonCache::group($group->id)) {
+        //     return $value;
+        // }
 
         // get latest record id for each uuid
         $records = LatestRecord::where('group_id', $group->id)
@@ -79,7 +79,7 @@ class JSONRepository
                 return GroupJSONFormatter::format($record);
             });
 
-        JsonCache::group($group->id, $records);
+        // JsonCache::group($group->id, $records);
         return $records;
     }
 
@@ -182,9 +182,9 @@ class JSONRepository
     public static function townmap()
     {
         // if cache exists, return cache
-        if ($value = JsonCache::townmap()) {
-            return $value;
-        }
+        // if ($value = JsonCache::townmap()) {
+        //     return $value;
+        // }
 
         $grouped = static::groups()->groupBy(function ($item, $key) {
             $geometry = $item->get('Geometry');
@@ -216,7 +216,7 @@ class JSONRepository
             'published' => time(),
         ];
 
-        JsonCache::townmap($townmap);
+        // JsonCache::townmap($townmap);
         return $townmap;
     }
 }
