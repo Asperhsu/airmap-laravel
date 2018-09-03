@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('fetch:record')
                  ->timezone('Asia/Taipei')
                  ->everyMinute()
-                 ->withoutOverlapping();
+                 ->everyFiveMinutes();
 
         $schedule->command('fetch:lass-analysis')
                  ->timezone('Asia/Taipei')
