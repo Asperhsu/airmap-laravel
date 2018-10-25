@@ -16,3 +16,4 @@ use Illuminate\Http\Request;
 Route::get('icon/{value}', 'ApiController@makeIcon')->name('pm25icon');
 Route::get('widget/{group}${uuid}', 'ApiController@widget');
 Route::get('shortcut/{keyword}', 'ShortcutController@search');
+Route::get('nearby', 'ApiController@searchNearBy');

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Repository\JSONRepository;
 use Carbon\Carbon;
 use App\Service\GaHelper;
+use App\Repository\SearchRepository;
+use App\Formatter\GroupJSONFormatter;
 
 class ApiController extends Controller
 {
@@ -34,6 +36,34 @@ class ApiController extends Controller
             'code' => 200,
             'data' => $record,
             'message' => 'success',
+        ]);
+    }
+
+    public function searchNearBy(Request $request)
+    {
+        $lat = $request->input('lat');
+        $lng = $request->input('lng');
+
+        if (!$lat || !$lng) {
+            return response()->json([
+                'success' => false,
+                'msg' => 'need query parameter lat and lng',
+            ], 400);
+        }
+
+        $records = SearchRepository::searchNearBy($lat, $lng);
+        if ($records) {
+            return response()->json([
+                'success' => true,
+                'sites' => $records->map(function ($record) {
+                    return GroupJSONFormatter::format($record);
+                })
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'sites' => [],
         ]);
     }
 }
