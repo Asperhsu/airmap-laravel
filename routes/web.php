@@ -45,10 +45,6 @@ Route::group(['prefix' => 'json', 'middleware' => 'cors'], function () {
 
 // Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
-/* V5 */
-Route::post('/v5/accept-warning', 'V5Controller@acceptWarning');
-Route::get('/v5/{any?}', 'V5Controller@index')->where('any', '.*');
-
 /* v4 */
 Route::get('/map{latlng?}', 'V4Controller@map')->where('latlng', '@[0-9.]+,[0-9.]+')->name('v4.map');
 // Route::get('/list', 'V4Controller@list')->name('v4.list');
