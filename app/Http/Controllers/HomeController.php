@@ -75,7 +75,6 @@ class HomeController extends Controller
     public function screenshotGif()
     {
         $dir = '/var/www/screenshots/gif';
-        $publicPath = 'screenshots/gif';
 
         $files = array_filter(scandir($dir) ?: [], function ($file) {
             return strpos($file, '.gif');
