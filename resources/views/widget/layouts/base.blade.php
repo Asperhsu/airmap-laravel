@@ -16,6 +16,9 @@
         @show
     </head>
     <body>
+        <div class="text-center" style="background: red; color: #fff; font-weight: bolder; padding: 3px 5px; font-size: .8em; margin-bottom: 5px;">
+            本系統僅供參考，空氣品質相關資訊，仍應以環保署資訊為準。
+        </div>
         @yield('content')
 
         @section('script')

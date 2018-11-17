@@ -3,11 +3,11 @@
 @section('style')
     @parent
     <style>
-        .header{ padding: 8px 5px 0; min-height: 32px; }
+        .header{ padding: 0px 5px; min-height: 32px; }
         .header > div { width: 49%; display: inline-block; margin-right: -4px; }
 
         .marker {
-            margin: -10px auto 0;
+            margin: -20px auto 0;
             width:180px; height: 180px;
             width: 80vw; height: 80vw;
             border-radius: 50%; border: 2px solid #4F595D;
@@ -25,7 +25,7 @@
             font-size: 40vw;
         }
 
-        .footer { padding: 8px 5px 0; margin-top: -15px; }
+        .footer { padding: 8px 5px 0; margin-top: -25px; }
         .footer > div { width: 49%; display: inline-block; margin-right: -4px; }
         .footer img{ height:25px; }
     </style>
