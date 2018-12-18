@@ -15,6 +15,8 @@ class LassAirbox extends Lass
     {
         $feed = parent::parse($raw);
 
-        $feed['name'] = $raw->get('SiteName');
+        $feed['name'] = $raw['SiteName'];
+
+        return $feed;
     }
 }
