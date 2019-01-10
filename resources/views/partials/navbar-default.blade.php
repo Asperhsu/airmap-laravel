@@ -15,12 +15,6 @@
             <li class="nav-item {{ active('widget.index') }}">
                 <a class="nav-link" href="{{ route('widget.index') }}"><i class="fas fa-tachometer-alt"></i> 小工具</a>
             </li>
-            <li class="nav-item {{ active('screenshot.hourly') }}">
-                <a class="nav-link" href="{{ route('screenshot.hourly') }}"><i class="fas fa-camera"></i> 整點截圖</a>
-            </li>
-            <li class="nav-item {{ active('screenshot.gif') }}">
-                <a class="nav-link" href="{{ route('screenshot.gif') }}"><i class="fas fa-images"></i> 歷史動畫</a>
-            </li>
             <li class="nav-item {{ active('recruit') }}">
                 <a class="nav-link" href="{{ route('recruit') }}"><i class="fas fa-sign-in-alt"></i> 自造站點募集</a>
             </li>

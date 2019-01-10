@@ -23,8 +23,8 @@
         <hr class="my-4">
 
         <p class="lead">
-            <a class="btn btn-primary btn-lg" href="http://airmap.g0v.tw">
-                新網域為 http://airmap.g0v.tw
+            <a class="btn btn-primary btn-lg" href="https://airmap.g0v.tw">
+                新網域為 https://airmap.g0v.tw
             </a>
         </p>
     </div>
