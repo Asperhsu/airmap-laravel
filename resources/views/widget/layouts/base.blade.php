@@ -17,7 +17,7 @@
     </head>
     <body>
         <div class="text-center" style="background: red; color: #fff; font-weight: bolder; padding: 3px 5px; font-size: .8em; margin-bottom: 5px;">
-            本系統僅供參考，空氣品質相關資訊，仍應以環保署資訊為準。
+            本網域將於3/1停用。<a href="https://airmap.g0v.tw">詳細資訊</a>
         </div>
         @yield('content')
 
